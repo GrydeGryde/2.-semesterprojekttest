@@ -8,6 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using _2._semesterprojekttest.Services;
+using _2._semesterprojekttest.Interfaces;
+
 
 namespace _2._semesterprojekttest
 {
@@ -24,6 +27,7 @@ namespace _2._semesterprojekttest
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddSingleton<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
