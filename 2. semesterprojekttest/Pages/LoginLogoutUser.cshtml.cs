@@ -65,7 +65,7 @@ namespace _2._semesterprojekttest.Pages
                 HttpContext.Session.SetInt32("Login", 1);
                 HttpContext.Session.SetString("UserName", userName);
                 HttpContext.Session.SetInt32("UserID", userService.GetUserId(userName));
-                return Redirect("~/Calendar");
+                return Redirect("Index");
             }
             else
             {
