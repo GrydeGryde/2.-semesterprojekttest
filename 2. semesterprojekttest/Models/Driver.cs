@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 namespace _2._semesterprojekttest.Models
 {
     [Table("Driver")]
-    public partial class Driver
+    public partial class Driver : CruizeUser
     {
         [Key]
         [Column("UserID")]
@@ -19,7 +19,7 @@ namespace _2._semesterprojekttest.Models
         public string CarType { get; set; }
         [StringLength(50)]
         public string Carcolor { get; set; }
-        public int? CouponCount { get; set; }
+        public int CouponCount { get; set; }
 
         [ForeignKey(nameof(UserId))]
         [InverseProperty(nameof(CruizeUser.Driver))]

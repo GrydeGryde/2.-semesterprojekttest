@@ -14,6 +14,7 @@ namespace _2._semesterprojekttest.Services
         private const string ConnectionString =
             "Data Source=alex-gryden-db.database.windows.net;Initial Catalog=\"Gryden DB\";Persist Security Info=True;User ID=adminlogin;Password=secret1!";
 
+        private const string AddDriverSQL = "insert into Drivers(UserID) values (@UID)";
         private const string AddUserSQL = "insert into Users(FirstName, LastName, Email, Password, Address) values (@FN, @LN, @E, @P, @AD)";
         private const string DeleteUserSQL = "delete from Users where ID = @ID";
         private const string GetAllUsersSQL = "select * from Users";
@@ -44,7 +45,27 @@ namespace _2._semesterprojekttest.Services
                     }
                 }
             }
+            return false;
+        }
 
+        public bool AddDriver(CruizeUser user)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand sql = new SqlCommand(AddDriverSQL, connection))
+                {
+                    sql.Parameters.AddWithValue("@UID", GetUserId(user.Email));
+
+                    int rows = sql.ExecuteNonQuery();
+
+                    if (rows == 1)
+                    {
+                        return true;
+                    }
+                }
+            }
             return false;
         }
 

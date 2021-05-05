@@ -15,6 +15,8 @@ namespace _2._semesterprojekttest.Interfaces
 
         bool AddUser(CruizeUser user);
 
+        bool AddDriver(CruizeUser user);
+
         CruizeUser DeleteUser(int id);
 
         bool UpdateUser(int id, CruizeUser user);

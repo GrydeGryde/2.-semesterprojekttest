@@ -1,0 +1,49 @@
+﻿@page
+@model _2._semesterprojekttest.Pages.CreateUserModel
+@{
+}
+
+@if (Model.EmailError != null)
+{
+    <div class="bg-danger">
+        <h5>
+            @Model.EmailError
+        </h5>
+    </div>
+}
+
+<div>
+    <h5 class="pageTitle">Fill this form to create user</h5>
+    <form method="post">
+        First Name:
+        <br />
+        <input name="First Name" type="text" class="form-control input-lg" required autofocus />
+        <br />
+        Last Name:
+        <br />
+        <input name="Last Name" type="text" class="form-control input-lg" required autofocus />
+        <br />
+        Address:
+        <br />
+        <input name="Address" type="text" class="form-control input-lg" required autofocus />
+        <br />
+        E-Mail:
+        <br />
+        <input name="Email" type="email" class="form-control input-lg" required />
+        <br />
+        Password:
+        <br />
+        <input name="Password" type="password" class="form-control input-lg" required />
+        <br />
+        Are you a driver or a passenger:
+        <br />
+        <input type="radio" id="driver" name="userStatus" value="driver">
+        <label for="driver">Driver</label><br>
+        <input type="radio" id="passenger" name="userStatus" value="passenger">
+        <label for="passenger">Passenger</label><br>
+        <br />
+        <input id="SaveButton" type="submit" value="Create User" class="btn btn-primary">
+
+        <a asp-page="LoginToSide" class="btn btn-primary">Log ind</a>
+    </form>
+</div>
