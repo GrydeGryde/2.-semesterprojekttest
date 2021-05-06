@@ -40,6 +40,8 @@ namespace _2._semesterprojekttest.Models
         [Required]
         [StringLength(50)]
         public string Address { get; set; }
+        [Required]
+        public int Zipcode { get; set; }
 
         [InverseProperty("User")]
         public virtual Driver Driver { get; set; }

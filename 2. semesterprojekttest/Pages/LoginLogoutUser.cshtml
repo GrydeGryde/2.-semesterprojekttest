@@ -1,0 +1,30 @@
+﻿@page
+@model _2._semesterprojekttest.Pages.LoginLogoutUser
+@{
+}
+
+@if (Model.validUser == 1)
+{
+    <p>Du er logget ind, @Model.LoggedInUser.FirstName</p>
+    <form method="post">
+        <button asp-page-handler="LogOut"
+                class="btn btn-dark btn-group-lg pull-right">
+            Log ud
+        </button>
+    </form>
+}
+else
+{
+    <h1>Login</h1>
+    <form method="post">
+        E-Mail:
+        <br />
+        <input name="Email" type="email" class="form-control input-lg" required autofocus />
+        <br />
+        Password:
+        <br />
+        <input name="Password" type="password" class="form-control input-lg" required />
+        <br />
+        <input id="LoginButton" type="submit" value="Login" class="btn btn-success">
+    </form>
+}
