@@ -14,11 +14,11 @@ namespace _2._semesterprojekttest.Services
         private const string ConnectionString =
             "Data Source=alex-gryden-db.database.windows.net;Initial Catalog=\"Gryden DB\";Persist Security Info=True;User ID=adminlogin;Password=secret1!";
 
-        private const string AddDriverSQL = "insert into Drivers(UserID) values (@UID)";
-        private const string AddUserSQL = "insert into Users(FirstName, LastName, Email, Password, Address) values (@FN, @LN, @E, @P, @AD)";
-        private const string DeleteUserSQL = "delete from Users where ID = @ID";
-        private const string GetAllUsersSQL = "select * from Users";
-        private const string GetOneUserSQL = "select * from Users where ID = @ID";
+        private const string AddDriverSQL = "insert into Driver(UserID) values (@UID)";
+        private const string AddUserSQL = "insert into CruizeUser(FirstName, LastName, Email, Password, Address, Zipcode) values (@FN, @LN, @E, @P, @AD, @ZC)";
+        private const string DeleteUserSQL = "delete from CruizeUser where UserID = @ID";
+        private const string GetAllUsersSQL = "select * from CruizeUser";
+        private const string GetOneUserSQL = "select * from CruizeUser where UserID = @ID";
 
 
         public bool AddUser(CruizeUser user)
@@ -36,6 +36,7 @@ namespace _2._semesterprojekttest.Services
                     sql.Parameters.AddWithValue("@E", user.Email);
                     sql.Parameters.AddWithValue("@P", user.Password);
                     sql.Parameters.AddWithValue("@AD", user.Address);
+                    sql.Parameters.AddWithValue("@ZC", user.Zipcode);
 
                     int rows = sql.ExecuteNonQuery();
 
@@ -158,7 +159,7 @@ namespace _2._semesterprojekttest.Services
         {
             CruizeUser user = new CruizeUser
             {
-                UserId = Convert.ToInt32(reader["ID"]),
+                UserId = Convert.ToInt32(reader["UserID"]),
                 FirstName = Convert.ToString(reader["FirstName"]),
                 LastName = Convert.ToString(reader["LastName"]),
                 Email = Convert.ToString(reader["Email"]),

@@ -33,7 +33,7 @@ namespace _2._semesterprojekttest.Pages
 
             if (ModelState.IsValid)
             {
-                if (!UserEmail.Contains("@easj.dk") || !UserEmail.Contains("@edu.easj.dk") || !UserEmail.Contains("@zealand.dk"))
+                if (!UserEmail.Contains("@easj.dk") && !UserEmail.Contains("@edu.easj.dk") && !UserEmail.Contains("@zealand.dk"))
                 {
                     EmailError = "You have to use a Zealand email";
                     return;
@@ -46,7 +46,7 @@ namespace _2._semesterprojekttest.Pages
                         return;
                     }
                 }
-                if (Request.Form["userStatus"] == "Driver")
+                if (Request.Form["userStatus"] == "driver")
                 {
                     UserStatus = true;
                 }
@@ -58,6 +58,7 @@ namespace _2._semesterprojekttest.Pages
             cruizer.Address = Request.Form["Address"];
             cruizer.Email = Request.Form["Email"];
             cruizer.Password = Request.Form["Password"];
+            cruizer.Zipcode = Convert.ToInt32(Request.Form["Zipcode"]);
 
             userService.AddUser(cruizer);
             
