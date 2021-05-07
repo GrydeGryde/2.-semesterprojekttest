@@ -6,7 +6,7 @@ using _2._semesterprojekttest.Models;
 
 namespace _2._semesterprojekttest.Interfaces
 {
-    interface IRouteService
+    public interface IRouteService
     {
         bool AddRoute(Route route);
         bool RemoveRoute(int id);
