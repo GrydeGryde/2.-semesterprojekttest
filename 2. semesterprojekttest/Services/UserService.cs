@@ -19,6 +19,8 @@ namespace _2._semesterprojekttest.Services
         private const string DeleteUserSQL = "delete from CruizeUser where UserID = @ID";
         private const string GetAllUsersSQL = "select * from CruizeUser";
         private const string GetOneUserSQL = "select * from CruizeUser where UserID = @ID";
+        private const string DeleteDriverSQL = "Delete from Driver where UserID = @ID";
+        private const string CheckDriverSQL = "Select * from Driver Where UserID = @ID";
 
 
         public bool AddUser(CruizeUser user)
@@ -64,6 +66,50 @@ namespace _2._semesterprojekttest.Services
                     if (rows == 1)
                     {
                         return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public bool CheckDriver(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                {
+                    using (SqlCommand sql = new SqlCommand(CheckDriverSQL, connection))
+                    {
+                        sql.Parameters.AddWithValue("@ID", id);
+
+                        SqlDataReader reader = sql.ExecuteReader();
+
+                        if (reader.Read())
+                        {
+                            return true;
+                        }
+                    }
+                } 
+            }
+            return false;
+        }
+
+        public bool DeleteDriver(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                {
+                    using (SqlCommand sql = new SqlCommand(DeleteDriverSQL, connection))
+                    {
+                        sql.Parameters.AddWithValue("@ID", id);
+
+                        int rows = sql.ExecuteNonQuery();
+
+                        if (rows == 1)
+                        {
+                            return true;
+                        }
                     }
                 }
             }
@@ -195,5 +241,7 @@ namespace _2._semesterprojekttest.Services
 
             return loggedIn;
         }
+
+
     }
 }

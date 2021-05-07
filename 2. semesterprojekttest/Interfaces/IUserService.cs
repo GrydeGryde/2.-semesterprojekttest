@@ -17,6 +17,8 @@ namespace _2._semesterprojekttest.Interfaces
 
         bool AddDriver(CruizeUser user);
 
+        bool CheckDriver(int id);
+
         CruizeUser DeleteUser(int id);
 
         bool UpdateUser(int id, CruizeUser user);
@@ -26,5 +28,7 @@ namespace _2._semesterprojekttest.Interfaces
         public string PasswordHash(string userName, string password);
 
         int GetUserId(string email);
+
+        bool DeleteDriver(int id);
     }
 }
