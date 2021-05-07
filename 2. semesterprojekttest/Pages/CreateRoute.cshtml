@@ -1,0 +1,35 @@
+﻿@page
+@model _2._semesterprojekttest.Pages.CreateRouteModel
+@{
+    <div>
+        <h5 class="pageTitle">Fill this form to create user</h5>
+        <form method="post">
+            Visuel visning af Bruger Id til testning (SLET EFTERFØLGENDE)
+            <br />
+            Brugerens ID er: @Model.userID
+            <br />
+            Start Address
+            <br />
+            <input name="AddStart" type="text" class="form-control input-lg" required autofocus />
+            <br />
+            End Route
+            <br />
+            <input name="AddEnd" type="text" class="form-control input-lg" required autofocus />
+            <br />
+            Day
+            <br />
+            <input name="Day" type="text" class="form-control input-lg" required autofocus />
+            <br />
+            Arrival Time
+            <br />
+            <input name="Arrival" type="time" class="form-control input-lg" required autofocus />
+            <br />
+            Available Space
+            <br />
+            <input name="Space" type="number" class="form-control input-lg" required autofocus />
+            <br />
+
+            <input id="SaveButton" type="submit" value="CreateRoute" class="btn btn-primary">
+        </form>
+    </div>
+}
