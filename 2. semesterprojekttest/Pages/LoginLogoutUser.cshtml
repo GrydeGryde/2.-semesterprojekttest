@@ -6,12 +6,35 @@
 @if (Model.validUser == 1)
 {
     <p>Du er logget ind, @Model.LoggedInUser.FirstName</p>
+
     <form method="post">
         <button asp-page-handler="LogOut"
                 class="btn btn-dark btn-group-lg pull-right">
             Log ud
         </button>
     </form>
+
+    @if (Model.validDriver == 0)
+    {
+        <h3>Recently got a car? Become a driver today!</h3>
+        <form method="post">
+            <button asp-page-handler="AddDriver"
+                    class="btn btn-dark btn-group-lg pull-right">
+                Add Driver Status
+            </button>
+        </form>
+    }
+    else if (Model.validDriver == 1)
+    {
+        <h1>You are a driver</h1>
+        <h3>No longer a driver?</h3>
+        <form method="post">
+            <button asp-page-handler="RemoveDriver"
+                    class="btn btn-dark btn-group-lg pull-right">
+                Remove Driver Status
+            </button>
+        </form>
+    }
 }
 else
 {
@@ -28,3 +51,6 @@ else
         <input id="LoginButton" type="submit" value="Login" class="btn btn-success">
     </form>
 }
+
+
+
