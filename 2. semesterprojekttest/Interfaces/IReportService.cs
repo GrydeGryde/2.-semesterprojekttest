@@ -6,7 +6,7 @@ using _2._semesterprojekttest.Models;
 
 namespace _2._semesterprojekttest.Interfaces
 {
-    interface IReportService
+    public interface IReportService
     {
         void AddReport(Report report);
     }

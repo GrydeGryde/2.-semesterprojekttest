@@ -1,0 +1,17 @@
+﻿@page
+@model _2._semesterprojekttest.Pages.ReportUserModel
+@{
+    <h1>Report @Model.ReportedUser.FirstName @Model.ReportedUser.LastName</h1>
+    <div>
+        Skriv din Rapport her
+        <form method="post">
+            <br />
+            <input name="Message" type="text" />
+            <br />
+
+            <button asp-route-id="@Model.ReportedUser.UserId" class="btn btn-danger">
+                Report
+            </button>
+        </form>
+    </div>
+}
