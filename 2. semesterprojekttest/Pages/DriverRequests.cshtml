@@ -1,0 +1,23 @@
+﻿@page
+@using _2._semesterprojekttest.Models
+@model _2._semesterprojekttest.Pages.DriverRequestsModel
+@{
+}
+@foreach (Request requests in Model.liste)
+{
+    <h2>@requests.RequestId</h2>
+    <h3>@requests.Message</h3>
+    <form method="post">
+        <button type="submit" asp-page-handler="Accept" asp-route-UserID="@requests.UserId" asp-route-RouteID="@requests.RouteId" asp-route-RequestID="@requests.RequestId"
+                class="btn btn-success btn-group-lg pull-right">
+            Accept
+        </button>
+    </form>
+    <form method="post">
+        <button type="submit" asp-page-handler="Decline" asp-route-RequestID="@requests.RequestId"
+                class="btn btn-danger btn-group-lg pull-right">
+            Decline
+        </button>
+    </form>
+    <br />
+}

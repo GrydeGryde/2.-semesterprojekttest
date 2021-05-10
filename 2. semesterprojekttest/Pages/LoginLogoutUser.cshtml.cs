@@ -20,6 +20,11 @@ namespace _2._semesterprojekttest.Pages
         {
             get { return Convert.ToInt32(HttpContext.Session.GetInt32("UserID")); }
         }
+        public int validDriver
+        {
+            get { return Convert.ToInt32(HttpContext.Session.GetInt32("Driver")); }
+        }
+
 
         public CruizeUser LoggedInUser
         {
@@ -42,6 +47,7 @@ namespace _2._semesterprojekttest.Pages
         }
         public void OnGet()
         {
+
         }
         public IActionResult OnPost()
         {
@@ -50,7 +56,8 @@ namespace _2._semesterprojekttest.Pages
 
         public IActionResult OnPostLogOut()
         {
-            return LogOut();
+            HttpContext.Session.Clear();
+            return RedirectToPage("LoginLogoutUser");
         }
 
         IActionResult CheckLogin()
@@ -65,8 +72,15 @@ namespace _2._semesterprojekttest.Pages
                 HttpContext.Session.SetInt32("Login", 1);
                 HttpContext.Session.SetString("UserName", userName);
                 HttpContext.Session.SetInt32("UserID", userService.GetUserId(userName));
+
+                if (userService.CheckDriver(userService.GetUserId(userName)))
+                {
+                    HttpContext.Session.SetInt32("Driver", 1);
+                }
+
                 return Redirect("Index");
             }
+
             else
             {
                 HttpContext.Session.SetInt32("Login", 0);
@@ -74,10 +88,19 @@ namespace _2._semesterprojekttest.Pages
                 return Page();
             }
         }
-        IActionResult LogOut()
+
+        public IActionResult OnPostRemoveDriver()
         {
-            HttpContext.Session.Clear();
-            return RedirectToPage("LoginLogoutUser");
+            userService.DeleteDriver(userID);
+            HttpContext.Session.SetInt32("Driver", 0);
+            return Page();
+        }
+
+        public IActionResult OnPostAddDriver()
+        {
+            userService.AddDriver(LoggedInUser);
+            HttpContext.Session.SetInt32("Driver", 1);
+            return Page();
         }
     }
 }
