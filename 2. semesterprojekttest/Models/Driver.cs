@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 namespace _2._semesterprojekttest.Models
 {
     [Table("Driver")]
-    public partial class Driver : CruizeUser
+    public partial class Driver /*: CruizeUser*/
     {
         [Key]
         [Column("UserID")]

@@ -12,11 +12,11 @@ namespace _2._semesterprojekttest.Pages
 {
     public class CreateUserModel : PageModel
     {
-        private IUserService userService;
+        private IUserService _userService;
 
         public CreateUserModel(IUserService service)
         {
-            userService = service;
+            _userService = service;
         }
 
         public string EmailError { get; set; }
@@ -27,7 +27,7 @@ namespace _2._semesterprojekttest.Pages
 
         public void OnPost()
         {
-            List<CruizeUser> users = userService.GetAllUsers();
+            List<CruizeUser> users = _userService.GetAllUsers();
             string UserEmail = Request.Form["Email".ToLower()];
             bool UserStatus = false;
 
@@ -60,11 +60,11 @@ namespace _2._semesterprojekttest.Pages
             cruizer.Password = Request.Form["Password"];
             cruizer.Zipcode = Convert.ToInt32(Request.Form["Zipcode"]);
 
-            userService.AddUser(cruizer);
+            _userService.AddUser(cruizer);
             
             if (UserStatus == true)
             {
-                userService.AddDriver(cruizer);
+                _userService.AddDriver(cruizer);
             }
         }
 
