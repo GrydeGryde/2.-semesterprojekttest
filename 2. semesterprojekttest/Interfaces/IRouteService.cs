@@ -11,7 +11,12 @@ namespace _2._semesterprojekttest.Interfaces
         bool AddRoute(Route route);
         bool RemoveRoute(int id);
         bool UpdateRoute(int id, Route route);
-        
-
+        List<Route> GetAllRoutes();
+        Route GetOneRoute(int id);
+        bool AddRequest(Request request);
+        Request DeleteRequest(int id);
+        Request GetOneRequest(int id);
+        List<Request> GetAllRequests(int id);
+        bool AcceptRequest(int UserID, int RouteID);
     }
 }
