@@ -1,0 +1,11 @@
+﻿@page
+@using _2._semesterprojekttest.Models
+@model _2._semesterprojekttest.Pages.AvailableRoutesModel
+@{
+}
+
+@foreach (Route routes in Model.liste)
+            {
+                <h2><a asp-page="Route" asp-route-id="@routes.RouteId">@routes.UserId route</a></h2>
+                <br />
+            }
