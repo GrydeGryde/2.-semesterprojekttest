@@ -5,11 +5,13 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
+
 #nullable disable
 
 namespace _2._semesterprojekttest.Models
 {
-    public partial class Picture
+    [Table("ImageTest")]
+    public partial class ImageTest
     {
         [Key]
         [Column("PictureID")]
@@ -18,13 +20,11 @@ namespace _2._semesterprojekttest.Models
         public int? UserId { get; set; }
         [Column("TypeID")]
         public int? TypeId { get; set; }
-        [StringLength(10)]
-        public string FileType { get; set; }
-        [Column("Picture")]
-        public byte[] Picture1 { get; set; }
+        [Column(TypeName = "image")]
+        public byte[] Image { get; set; }
 
         [ForeignKey(nameof(UserId))]
-        [InverseProperty(nameof(CruizeUser.Pictures))]
+        [InverseProperty(nameof(CruizeUser.ImageTests))]
         public virtual CruizeUser User { get; set; }
     }
 }
