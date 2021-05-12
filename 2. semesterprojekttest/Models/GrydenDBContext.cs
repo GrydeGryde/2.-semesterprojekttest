@@ -18,10 +18,12 @@ namespace _2._semesterprojekttest.Models
         {
         }
 
+        public virtual DbSet<BannedUser> BannedUsers { get; set; }
         public virtual DbSet<Coupon> Coupons { get; set; }
         public virtual DbSet<CruizeUser> CruizeUsers { get; set; }
         public virtual DbSet<Driver> Drivers { get; set; }
         public virtual DbSet<Passenger> Passengers { get; set; }
+        public virtual DbSet<Picture> Pictures { get; set; }
         public virtual DbSet<Report> Reports { get; set; }
         public virtual DbSet<Request> Requests { get; set; }
         public virtual DbSet<Route> Routes { get; set; }
@@ -38,6 +40,14 @@ namespace _2._semesterprojekttest.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+
+            modelBuilder.Entity<BannedUser>(entity =>
+            {
+                entity.HasKey(e => e.BannedEmail)
+                    .HasName("PK__BannedUs__DB64C3D6EBC43E07");
+
+                entity.Property(e => e.BannedEmail).IsUnicode(false);
+            });
 
             modelBuilder.Entity<Coupon>(entity =>
             {
@@ -100,6 +110,15 @@ namespace _2._semesterprojekttest.Models
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Passenger__UserI__7E37BEF6");
+            });
+
+            modelBuilder.Entity<Picture>(entity =>
+            {
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Pictures)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK__Pictures__UserID__17F790F9");
             });
 
             modelBuilder.Entity<Report>(entity =>

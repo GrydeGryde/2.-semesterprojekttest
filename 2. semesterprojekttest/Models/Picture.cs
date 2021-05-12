@@ -9,20 +9,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace _2._semesterprojekttest.Models
 {
-    [Table("Driver")]
-    public partial class Driver
+    public partial class Picture
     {
         [Key]
+        [Column("PictureID")]
+        public int PictureId { get; set; }
         [Column("UserID")]
-        public int UserId { get; set; }
-        [StringLength(50)]
-        public string CarType { get; set; }
-        [StringLength(50)]
-        public string Carcolor { get; set; }
-        public int? CouponCount { get; set; }
+        public int? UserId { get; set; }
+        [Column("TypeID")]
+        public int? TypeId { get; set; }
+        [StringLength(10)]
+        public string FileType { get; set; }
+        public byte[] Foto { get; set; }
 
         [ForeignKey(nameof(UserId))]
-        [InverseProperty(nameof(CruizeUser.Driver))]
+        [InverseProperty(nameof(CruizeUser.Pictures))]
         public virtual CruizeUser User { get; set; }
     }
 }
