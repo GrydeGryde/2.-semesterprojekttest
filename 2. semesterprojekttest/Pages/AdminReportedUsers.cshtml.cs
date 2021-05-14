@@ -6,6 +6,7 @@ using _2._semesterprojekttest.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using _2._semesterprojekttest.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace _2._semesterprojekttest.Pages
 {
@@ -15,6 +16,18 @@ namespace _2._semesterprojekttest.Pages
         private IReportService _reportService;
 
         public List<Report> AllReports;
+        public int validUser
+        {
+            get { return Convert.ToInt32(HttpContext.Session.GetInt32("Login")); }
+        }
+        public int userID
+        {
+            get { return Convert.ToInt32(HttpContext.Session.GetInt32("UserID")); }
+        }
+        public int validDriver
+        {
+            get { return Convert.ToInt32(HttpContext.Session.GetInt32("Driver")); }
+        }
 
         public AdminReportedUsersModel(IUserService userService, IReportService reportService)
         {

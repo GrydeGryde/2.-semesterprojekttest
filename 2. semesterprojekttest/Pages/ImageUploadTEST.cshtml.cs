@@ -26,6 +26,22 @@ namespace _2._semesterprojekttest.Pages
         private const string ConnectionString =
             "Data Source=alex-gryden-db.database.windows.net;Initial Catalog=\"Gryden DB\";Persist Security Info=True;User ID=adminlogin;Password=secret1!";
 
+
+        public int validUser
+        {
+            get { return Convert.ToInt32(HttpContext.Session.GetInt32("Login")); }
+        }
+        public int userID
+        {
+            get { return Convert.ToInt32(HttpContext.Session.GetInt32("UserID")); }
+        }
+        public int validDriver
+        {
+            get { return Convert.ToInt32(HttpContext.Session.GetInt32("Driver")); }
+        }
+
+
+
         public Picture Picture
         {
             get => _picture;

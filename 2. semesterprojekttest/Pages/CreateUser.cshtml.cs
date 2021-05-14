@@ -30,19 +30,6 @@ namespace _2._semesterprojekttest.Pages
         private IReportService _reportService;
 
 
-        public int validUser
-        {
-            get { return Convert.ToInt32(HttpContext.Session.GetInt32("Login")); }
-        }
-        public int userID
-        {
-            get { return Convert.ToInt32(HttpContext.Session.GetInt32("UserID")); }
-        }
-        public int validDriver
-        {
-            get { return Convert.ToInt32(HttpContext.Session.GetInt32("Driver")); }
-        }
-
         public CreateUserModel(IUserService service, IReportService reportService)
 
         {

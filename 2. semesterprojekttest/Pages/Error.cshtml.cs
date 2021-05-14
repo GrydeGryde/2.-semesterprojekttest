@@ -6,12 +6,25 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace _2._semesterprojekttest.Pages
 {
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public class ErrorModel : PageModel
     {
+        public int validUser
+        {
+            get { return Convert.ToInt32(HttpContext.Session.GetInt32("Login")); }
+        }
+        public int userID
+        {
+            get { return Convert.ToInt32(HttpContext.Session.GetInt32("UserID")); }
+        }
+        public int validDriver
+        {
+            get { return Convert.ToInt32(HttpContext.Session.GetInt32("Driver")); }
+        }
         public string RequestId { get; set; }
 
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
