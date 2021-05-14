@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Net.Mime;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using _2._semesterprojekttest.Models;
 using Microsoft.AspNetCore.Http;
@@ -49,6 +50,7 @@ namespace _2._semesterprojekttest.Pages
 
         public void OnPost()
         {
+
             string path = @"C:\Users\grydg\OneDrive\Billeder\";
             FileStream b1 = System.IO.File.OpenRead(path + Request.Form["Picture1"]);
             long b1size = b1.Length;
