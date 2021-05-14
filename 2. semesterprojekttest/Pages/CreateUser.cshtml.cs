@@ -13,10 +13,12 @@ namespace _2._semesterprojekttest.Pages
     public class CreateUserModel : PageModel
     {
         private IUserService _userService;
+        private IReportService _reportService;
 
-        public CreateUserModel(IUserService service)
+        public CreateUserModel(IUserService service, IReportService reportService)
         {
             _userService = service;
+            _reportService = reportService;
         }
 
         public string EmailError { get; set; }
@@ -28,12 +30,21 @@ namespace _2._semesterprojekttest.Pages
         public void OnPost()
         {
             List<CruizeUser> users = _userService.GetAllUsers();
-            string UserEmail = Request.Form["Email".ToLower()];
-            bool UserStatus = false;
+            string userEmail = Request.Form["Email".ToLower()];
+            bool userStatus = false;
+
+            foreach (BannedUser bannedUser in _reportService.BannedUsers())
+            {
+                if (userEmail == bannedUser.BannedEmail)
+                {
+                    EmailError = "This user has been banned from the application";
+                    return;
+                }
+            }
 
             if (ModelState.IsValid)
             {
-                if (!UserEmail.Contains("@easj.dk") && !UserEmail.Contains("@edu.easj.dk") && !UserEmail.Contains("@zealand.dk"))
+                if (!userEmail.Contains("@easj.dk") && !userEmail.Contains("@edu.easj.dk") && !userEmail.Contains("@zealand.dk"))
                 {
                     EmailError = "You have to use a Zealand email";
                     return;
@@ -48,7 +59,7 @@ namespace _2._semesterprojekttest.Pages
                 }
                 if (Request.Form["userStatus"] == "driver")
                 {
-                    UserStatus = true;
+                    userStatus = true;
                 }
             }
 
@@ -62,7 +73,7 @@ namespace _2._semesterprojekttest.Pages
 
             _userService.AddUser(cruizer);
             
-            if (UserStatus == true)
+            if (userStatus == true)
             {
                 _userService.AddDriver(cruizer);
             }

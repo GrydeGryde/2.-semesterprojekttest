@@ -9,5 +9,8 @@ namespace _2._semesterprojekttest.Interfaces
     public interface IReportService
     {
         void AddReport(Report report);
+        List<Report> ReportedUsers();
+        void AddBan(BannedUser bannedUser);
+        List<BannedUser> BannedUsers();
     }
 }
