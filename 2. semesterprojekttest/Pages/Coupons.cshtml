@@ -1,0 +1,29 @@
+﻿@page
+@model _2._semesterprojekttest.Pages.CouponsModel
+@{
+}
+
+<h1>Coupons</h1>
+<p>On this page, you will find the food-coupons you are eligible for. You can redeem these in the Zealand Cafeteria.</p>
+<hr>
+
+@if (Model.validUser == 1 && Model.validDriver == 0)
+{
+    <p>To be eligible for coupons, you must be a driver to progress towards these rewards.</p>
+    <p>Click <a asp-page="/LoginLogoutUser">HERE</a> to change your user-status.</p>
+}
+else if (Model.validDriver == 1)
+{
+    @foreach (Models.Coupon c in Model.Coupons)
+    {
+        <p>@c.CouponId</p>
+        <p>@c.UserId</p>
+        <p>@c.Info</p>
+        <p>@c.Barcode</p>
+        <hr>
+    }
+}
+else
+{
+    <p class="text-danger">You must <a asp-page="LoginLogoutUser">Log In</a> to view your coupons.</p>
+}
