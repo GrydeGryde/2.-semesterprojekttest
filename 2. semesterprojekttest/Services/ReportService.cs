@@ -17,5 +17,23 @@ namespace _2._semesterprojekttest.Services
             db.Reports.Add(report);
             db.SaveChanges();
         }
+
+        public List<Report> ReportedUsers()
+        {
+            List<Report> reportedUsers = db.Reports.ToList();
+            return reportedUsers;
+        }
+
+        public void AddBan(BannedUser bannedUser)
+        {
+            db.BannedUsers.Add(bannedUser);
+            db.SaveChanges();
+        }
+
+        public List<BannedUser> BannedUsers()
+        {
+            List<BannedUser> bannedUsers = db.BannedUsers.ToList();
+            return bannedUsers;
+        }
     }
 }

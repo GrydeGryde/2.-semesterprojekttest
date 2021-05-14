@@ -143,22 +143,26 @@ namespace _2._semesterprojekttest.Services
         {
             List<CruizeUser> liste = new List<CruizeUser>();
 
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
-                connection.Open();
+                conn.Open();
 
-                using (SqlCommand sql = new SqlCommand(GetAllUsersSQL, connection))
+                using (SqlCommand sql = new SqlCommand("select * from CruizeUser", conn))
                 {
                     SqlDataReader reader = sql.ExecuteReader();
-
                     while (reader.Read())
                     {
-                        CruizeUser user = MakeUser(reader);
-                        liste.Add(user);
+                        CruizeUser u = new CruizeUser();
+                        u.UserId = reader.GetInt32(0);
+                        u.FirstName = reader.GetString(1);
+                        u.LastName = reader.GetString(2);
+                        u.Email = reader.GetString(4);
+                        u.Address = reader.GetString(5);
+                        u.Zipcode = reader.GetInt32(6);
+                        liste.Add(u);
                     }
                 }
             }
-
             return liste;
         }
 

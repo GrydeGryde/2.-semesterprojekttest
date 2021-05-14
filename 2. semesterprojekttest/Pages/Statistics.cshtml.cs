@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace _2._semesterprojekttest.Pages
 {
-    public class AvailableRoutesModel : PageModel
+    public class StatisticsModel : PageModel
     {
         public int validUser
         {
@@ -25,19 +25,18 @@ namespace _2._semesterprojekttest.Pages
         {
             get { return Convert.ToInt32(HttpContext.Session.GetInt32("Driver")); }
         }
-        private IRouteService _routeService;
 
-        public List<Route> liste { get; set; }
+        private IUserService _userService;
 
-        public AvailableRoutesModel(IRouteService routeService)
+        public List<CruizeUser> liste { get; set; }
+        public StatisticsModel(IUserService service)
         {
-            _routeService = routeService;
+            _userService = service;
         }
         public void OnGet()
         {
-            liste = _routeService.GetAllRoutes();
+            liste = _userService.GetAllUsers();
         }
-
 
     }
 }

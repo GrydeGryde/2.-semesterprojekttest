@@ -42,6 +42,7 @@ namespace _2._semesterprojekttest.Pages
         {
             _routeService.AcceptRequest(UserID, RouteID);
             _routeService.DeleteRequest(RequestID);
+            _routeService.ReduceSpace(RouteID);
             liste = _routeService.GetAllRequests(userID);
             return Page();
         }

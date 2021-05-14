@@ -1,0 +1,16 @@
+﻿@page
+@using _2._semesterprojekttest.Models
+@model _2._semesterprojekttest.Pages.StatisticsModel
+@{
+}
+
+@foreach (CruizeUser users in Model.liste)
+{
+    <h1>User ID: @users.UserId</h1>
+    <h4>First Name: @users.FirstName</h4>
+    <h4>Last Name:@users.LastName</h4>
+    <h4>Email: @users.Email</h4>
+    <h4>Address: @users.Address</h4>
+    <h4>Zipcode: @users.Zipcode</h4>
+    <br />
+}

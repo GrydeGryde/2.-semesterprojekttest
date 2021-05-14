@@ -5,7 +5,11 @@
 }
 
 @foreach (Route routes in Model.liste)
-            {
-                <h2><a asp-page="Route" asp-route-id="@routes.RouteId">@routes.UserId route</a></h2>
-                <br />
-            }
+{
+    if (routes.Space > 0 && routes.UserId != Model.userID)
+    {
+        <h2><a asp-page="Route" asp-route-id="@routes.RouteId">@routes.UserId route</a></h2>
+        <br />
+    }
+
+}
