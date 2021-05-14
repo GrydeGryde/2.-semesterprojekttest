@@ -2,12 +2,12 @@
 @model _2._semesterprojekttest.Pages.RouteModel
 @{
 }
-<h1>@Model.RouteProperty.UserId</h1>
-<h2>@Model.RouteProperty.Start</h2>
-<h2>@Model.RouteProperty.Goal</h2>
-<h2>@Model.RouteProperty.Arrival</h2>
-<h2>@Model.RouteProperty.Day</h2>
-<h2>@Model.RouteProperty.Space</h2>
+<h1>User ID: @Model.RouteProperty.UserId</h1>
+<h2>Start: @Model.RouteProperty.Start</h2>
+<h2>Goal: @Model.RouteProperty.Goal</h2>
+<h2>Arrival: @Model.RouteProperty.Arrival</h2>
+<h2>Day: @Model.RouteProperty.Day</h2>
+<h2>Space: @Model.RouteProperty.Space</h2>
 
 <form method="post">
     <input name="RequestMessage" type="text" class="form-control input-lg" required autofocus />

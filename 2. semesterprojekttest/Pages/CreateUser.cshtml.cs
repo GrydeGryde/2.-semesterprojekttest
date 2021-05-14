@@ -13,6 +13,19 @@ namespace _2._semesterprojekttest.Pages
 {
     public class CreateUserModel : PageModel
     {
+        public int validUser
+        {
+            get { return Convert.ToInt32(HttpContext.Session.GetInt32("Login")); }
+        }
+        public int userID
+        {
+            get { return Convert.ToInt32(HttpContext.Session.GetInt32("UserID")); }
+        }
+        public int validDriver
+        {
+            get { return Convert.ToInt32(HttpContext.Session.GetInt32("Driver")); }
+        }
+
         private IUserService _userService;
         private IReportService _reportService;
 
