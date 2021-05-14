@@ -31,6 +31,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[ImageTest]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[Passenger]",
          "ObjectType": 0
       },

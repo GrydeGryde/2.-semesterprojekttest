@@ -15,6 +15,7 @@ namespace _2._semesterprojekttest.Models
         public CruizeUser()
         {
             Coupons = new HashSet<Coupon>();
+            ImageTests = new HashSet<ImageTest>();
             Passengers = new HashSet<Passenger>();
             Pictures = new HashSet<Picture>();
             ReportReportedNavigations = new HashSet<Report>();
@@ -47,6 +48,8 @@ namespace _2._semesterprojekttest.Models
         public virtual Driver Driver { get; set; }
         [InverseProperty(nameof(Coupon.User))]
         public virtual ICollection<Coupon> Coupons { get; set; }
+        [InverseProperty(nameof(ImageTest.User))]
+        public virtual ICollection<ImageTest> ImageTests { get; set; }
         [InverseProperty(nameof(Passenger.User))]
         public virtual ICollection<Passenger> Passengers { get; set; }
         [InverseProperty(nameof(Picture.User))]

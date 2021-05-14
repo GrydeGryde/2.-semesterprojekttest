@@ -22,6 +22,7 @@ namespace _2._semesterprojekttest.Models
         public virtual DbSet<Coupon> Coupons { get; set; }
         public virtual DbSet<CruizeUser> CruizeUsers { get; set; }
         public virtual DbSet<Driver> Drivers { get; set; }
+        public virtual DbSet<ImageTest> ImageTests { get; set; }
         public virtual DbSet<Passenger> Passengers { get; set; }
         public virtual DbSet<Picture> Pictures { get; set; }
         public virtual DbSet<Report> Reports { get; set; }
@@ -92,6 +93,18 @@ namespace _2._semesterprojekttest.Models
                     .WithOne(p => p.Driver)
                     .HasForeignKey<Driver>(d => d.UserId)
                     .HasConstraintName("FK__Driver__UserID__797309D9");
+            });
+
+            modelBuilder.Entity<ImageTest>(entity =>
+            {
+                entity.HasKey(e => e.PictureId)
+                    .HasName("PK__ImageTes__8C2866F8AE9FFB8E");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.ImageTests)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK__ImageTest__UserI__1AD3FDA4");
             });
 
             modelBuilder.Entity<Passenger>(entity =>
