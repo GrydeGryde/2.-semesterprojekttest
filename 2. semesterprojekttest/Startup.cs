@@ -31,6 +31,7 @@ namespace _2._semesterprojekttest
             services.AddSession();
             services.AddSingleton<IRouteService, RouteService>();
             services.AddSingleton<IReportService, ReportService>();
+            services.AddSingleton<ICouponService, CouponService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
