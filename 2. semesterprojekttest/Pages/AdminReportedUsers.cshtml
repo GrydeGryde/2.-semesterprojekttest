@@ -1,0 +1,17 @@
+﻿@page
+@using _2._semesterprojekttest.Models
+@model _2._semesterprojekttest.Pages.AdminReportedUsersModel
+@{
+}
+
+@foreach (Report report in Model.allReports)
+{
+    <h2>@report.ReportId: User with ID @report.Reported is reported with the following message:</h2>
+    <h3>@report.Message</h3>
+    <form method="post">
+        <button asp-page-handler="Ban" asp-route-email="@Model.GetReportedUser(report.Reported).Email" asp-route-id="@report.Reported" class="btn btn-danger" onclick="return confirm('Are you sure you want to ban this user from the application? The user and all their data will be deleted upon confirmation.')">
+            Ban from application
+        </button>
+
+    </form>
+}

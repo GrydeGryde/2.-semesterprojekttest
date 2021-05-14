@@ -5,24 +5,26 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
+
 #nullable disable
 
 namespace _2._semesterprojekttest.Models
 {
-    [Table("Driver")]
-    public partial class Driver
+    [Table("ImageTest")]
+    public partial class ImageTest
     {
         [Key]
+        [Column("PictureID")]
+        public int PictureId { get; set; }
         [Column("UserID")]
-        public int UserId { get; set; }
-        [StringLength(50)]
-        public string CarType { get; set; }
-        [StringLength(50)]
-        public string Carcolor { get; set; }
-        public int? CouponCount { get; set; }
+        public int? UserId { get; set; }
+        [Column("TypeID")]
+        public int? TypeId { get; set; }
+        [Column(TypeName = "image")]
+        public byte[] Image { get; set; }
 
         [ForeignKey(nameof(UserId))]
-        [InverseProperty(nameof(CruizeUser.Driver))]
+        [InverseProperty(nameof(CruizeUser.ImageTests))]
         public virtual CruizeUser User { get; set; }
     }
 }
