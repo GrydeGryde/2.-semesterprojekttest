@@ -4,12 +4,15 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Net.Mime;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using _2._semesterprojekttest.Interfaces;
 using _2._semesterprojekttest.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace _2._semesterprojekttest.Pages
@@ -22,10 +25,15 @@ namespace _2._semesterprojekttest.Pages
         private ImageTest _image;
         private List<ImageTest> _images;
         private GrydenDBContext db = new GrydenDBContext();
+        private IProfilePicture _profilePicture;
 
         private const string ConnectionString =
             "Data Source=alex-gryden-db.database.windows.net;Initial Catalog=\"Gryden DB\";Persist Security Info=True;User ID=adminlogin;Password=secret1!";
 
+        public ImageUploadTESTModel(IProfilePicture billedinterface)
+        {
+            _profilePicture = billedinterface;
+        }
 
         public int validUser
         {
@@ -64,24 +72,23 @@ namespace _2._semesterprojekttest.Pages
             //}
         }
 
-        public void OnPost()
+        public void OnPost(Picture pic)
         {
-
-            string path = @"C:\Users\grydg\OneDrive\Billeder\";
-            FileStream b1 = System.IO.File.OpenRead(path + Request.Form["Picture1"]);
-            long b1size = b1.Length;
-            byte[] billedBytes = new byte[b1size];
-            int noOfBytes = b1.Read(billedBytes, 0, (int)b1size);
-
             GrydenDBContext db = new GrydenDBContext();
-            Picture pic = new Picture();
+            {
+                string path = @"C:\Users\grydg\OneDrive\Billeder\";
+                FileStream b1 = System.IO.File.OpenRead(path + Request.Form["Picture1"]);
+                long b1size = b1.Length;
+                byte[] billedBytes = new byte[b1size];
+                int noOfBytes = b1.Read(billedBytes, 0, (int) b1size);
 
-            pic.UserId = Convert.ToInt32(HttpContext.Session.GetInt32("UserID"));
-            pic.FileType = "jpg";
-            pic.Picture1 = billedBytes;
-            pic.TypeId = Convert.ToInt32(Request.Form["Bil/profil"]);
-            db.Pictures.Add(pic);
-            db.SaveChanges();
+
+                pic.UserId = Convert.ToInt32(HttpContext.Session.GetInt32("UserID"));
+                pic.FileType = "jpg";
+                pic.Picture1 = billedBytes;
+                pic.TypeId = Convert.ToInt32(Request.Form["Bil/profil"]);
+                _profilePicture.AddPicture(pic);
+            }
         }
     }
 }
