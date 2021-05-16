@@ -32,6 +32,7 @@ namespace _2._semesterprojekttest
             services.AddSingleton<IRouteService, RouteService>();
             services.AddSingleton<IReportService, ReportService>();
             services.AddSingleton<ICouponService, CouponService>();
+            services.AddSingleton<IProfilePicture, PictureService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

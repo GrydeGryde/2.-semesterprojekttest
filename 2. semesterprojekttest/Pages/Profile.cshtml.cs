@@ -52,7 +52,7 @@ namespace _2._semesterprojekttest.Pages
         {
             //var checkforpic = db.Pictures.Find(userID, Picture.UserId);
             var checkforpic = db.Pictures.Where(i => i.UserId==userID).ToList();
-            if (checkforpic != null)
+            if (checkforpic.Count() != 0)
             {
                 _pictures = checkforpic;
 

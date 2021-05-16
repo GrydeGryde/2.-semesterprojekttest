@@ -22,6 +22,7 @@ namespace _2._semesterprojekttest.Services
         private const string DeleteDriverSQL = "Delete from Driver where UserID = @ID";
         private const string CheckDriverSQL = "Select * from Driver Where UserID = @ID";
 
+
         public bool AddUser(CruizeUser user)
         {
             user.Password = PasswordHash(user.Email, user.Password);
