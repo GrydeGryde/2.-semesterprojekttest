@@ -10,5 +10,7 @@ namespace _2._semesterprojekttest.Interfaces
     {
         void AddPicture(Picture pic);
         void DeletePicture(int userid, int typeID);
+        Picture GetProfilePicture(int userid);
+        Picture GetCarPicture(int userid);
     }
 }

@@ -81,5 +81,27 @@ namespace _2._semesterprojekttest.Services
         public void DeletePicture(int userID, int typeID)
         {
         }
+
+        public Picture GetProfilePicture(int userID)
+        {
+            var checkforpic = db.Pictures.Where(i => i.UserId == userID && i.TypeId == 1).ToList();
+            foreach (Picture pic in checkforpic)
+            {
+                return pic;
+            }
+
+            return null;
+        }
+        public Picture GetCarPicture(int userID)
+        {
+            var checkforpic = db.Pictures.Where(i => i.UserId == userID && i.TypeId == 0).ToList();
+            foreach (Picture pic in checkforpic)
+            {
+                return pic;
+            }
+
+            return null;
+        }
+
     }
 }
