@@ -24,7 +24,10 @@ namespace _2._semesterprojekttest.Pages
         {
             get { return Convert.ToInt32(HttpContext.Session.GetInt32("Driver")); }
         }
-
+        public int adminLogin
+        {
+            get { return Convert.ToInt32(HttpContext.Session.GetInt32("Admin")); }
+        }
 
         public CruizeUser LoggedInUser
         {
@@ -76,6 +79,11 @@ namespace _2._semesterprojekttest.Pages
                 if (userService.CheckDriver(userService.GetUserId(userName)))
                 {
                     HttpContext.Session.SetInt32("Driver", 1);
+                }
+
+                if (userName == "admin@easj.dk")
+                {
+                    HttpContext.Session.SetInt32("Admin", 1);
                 }
 
                 return Redirect("Index");

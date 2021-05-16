@@ -25,6 +25,10 @@ namespace _2._semesterprojekttest.Pages
         {
             get { return Convert.ToInt32(HttpContext.Session.GetInt32("Driver")); }
         }
+        public int adminLogin
+        {
+            get { return Convert.ToInt32(HttpContext.Session.GetInt32("Admin")); }
+        }
 
         public List<Coupon> Coupons;
         private ICouponService _couponService;
