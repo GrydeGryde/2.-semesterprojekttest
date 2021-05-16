@@ -11,42 +11,62 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">_2._semesterprojekttest</a>
+
+                <a class="navbar-brand" asp-area="" asp-page="/Index"><img src="/Images/cruizelogo.png" alt="logo" height="80"></a>
+                @if (Model.validUser == 0)
+                {
+                    <a class="nav-link text-dark" asp-area="" asp-page="/CreateUser">Create User</a>
+                    <a class="nav-link text-dark" asp-area="" asp-page="/LoginLogoutUser">Login</a>
+                }
+                else
+                {
+                    <a class="rounded-circle" asp-area="" asp-page="/ProfilePage"><img src="/Images/emptyprofile.png" alt="profilepic" height="80" class="rounded-circle"></a>
+                }
+
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/LoginLogoutUser">Login/Logout</a>
-                        </li>
+                        @if (Model.validUser == 1)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/AvailableRoutes">Available routes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/DummyReportPage">Test: Report en bruger</a>
+                            </li>
+                        }
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/AvailableRoutes">Available routes</a>
-                        </li>
+                        @if (Model.validDriver == 1)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/CreateRoute">Test: Lav rute/Husk Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/DriverRequests">Driver Requests</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Coupons">Coupons</a>
+                            </li>
+                        }
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/CreateUser">Create User</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/CreateRoute">Test: Lav rute/Husk Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/DummyReportPage">Test: Report en bruger</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/DriverRequests">Driver Requests</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Coupons">Coupons</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Statistics">Statistics</a>
-                        </li>
+                        @if (Model.adminLogin == 1)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Statistics">Statistics</a>
+                            </li>
+                        }
+
+                        @if (Model.validUser == 1)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-page="/LoginLogoutUser">Logout</a>
+                            </li>
+                        }
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/ImageUploadTEST">Test af billedupload</a>
                         </li>

@@ -25,6 +25,10 @@ namespace _2._semesterprojekttest.Pages
         {
             get { return Convert.ToInt32(HttpContext.Session.GetInt32("Driver")); }
         }
+        public int adminLogin
+        {
+            get { return Convert.ToInt32(HttpContext.Session.GetInt32("Admin")); }
+        }
 
         private IRouteService _routeService;
         public List<Request> liste { get; set; }
