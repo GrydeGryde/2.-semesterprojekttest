@@ -20,7 +20,17 @@
                 }
                 else
                 {
-                    <a class="rounded-circle" asp-area="" asp-page="/ProfilePage"><img src="/Images/emptyprofile.png" alt="profilepic" height="80" class="rounded-circle"></a>
+                    if (Model.ProfilePicture == null)
+                    {
+                        <a class="rounded-circle" asp-area="" asp-page="/ProfilePage"><img src="/Images/emptyprofile.png" alt="profilepic" height="80" width="80" class="rounded-circle"></a>
+                    }
+                    else
+                    { 
+                        String file = "data:image/jpeg;base64," + Convert.ToBase64String(Model.ProfilePicture.Picture1);
+                        <a class="rounded-circle" asp-area="" asp-page="/ProfilePage"><img src="@file" alt="profilepic" height="80" width="80" class="rounded-circle"></a>
+
+                    }
+
                 }
 
 

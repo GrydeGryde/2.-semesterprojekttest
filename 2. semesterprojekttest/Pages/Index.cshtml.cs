@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using _2._semesterprojekttest.Interfaces;
+using _2._semesterprojekttest.Models;
 using Microsoft.AspNetCore.Http;
 
 namespace _2._semesterprojekttest.Pages
@@ -12,7 +14,13 @@ namespace _2._semesterprojekttest.Pages
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
+        private IProfilePicture _iPicture;
 
+        public Picture ProfilePicture
+        {
+            get;
+            set;
+        }
         public int validUser
         {
             get { return Convert.ToInt32(HttpContext.Session.GetInt32("Login")); }
@@ -30,13 +38,15 @@ namespace _2._semesterprojekttest.Pages
             get { return Convert.ToInt32(HttpContext.Session.GetInt32("Admin")); }
         }
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(ILogger<IndexModel> logger, IProfilePicture billed)
         {
             _logger = logger;
+            _iPicture = billed;
         }
 
         public void OnGet()
         {
+            ProfilePicture = _iPicture.GetProfilePicture(userID);
         }
     }
 }
