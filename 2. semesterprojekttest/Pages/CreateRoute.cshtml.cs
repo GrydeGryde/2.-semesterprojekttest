@@ -42,7 +42,7 @@ namespace _2._semesterprojekttest.Pages
             ProfilePicture = _iPicture.GetProfilePicture(userID);
         }
 
-        public void OnPost()
+        public IActionResult OnPost()
         {
             if (ModelState.IsValid)
             {
@@ -56,7 +56,14 @@ namespace _2._semesterprojekttest.Pages
 
 
                 _routeService.AddRoute(route);
+
+
+                int id = _routeService.GetAllRoutes().Last().RouteId;
+
+                return RedirectToPage("Route", new { id = id });
             }
+
+            return Page();
         }
     }
 }

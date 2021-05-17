@@ -18,7 +18,20 @@
             <br />
             Day
             <br />
-            <input name="Day" type="text" class="form-control input-lg" required autofocus />
+            <input type="radio" id="Monday" name="Day" value="1">
+            <label for="Monday">Monday</label><br>
+            <input type="radio" id="Tuesday" name="Day" value="2">
+            <label for="Tuesday">Tuesday</label><br>
+            <input type="radio" id="Wednesday" name="Day" value="3">
+            <label for="Wednesday">Wednesday</label><br>
+            <input type="radio" id="Thursday" name="Day" value="4">
+            <label for="Thursday">Thursday</label><br>
+            <input type="radio" id="Friday" name="Day" value="5">
+            <label for="Friday">Friday</label><br>
+            <input type="radio" id="Saturday" name="Day" value="6">
+            <label for="Saturday">Saturday</label><br>
+            <input type="radio" id="Sunday" name="Day" value="7">
+            <label for="Sunday">Sunday</label><br>
             <br />
             Arrival Time
             <br />
@@ -26,10 +39,16 @@
             <br />
             Available Space
             <br />
-            <input name="Space" type="number" class="form-control input-lg" required autofocus />
+            <select name="Space" id="Space" required autofocus>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
             <br />
 
-            <input id="SaveButton" type="submit" value="CreateRoute" class="btn btn-primary">
+            <input id="SaveButton" type="submit" class="btn btn-primary">
         </form>
     </div>
 }
