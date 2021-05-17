@@ -9,10 +9,20 @@
 <h2>Day: @Model.RouteProperty.Day</h2>
 <h2>Space: @Model.RouteProperty.Space</h2>
 
-<form method="post">
-    <input name="RequestMessage" type="text" class="form-control input-lg" required autofocus />
-    <button type="submit" asp-page-handler="Request" asp-route-UserID="@Model.RouteProperty.UserId" asp-route-RouteID="@Model.RouteProperty.RouteId"
-            class="btn btn-dark btn-group-lg pull-right">
-        Request
-    </button>
-</form>
+
+@if (Model.userID != Model.RouteProperty.UserId)
+{
+    <form method="post">
+        <input name="RequestMessage" type="text" class="form-control input-lg" required autofocus />
+        <button type="submit" asp-page-handler="Request" asp-route-UserID="@Model.RouteProperty.UserId" asp-route-RouteID="@Model.RouteProperty.RouteId"
+                class="btn btn-dark btn-group-lg pull-right">
+            Request
+        </button>
+    </form>
+}
+else if (Model.userID == Model.RouteProperty.UserId)
+{
+    <h2>OPDATER RUTE MÅSKE??</h2>
+
+    <h2> PASSENGER LISTE DER ER PÅ RUTEN </h2>
+}
