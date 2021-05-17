@@ -14,6 +14,7 @@ namespace _2._semesterprojekttest.Pages
     {
         private IProfilePicture _iPicture;
         public Picture ProfilePicture { get; set; }
+        public Picture CarPicture { get; set; }
         public int validUser
         {
             get { return Convert.ToInt32(HttpContext.Session.GetInt32("Login")); }
@@ -38,6 +39,7 @@ namespace _2._semesterprojekttest.Pages
         public void OnGet()
         {
             ProfilePicture = _iPicture.GetProfilePicture(userID);
+            CarPicture = _iPicture.GetCarPicture(userID);
         }
 
         public IActionResult OnPostLogout()

@@ -15,6 +15,17 @@ String file = "data:image/jpeg;base64," + Convert.ToBase64String(Model.ProfilePi
 <a class="rounded-circle" asp-area="" asp-page="/ImageUploadTEST"><img src="@file" alt="profilepic" height="80" width="80" class="rounded-circle"></a>
 
 }
+
+@if (Model.CarPicture == null)
+{
+    <a class="rounded-circle" asp-area="" asp-page="/ImageUploadTEST"><img src="/Images/emptyprofile.png" alt="carpic" height="80" width="80" class="rounded-circle"></a>
+}
+else
+{ 
+    String file = "data:image/jpeg;base64," + Convert.ToBase64String(Model.CarPicture.Picture1);
+    <a class="rounded-circle" asp-area="" asp-page="/ImageUploadTEST"><img src="@file" alt="carpic" height="80" width="80" class="rounded-circle"></a>
+
+}
 <form method="post">
     <button asp-page-handler="LogOut"
             class="btn btn-dark btn-group-lg pull-right">

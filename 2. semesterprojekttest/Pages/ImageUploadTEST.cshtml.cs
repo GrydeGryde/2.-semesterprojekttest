@@ -88,7 +88,10 @@ namespace _2._semesterprojekttest.Pages
                 pic.Picture1 = billedBytes;
                 pic.TypeId = Convert.ToInt32(Request.Form["Bil/profil"]);
                 _iPicture.AddPicture(pic);
-                ProfilePicture = pic;
+                if (pic.TypeId == 1)
+                {
+                     ProfilePicture = pic;
+                }
             }
         }
     }
