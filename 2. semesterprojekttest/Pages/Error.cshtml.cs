@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using _2._semesterprojekttest.Interfaces;
+using _2._semesterprojekttest.Models;
 using Microsoft.AspNetCore.Http;
 
 namespace _2._semesterprojekttest.Pages
@@ -13,6 +15,8 @@ namespace _2._semesterprojekttest.Pages
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public class ErrorModel : PageModel
     {
+        private IProfilePicture _iPicture;
+        public Picture ProfilePicture { get; set; }
         public int validUser
         {
             get { return Convert.ToInt32(HttpContext.Session.GetInt32("Login")); }

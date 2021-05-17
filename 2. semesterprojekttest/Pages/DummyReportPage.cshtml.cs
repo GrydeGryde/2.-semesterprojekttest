@@ -15,6 +15,8 @@ namespace _2._semesterprojekttest.Pages
         public CruizeUser user;
         public List<CruizeUser> _listeUsers;
         private IUserService _userService;
+        private IProfilePicture _iPicture;
+        public Picture ProfilePicture { get; set; }
 
         public int validUser
         {
@@ -33,12 +35,14 @@ namespace _2._semesterprojekttest.Pages
             get { return Convert.ToInt32(HttpContext.Session.GetInt32("Admin")); }
         }
 
-        public DummyReportPageModel(IUserService service)
+        public DummyReportPageModel(IUserService service, IProfilePicture pictureservice)
         {
             _userService = service;
+            _iPicture = pictureservice;
         }
         public void OnGet()
         {
+            ProfilePicture = _iPicture.GetProfilePicture(userID);
             _listeUsers = _userService.GetAllUsers();
         }
     }

@@ -13,6 +13,10 @@ namespace _2._semesterprojekttest.Pages
 {
     public class CreateUserModel : PageModel
     {
+        private IProfilePicture _iPicture;
+        private IUserService _userService;
+        private IReportService _reportService;
+        public Picture ProfilePicture { get; set; }
         public int validUser
         {
             get { return Convert.ToInt32(HttpContext.Session.GetInt32("Login")); }
@@ -30,21 +34,20 @@ namespace _2._semesterprojekttest.Pages
             get { return Convert.ToInt32(HttpContext.Session.GetInt32("Admin")); }
         }
 
-        private IUserService _userService;
-        private IReportService _reportService;
 
-
-        public CreateUserModel(IUserService service, IReportService reportService)
+        public CreateUserModel(IUserService service, IReportService reportService, IProfilePicture pictureservice)
 
         {
             _userService = service;
             _reportService = reportService;
+            _iPicture = pictureservice;
         }
 
         public string EmailError { get; set; }
 
         public void OnGet()
         {
+            ProfilePicture = _iPicture.GetProfilePicture(userID);
         }
 
         public void OnPost()

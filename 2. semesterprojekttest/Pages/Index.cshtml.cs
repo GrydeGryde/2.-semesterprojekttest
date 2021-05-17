@@ -18,8 +18,7 @@ namespace _2._semesterprojekttest.Pages
 
         public Picture ProfilePicture
         {
-            get;
-            set;
+            get; set;
         }
         public int validUser
         {

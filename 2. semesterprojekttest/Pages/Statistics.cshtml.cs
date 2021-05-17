@@ -13,6 +13,9 @@ namespace _2._semesterprojekttest.Pages
 {
     public class StatisticsModel : PageModel
     {
+        private IProfilePicture _iPicture;
+        private IUserService _userService;
+        public Picture ProfilePicture { get; set; }
         public int validUser
         {
             get { return Convert.ToInt32(HttpContext.Session.GetInt32("Login")); }
@@ -30,18 +33,20 @@ namespace _2._semesterprojekttest.Pages
             get { return Convert.ToInt32(HttpContext.Session.GetInt32("Admin")); }
         }
 
-        private IUserService _userService;
+        
         [BindProperty(SupportsGet = true)]
         public string Filter { get; set; }
 
         public List<CruizeUser> liste { get; set; }
 
-        public StatisticsModel(IUserService service)
+        public StatisticsModel(IUserService service, IProfilePicture pictureservice)
         {
             _userService = service;
+            _iPicture = pictureservice;
         }
         public IActionResult OnGet()
         {
+            ProfilePicture = _iPicture.GetProfilePicture(userID);
             liste = _userService.GetAllUsers();
             if (!string.IsNullOrEmpty(Filter))
             {

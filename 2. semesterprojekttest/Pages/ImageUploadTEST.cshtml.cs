@@ -25,14 +25,15 @@ namespace _2._semesterprojekttest.Pages
         private ImageTest _image;
         private List<ImageTest> _images;
         private GrydenDBContext db = new GrydenDBContext();
-        private IProfilePicture _profilePicture;
+        private IProfilePicture _iPicture;
+        public Picture ProfilePicture { get; set; }
 
         private const string ConnectionString =
             "Data Source=alex-gryden-db.database.windows.net;Initial Catalog=\"Gryden DB\";Persist Security Info=True;User ID=adminlogin;Password=secret1!";
 
         public ImageUploadTESTModel(IProfilePicture billedinterface)
         {
-            _profilePicture = billedinterface;
+            _iPicture = billedinterface;
         }
 
         public int validUser
@@ -68,11 +69,7 @@ namespace _2._semesterprojekttest.Pages
 
         public void OnGet()
         {
-            //var checkforpic = db.ImageTests.Find(HttpContext.Session.GetInt32("UserID"));
-            //if (checkforpic != null)
-            //{
-
-            //}
+            ProfilePicture = _iPicture.GetProfilePicture(userID);
         }
 
         public void OnPost(Picture pic)
@@ -90,7 +87,8 @@ namespace _2._semesterprojekttest.Pages
                 pic.FileType = "jpg";
                 pic.Picture1 = billedBytes;
                 pic.TypeId = Convert.ToInt32(Request.Form["Bil/profil"]);
-                _profilePicture.AddPicture(pic);
+                _iPicture.AddPicture(pic);
+                ProfilePicture = pic;
             }
         }
     }

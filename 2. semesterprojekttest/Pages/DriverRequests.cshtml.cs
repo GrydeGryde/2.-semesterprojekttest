@@ -13,6 +13,9 @@ namespace _2._semesterprojekttest.Pages
 {
     public class DriverRequestsModel : PageModel
     {
+        private IProfilePicture _iPicture;
+        private IRouteService _routeService;
+        public Picture ProfilePicture { get; set; }
         public int validUser
         {
             get { return Convert.ToInt32(HttpContext.Session.GetInt32("Login")); }
@@ -30,15 +33,16 @@ namespace _2._semesterprojekttest.Pages
             get { return Convert.ToInt32(HttpContext.Session.GetInt32("Admin")); }
         }
 
-        private IRouteService _routeService;
         public List<Request> liste { get; set; }
         
-        public DriverRequestsModel(IRouteService routeService)
+        public DriverRequestsModel(IRouteService routeService, IProfilePicture pictureservice)
         {
             _routeService = routeService;
+            _iPicture = pictureservice;
         }
         public void OnGet()
         {
+            ProfilePicture = _iPicture.GetProfilePicture(userID);
             liste = _routeService.GetAllRequests(userID);
         }
 

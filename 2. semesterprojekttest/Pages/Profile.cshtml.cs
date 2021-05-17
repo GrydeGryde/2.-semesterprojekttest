@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using _2._semesterprojekttest.Interfaces;
 using _2._semesterprojekttest.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,10 +13,12 @@ namespace _2._semesterprojekttest.Pages
 {
     public class ProfileModel : PageModel
     {
+        private IProfilePicture _iPicture;
         private readonly ILogger<ProfileModel> _logger;
         private Picture _picture;
         private List<Picture> _pictures;
         private GrydenDBContext db = new GrydenDBContext();
+        public Picture ProfilePicture { get; set; }
 
         public int validUser
         {
@@ -48,18 +51,19 @@ namespace _2._semesterprojekttest.Pages
         }
 
 
-        public ProfileModel(ILogger<ProfileModel> logger)
+        public ProfileModel(ILogger<ProfileModel> logger, IProfilePicture pictureservice)
         {
             _logger = logger;
+            _iPicture = pictureservice;
         }
         public void OnGet()
         {
+            ProfilePicture = _iPicture.GetProfilePicture(userID);
             //var checkforpic = db.Pictures.Find(userID, Picture.UserId);
             var checkforpic = db.Pictures.Where(i => i.UserId==userID).ToList();
             if (checkforpic.Count() != 0)
             {
                 _pictures = checkforpic;
-
             }
 
         }

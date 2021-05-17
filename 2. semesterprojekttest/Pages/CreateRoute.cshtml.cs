@@ -12,6 +12,9 @@ namespace _2._semesterprojekttest.Pages
 {
     public class CreateRouteModel : PageModel
     {
+        private IProfilePicture _iPicture;
+        private IRouteService _routeService;
+        public Picture ProfilePicture { get; set; }
         public int validUser
         {
             get { return Convert.ToInt32(HttpContext.Session.GetInt32("Login")); }
@@ -29,14 +32,14 @@ namespace _2._semesterprojekttest.Pages
             get { return Convert.ToInt32(HttpContext.Session.GetInt32("Admin")); }
         }
 
-        private IRouteService _routeService;
-
-        public CreateRouteModel(IRouteService service)
+        public CreateRouteModel(IRouteService service, IProfilePicture pictureservice)
         {
             _routeService = service;
+            _iPicture = pictureservice;
         }
         public void OnGet()
         {
+            ProfilePicture = _iPicture.GetProfilePicture(userID);
         }
 
         public void OnPost()

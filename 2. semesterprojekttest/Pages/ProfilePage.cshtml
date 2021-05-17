@@ -5,7 +5,16 @@
 
 
 <a class="text-dark" asp-area="" asp-page="/AvailableRoutes">Available routes</a>
+@if (Model.ProfilePicture == null)
+{
+<a class="rounded-circle" asp-area="" asp-page="/ImageUploadTEST"><img src="/Images/emptyprofile.png" alt="profilepic" height="80" width="80" class="rounded-circle"></a>
+}
+else
+{ 
+String file = "data:image/jpeg;base64," + Convert.ToBase64String(Model.ProfilePicture.Picture1);
+<a class="rounded-circle" asp-area="" asp-page="/ImageUploadTEST"><img src="@file" alt="profilepic" height="80" width="80" class="rounded-circle"></a>
 
+}
 <form method="post">
     <button asp-page-handler="LogOut"
             class="btn btn-dark btn-group-lg pull-right">

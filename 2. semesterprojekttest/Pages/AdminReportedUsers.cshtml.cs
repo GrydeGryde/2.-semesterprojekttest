@@ -14,8 +14,10 @@ namespace _2._semesterprojekttest.Pages
     {
         private IUserService _userService;
         private IReportService _reportService;
+        private IProfilePicture _iPicture;
 
         public List<Report> AllReports;
+        public Picture ProfilePicture { get; set; }
         public int validUser
         {
             get { return Convert.ToInt32(HttpContext.Session.GetInt32("Login")); }
@@ -33,15 +35,17 @@ namespace _2._semesterprojekttest.Pages
             get { return Convert.ToInt32(HttpContext.Session.GetInt32("Admin")); }
         }
 
-        public AdminReportedUsersModel(IUserService userService, IReportService reportService)
+        public AdminReportedUsersModel(IUserService userService, IReportService reportService, IProfilePicture pictureservice)
         {
             _userService = userService;
             _reportService = reportService;
+            _iPicture = pictureservice;
         }
 
 
         public void OnGet()
         {
+            ProfilePicture = _iPicture.GetProfilePicture(userID);
             AllReports = _reportService.ReportedUsers();
         }
 

@@ -13,6 +13,9 @@ namespace _2._semesterprojekttest.Pages
 {
     public class CouponsModel : PageModel
     {
+        private IProfilePicture _iPicture;
+        private ICouponService _couponService;
+        public Picture ProfilePicture { get; set; }
         public int count { get; set; }
 
         public int validUser
@@ -33,17 +36,20 @@ namespace _2._semesterprojekttest.Pages
         }
 
         public List<Coupon> Coupons;
-        private ICouponService _couponService;
+        
 
 
-        public CouponsModel(ICouponService couponService)
+        public CouponsModel(ICouponService couponService, IProfilePicture pictureservice)
         {
             _couponService = couponService;
+            _iPicture = pictureservice;
         }
 
         public void OnGet()
         {
+            ProfilePicture = _iPicture.GetProfilePicture(userID);
             Coupons = _couponService.GetUserCoupons(userID);
+            count = _couponService.GetCouponCount(userID);
         }
 
         public void OnPost()

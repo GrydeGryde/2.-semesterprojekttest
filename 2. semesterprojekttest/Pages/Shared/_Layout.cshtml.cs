@@ -14,11 +14,7 @@ namespace _2._semesterprojekttest.Pages.Shared
     {
         private IProfilePicture _iPicture;
 
-        public Picture ProfilePicture
-        {
-            get;
-            set;
-        }
+        public Picture ProfilePicture { get; set; }
 
 
         public LayoutModel(IProfilePicture Billed)
