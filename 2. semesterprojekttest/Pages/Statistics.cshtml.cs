@@ -31,15 +31,23 @@ namespace _2._semesterprojekttest.Pages
         }
 
         private IUserService _userService;
+        [BindProperty(SupportsGet = true)]
+        public string Filter { get; set; }
 
         public List<CruizeUser> liste { get; set; }
+
         public StatisticsModel(IUserService service)
         {
             _userService = service;
         }
-        public void OnGet()
+        public IActionResult OnGet()
         {
             liste = _userService.GetAllUsers();
+            if (!string.IsNullOrEmpty(Filter))
+            {
+                liste = _userService.FilterUsers(Filter);
+            }
+            return Page();
         }
 
     }

@@ -247,6 +247,20 @@ namespace _2._semesterprojekttest.Services
             return loggedIn;
         }
 
-
+        public List<CruizeUser> FilterUsers(string e)
+        {
+            List<CruizeUser> filterUsers = new List<CruizeUser>();
+            if (e != null)
+            {
+                foreach (CruizeUser cruizer in GetAllUsers())
+                {
+                    if (cruizer.Zipcode.ToString().StartsWith(e))
+                    {
+                        filterUsers.Add(cruizer);
+                    }
+                }
+            }
+            return filterUsers;
+        }
     }
 }

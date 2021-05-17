@@ -4,6 +4,18 @@
 @{
 }
 
+@if (Model.liste != null && Model.liste.Count > 0)
+{<h5>Number of users : @Model.liste.Count</h5>}
+else
+{ <h5>Number of users : 0</h5>}
+
+<form>
+    <p>
+        Filter users by zipcode: <input type="text" asp-for="Filter" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
 @foreach (CruizeUser users in Model.liste)
 {
     <h1>User ID: @users.UserId</h1>
