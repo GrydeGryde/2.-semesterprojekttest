@@ -12,6 +12,8 @@ namespace _2._semesterprojekttest.Interfaces
 
         bool CreateCoupon(Coupon aCoupon);
 
-        void CompletedFare();
+        int GetCouponCount(int id);
+
+        bool AddCouponCount(int id, int counter);
     }
 }

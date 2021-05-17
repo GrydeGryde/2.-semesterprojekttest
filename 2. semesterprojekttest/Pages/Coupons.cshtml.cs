@@ -13,6 +13,8 @@ namespace _2._semesterprojekttest.Pages
 {
     public class CouponsModel : PageModel
     {
+        public int count { get; set; }
+
         public int validUser
         {
             get { return Convert.ToInt32(HttpContext.Session.GetInt32("Login")); }
@@ -47,7 +49,21 @@ namespace _2._semesterprojekttest.Pages
             aCoupon.Info = "Dette er en madkupon, indløs den i cafeteriet";
             aCoupon.Barcode = "570020010042069";
 
-            _couponService.CreateCoupon(aCoupon);
+            int counter = _couponService.GetCouponCount(userID);
+            if (counter < 10)
+            {
+                counter = counter + 1;
+                _couponService.AddCouponCount(userID, counter);
+            }
+
+            if (counter == 10)
+            {
+                _couponService.CreateCoupon(aCoupon);
+                _couponService.AddCouponCount(userID, 0);
+            }
+
+            Coupons = _couponService.GetUserCoupons(userID);
+            count = counter;
         }
     }
 }

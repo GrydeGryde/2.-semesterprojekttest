@@ -14,7 +14,13 @@
 }
 else if (Model.validDriver == 1)
 {
-    <button type="submit" value="">Finish a route</button>
+    <form method="post">
+        <button type="submit" class="btn btn-success btn-group-lg pull-right">
+            Add count
+        </button>
+    </form>
+
+    <h3>@Model.count</h3>
 
     @foreach (Models.Coupon c in Model.Coupons)
     {
