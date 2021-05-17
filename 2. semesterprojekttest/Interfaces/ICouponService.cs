@@ -9,5 +9,11 @@ namespace _2._semesterprojekttest.Interfaces
     public interface ICouponService
     {
         List<Coupon> GetUserCoupons(int id);
+
+        bool CreateCoupon(Coupon aCoupon);
+
+        int GetCouponCount(int id);
+
+        bool AddCouponCount(int id, int counter);
     }
 }
