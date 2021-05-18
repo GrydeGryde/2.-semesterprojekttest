@@ -13,7 +13,11 @@ namespace _2._semesterprojekttest.Pages
     public class ProfilePageModel : PageModel
     {
         private IProfilePicture _iPicture;
+        private IUserService _userService;
         public Picture ProfilePicture { get; set; }
+        public Picture CarPicture { get; set; }
+        public CruizeUser User { get; set; }
+        public Driver CruizeDriver { get; set; }
         public int validUser
         {
             get { return Convert.ToInt32(HttpContext.Session.GetInt32("Login")); }
@@ -31,13 +35,18 @@ namespace _2._semesterprojekttest.Pages
             get { return Convert.ToInt32(HttpContext.Session.GetInt32("Admin")); }
         }
 
-        public ProfilePageModel(IProfilePicture pictureservice)
+        
+        public ProfilePageModel(IProfilePicture pictureservice, IUserService userservice)
         {
             _iPicture = pictureservice;
+            _userService = userservice;
         }
         public void OnGet()
         {
             ProfilePicture = _iPicture.GetProfilePicture(userID);
+            CarPicture = _iPicture.GetCarPicture(userID);
+            User = _userService.GetOneUser(userID);
+            CruizeDriver = _userService.GetOneDriver(userID);
         }
 
         public IActionResult OnPostLogout()

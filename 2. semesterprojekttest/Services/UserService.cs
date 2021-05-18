@@ -262,5 +262,42 @@ namespace _2._semesterprojekttest.Services
             }
             return filterUsers;
         }
+
+        public Driver GetOneDriver(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand sql = new SqlCommand("Select * from Driver where UserID = @ID ", connection))
+                {
+                    sql.Parameters.AddWithValue("@ID", id);
+
+                    SqlDataReader reader = sql.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        return MakeDriver(reader);
+                    }
+                }
+            }
+
+            return null;
+        }
+
+
+
+        private Driver MakeDriver(SqlDataReader reader)
+        {
+            Driver driver = new Driver
+            {
+                UserId = Convert.ToInt32(reader["UserID"]),
+                CarType = Convert.ToString(reader["CarType"]),
+                Carcolor = Convert.ToString(reader["CarColor"]),
+                CouponCount = Convert.ToInt32(reader["CouponCount"])
+            };
+
+            return driver;
+        }
     }
 }

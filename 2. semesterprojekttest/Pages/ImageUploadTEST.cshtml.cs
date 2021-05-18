@@ -67,12 +67,23 @@ namespace _2._semesterprojekttest.Pages
             set => _pictures = value;
         }
 
-        public void OnGet()
+        public int TypeID
         {
+            get;
+            set;
+        }
+        public void OnGet(int picID)
+        {
+            TypeID = picID;
             ProfilePicture = _iPicture.GetProfilePicture(userID);
         }
 
-        public void OnPost(Picture pic)
+        public IActionResult Profile()
+        {
+            return RedirectToPage("ProfilePage");
+        }
+
+        public void OnPostUpload(Picture pic, int id)
         {
             GrydenDBContext db = new GrydenDBContext();
             {
@@ -86,10 +97,14 @@ namespace _2._semesterprojekttest.Pages
                 pic.UserId = Convert.ToInt32(HttpContext.Session.GetInt32("UserID"));
                 pic.FileType = "jpg";
                 pic.Picture1 = billedBytes;
-                pic.TypeId = Convert.ToInt32(Request.Form["Bil/profil"]);
+                pic.TypeId = id;
                 _iPicture.AddPicture(pic);
-                ProfilePicture = pic;
+                if (pic.TypeId == 1)
+                {
+                     ProfilePicture = pic;
+                }
             }
+            
         }
     }
 }
