@@ -7,12 +7,15 @@
 <h1>UploadTest</h1>
 <form method="post">
     Upload file:<input id="Picture1" type="file" name="Picture1" /><br />
-    <input id="Submit1" type="submit" value="submit" />
-    Er billedet til bil eller bruger?
+    
+    @*Er billedet til bil eller bruger?
     <br />
-    <input type="radio" id="Bil" name="Bil/profil" value="0">
-    <label for="Bil">Bil</label><br>
+    <input type="radio" id="Bil" name="Bil/profil" value="0">*@
+    @*<label for="Bil">Bil</label><br>
     <input type="radio" id="Profil" name="Bil/profil" value="1">
-    <label for="Profil">Profil</label><br>
+    <label for="Profil">Profil</label><br>*@
+    <button asp-page-handler="Upload" asp-route-id="@Model.TypeID" class="btn btn-danger" onclick="return confirm('Do you want to upload this picture?')">
+        Upload 
+    </button>
     <br />
 </form>
