@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body>
+<body style="min-width: 414px">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
@@ -46,14 +46,14 @@
                                 <a class="nav-link text-dark" asp-area="" asp-page="/AvailableRoutes">Available routes</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/DummyReportPage">Test: Report en bruger</a>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/DummyReportPage">Report User</a>
                             </li>
                         }
 
                         @if (Model.validDriver == 1)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/CreateRoute">Test: Lav rute/Husk Login</a>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/CreateRoute">Create Route</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-page="/DriverRequests">Driver Requests</a>
@@ -81,10 +81,10 @@
                         }
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/ImageUploadTEST">Test af billedupload</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/ImageUploadTEST">Upload Image</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Profile">Test af download billed</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Profile">Download Image</a>
                         </li>
                     </ul>
                 </div>

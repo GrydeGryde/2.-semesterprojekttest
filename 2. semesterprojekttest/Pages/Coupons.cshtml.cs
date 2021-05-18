@@ -17,6 +17,7 @@ namespace _2._semesterprojekttest.Pages
         private ICouponService _couponService;
         public Picture ProfilePicture { get; set; }
         public int count { get; set; }
+        public int FaresLeft = 10;
 
         public int validUser
         {
@@ -74,6 +75,7 @@ namespace _2._semesterprojekttest.Pages
 
             Coupons = _couponService.GetUserCoupons(userID);
             count = counter;
+            FaresLeft = FaresLeft - counter;
         }
     }
 }
