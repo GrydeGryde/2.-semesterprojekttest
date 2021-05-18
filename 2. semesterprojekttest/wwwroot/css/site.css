@@ -69,3 +69,26 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+.ProfilePagerow {
+    margin-left: -5px;
+    margin-right: -5px;
+}
+
+.ProfilePagecolumn {
+    float: left;
+    width: 50%;
+    padding: 5px;
+}
+.ProfilePageTable {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+.ProfilePageth {
+    text-align: left;
+    padding: 16px;
+}
+.ProfilePageTR:nth-child(even) {
+    background-color: #f2f2f2;
+}

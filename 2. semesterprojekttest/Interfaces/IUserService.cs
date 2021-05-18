@@ -31,5 +31,6 @@ namespace _2._semesterprojekttest.Interfaces
 
         bool DeleteDriver(int id);
         List<CruizeUser> FilterUsers(string e);
+        Driver GetOneDriver(int id);
     }
 }
