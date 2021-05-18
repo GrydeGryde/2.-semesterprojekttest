@@ -2,21 +2,41 @@
 @model _2._semesterprojekttest.Pages.RouteModel
 @{
 }
-<h1>User ID: @Model.RouteProperty.UserId</h1>
-<h2>Start: @Model.RouteProperty.Start</h2>
-<h2>Goal: @Model.RouteProperty.Goal</h2>
-<h2>Arrival: @Model.RouteProperty.Arrival</h2>
-<h2>Day: @Model.RouteProperty.Day</h2>
-<h2>Space: @Model.RouteProperty.Space</h2>
 
+<table class="table table-bordered table-striped">
+    <thead class="table-primary">
+        <tr>
+            <th>Route Information</th>
+        </tr>
+        <tr>
+           <td>User ID(skal ændres til driver name): @Model.RouteProperty.UserId</td>
+        </tr>
+        <tr>
+            <td>Start Point: @Model.RouteProperty.Start</td>
+        </tr>
+        <tr>
+            <td>End Point: @Model.RouteProperty.Goal</td>
+        </tr>
+        <tr>
+            <td>Arrival Time: @Model.RouteProperty.Arrival</td>
+        </tr>
+        <tr>
+            <td>Day: @Model.RouteProperty.Day</td>
+        </tr>
+        <tr>
+            <td>Seats left: @Model.RouteProperty.Space</td>
+        </tr>
+</table>
+<br/>
 
 @if (Model.userID != Model.RouteProperty.UserId)
 {
+    <h5>Write a message to the driver:</h5>
     <form method="post">
         <input name="RequestMessage" type="text" class="form-control input-lg" required autofocus />
         <button type="submit" asp-page-handler="Request" asp-route-UserID="@Model.RouteProperty.UserId" asp-route-RouteID="@Model.RouteProperty.RouteId"
                 class="btn btn-dark btn-group-lg pull-right">
-            Request
+            Request to join
         </button>
     </form>
 }

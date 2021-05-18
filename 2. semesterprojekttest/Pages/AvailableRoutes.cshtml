@@ -4,12 +4,28 @@
 @{
 }
 
-@foreach (Route routes in Model.liste)
-{
-    if (routes.Space > 0 && routes.UserId != Model.userID)
-    {
-        <h2><a asp-page="Route" asp-route-id="@routes.RouteId">@routes.UserId route</a></h2>
-        <br />
-    }
+<table class="table table-bordered table-striped">
+    <thead class="table-primary">
+    <th>Start point</th>
+    <th>End point</th>
+    <th>Arrival time</th>
+    <th>Seats left</th>
+    <th></th>
+    </thead>
 
-}
+    <tbody>
+        @foreach (Route routes in Model.liste)
+        {
+            if (routes.Space > 0 && routes.UserId != Model.userID)
+            {
+        <tr>
+            <td>@routes.Start</td>
+            <td>@routes.Goal</td>
+            <td>@routes.Arrival</td>
+            <td>@routes.Space</td>
+            <td><a asp-page="Route" asp-route-id="@routes.RouteId">Apply</a></td>
+        </tr>
+            }
+        }
+    </tbody>
+</table>

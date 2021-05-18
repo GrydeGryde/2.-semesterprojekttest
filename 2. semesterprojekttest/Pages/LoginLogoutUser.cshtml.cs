@@ -12,6 +12,13 @@ namespace _2._semesterprojekttest.Pages
 {
     public class LoginLogoutUser : PageModel
     {
+
+        private IProfilePicture _iPicture;
+
+        public Picture ProfilePicture
+        {
+            get; set;
+        }
         public int validUser
         {
             get { return Convert.ToInt32(HttpContext.Session.GetInt32("Login")); }
@@ -44,9 +51,11 @@ namespace _2._semesterprojekttest.Pages
 
         private IUserService userService;
 
-        public LoginLogoutUser(IUserService service)
+        public LoginLogoutUser(IUserService service, IProfilePicture iPicture)
         {
             userService = service;
+            _iPicture = iPicture;
+
         }
         public void OnGet()
         {
