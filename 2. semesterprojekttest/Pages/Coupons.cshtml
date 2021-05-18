@@ -3,10 +3,6 @@
 @{
 }
 
-<h1>Coupons</h1>
-<p>On this page, you will find the food-coupons you are eligible for. You can redeem these in the Zealand Cafeteria.</p>
-<hr>
-
 @if (Model.validUser == 1 && Model.validDriver == 0)
 {
     <p>To be eligible for coupons, you must be a driver to progress towards these rewards.</p>
@@ -14,24 +10,42 @@
 }
 else if (Model.validDriver == 1)
 {
-    <form method="post">
-        <button type="submit" class="btn btn-success btn-group-lg pull-right">
-            Add count
-        </button>
-    </form>
+    <div class="text-center">
+        <h1 class="display-4">Coupons</h1>
+        <p>On this page, you will find the food-coupons you are eligible for. You can redeem these in the Zealand Cafeteria.</p>
+        
+        <h3>@Model.count completed fare(s)</h3>
+        <h5>You have to complete @Model.FaresLeft more fares, before you are rewarded a coupon</h5>
 
-    <h3>@Model.count</h3>
+        <form method="post">
+            <button type="submit" class="btn btn-success btn-group-lg pull-right">
+                Add count
+            </button>
+        </form>
+        <br>
+    </div>
 
-    @foreach (Models.Coupon c in Model.Coupons)
-    {
-        <p>@c.CouponId</p>
-        <p>@c.UserId</p>
-        <p>@c.Info</p>
-        <p>@c.Barcode</p>
-        <hr>
+
+        <table class="table">
+            <thead class="table-primary">
+                <th>Coupon ID</th>
+                <th>Info</th>
+                <th>Barcode</th>
+            </thead>
+
+            <tbody>
+                @foreach (Models.Coupon c in Model.Coupons)
+                {
+                    <tr>
+                        <td>@c.CouponId</td>
+                        <td>@c.Info</td>
+                        <td>@c.Barcode</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     }
-}
-else
-{
-    <p class="text-danger">You must <a asp-page="LoginLogoutUser">Log In</a> to view your coupons.</p>
-}
+    else
+    {
+        <p class="text-danger">You must <a asp-page="LoginLogoutUser">Log In</a> to view your coupons.</p>
+    }

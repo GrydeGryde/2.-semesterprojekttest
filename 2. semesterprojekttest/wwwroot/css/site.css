@@ -69,3 +69,13 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+.table-primary {
+    background-color: #fff387;
+    border-color: #000000;
+}
+
+.primary th {
+border-color: #000;
+}
+
