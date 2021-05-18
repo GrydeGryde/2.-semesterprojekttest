@@ -30,16 +30,21 @@ namespace _2._semesterprojekttest.Pages
             get { return Convert.ToInt32(HttpContext.Session.GetInt32("Admin")); }
         }
 
+        public List<CruizeUser> liste { get; set; }
+
         private IProfilePicture _iPicture;
+
+        private IUserService _userService;
 
         public Picture ProfilePicture { get; set; }
 
         private IRouteService routeService;
         public Route RouteProperty { get; set; }
-        public RouteModel(IRouteService service, IProfilePicture pictureservice)
+        public RouteModel(IRouteService service, IProfilePicture pictureservice, IUserService userService)
         {
             routeService = service;
             _iPicture = pictureservice;
+            _userService = userService;
         }
         public void OnGet(int id)
         {

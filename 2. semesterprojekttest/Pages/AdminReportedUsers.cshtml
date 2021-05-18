@@ -3,15 +3,28 @@
 @model _2._semesterprojekttest.Pages.AdminReportedUsersModel
 @{
 }
+<table class="table table-bordered table-striped">
+    <thead class="table-primary">
+    <th>Report ID</th>
+    <th>Report Message</th>
+    <th></th>
+    </thead>
 
-@foreach (Report report in Model.AllReports)
-{
-    <h2>@report.ReportId: User with ID @report.Reported is reported with the following message:</h2>
-    <h3>@report.Message</h3>
-    <form method="post">
-        <button asp-page-handler="Ban" asp-route-email="@Model.GetReportedUser(report.Reported).Email" asp-route-id="@report.Reported" class="btn btn-danger" onclick="return confirm('Are you sure you want to ban this user from the application? The user and all their data will be deleted upon confirmation.')">
-            Ban from application
-        </button>
+    <tbody>
+        @foreach (Report report in Model.AllReports)
+        {
+            <tr>
+                <td>@report.ReportId</td>
+                <td>@report.Message</td>
+                <td>
+                    <form method="post">
+                        <button asp-page-handler="Ban" asp-route-email="@Model.GetReportedUser(report.Reported).Email" asp-route-id="@report.Reported" class="btn btn-danger" onclick="return confirm('Are you sure you want to ban this user from the application? The user and all their data will be deleted upon confirmation.')">
+                            Ban from application
+                        </button>
 
-    </form>
-}
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
