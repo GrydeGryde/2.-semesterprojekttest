@@ -54,5 +54,30 @@ namespace _2._semesterprojekttest.Pages
             HttpContext.Session.Clear();
             return RedirectToPage("LoginLogoutUser");
         }
+        public IActionResult OnPostRemoveDriver()
+        {
+            _userService.DeleteDriver(userID);
+            HttpContext.Session.SetInt32("Driver", 0);
+            return Page();
+        }
+
+        public IActionResult OnPostAddDriver()
+        {
+            _userService.AddDriver(LoggedInUser);
+            HttpContext.Session.SetInt32("Driver", 1);
+            return Page();
+        }
+        public CruizeUser LoggedInUser
+        {
+            get
+            {
+                if (userID != 0)
+                {
+                    return _userService.GetOneUser(userID);
+                }
+
+                return new CruizeUser();
+            }
+        }
     }
 }

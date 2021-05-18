@@ -48,6 +48,7 @@ namespace _2._semesterprojekttest.Pages
         }
         public void OnGet(int id)
         {
+            ProfilePicture = _iPicture.GetProfilePicture(userID);
             RouteProperty = routeService.GetOneRoute(id);
         }
 

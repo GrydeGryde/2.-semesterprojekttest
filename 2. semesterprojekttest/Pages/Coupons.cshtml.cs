@@ -76,6 +76,7 @@ namespace _2._semesterprojekttest.Pages
             Coupons = _couponService.GetUserCoupons(userID);
             count = counter;
             FaresLeft = FaresLeft - counter;
+            ProfilePicture = _iPicture.GetProfilePicture(userID);
         }
     }
 }
