@@ -33,6 +33,9 @@ namespace _2._semesterprojekttest.Pages
             get { return Convert.ToInt32(HttpContext.Session.GetInt32("Admin")); }
         }
 
+        public string SuccesAccept { get; set; }
+        public string SuccesDecline { get; set; }
+
         public List<Request> liste { get; set; }
         
         public DriverRequestsModel(IRouteService routeService, IProfilePicture pictureservice)
@@ -48,6 +51,7 @@ namespace _2._semesterprojekttest.Pages
 
         public IActionResult OnPostAccept(int UserID, int RouteID, int RequestID)
         {
+            SuccesAccept = "The request has been accepted.";
             _routeService.AcceptRequest(UserID, RouteID);
             _routeService.DeleteRequest(RequestID);
             _routeService.ReduceSpace(RouteID);
@@ -56,6 +60,7 @@ namespace _2._semesterprojekttest.Pages
         }
         public IActionResult OnPostDecline(int RequestID)
         {
+            SuccesDecline = "The request has been declined.";
             _routeService.DeleteRequest(RequestID);
             liste = _routeService.GetAllRequests(userID);
             return Page();

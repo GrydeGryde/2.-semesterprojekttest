@@ -4,6 +4,23 @@
 @{
 }
 
+@if (Model.SuccesAccept != null)
+{
+    <div class="bg-success">
+        <h5>
+            @Model.SuccesAccept
+        </h5>
+    </div>
+}
+else if (Model.SuccesDecline != null)
+{
+    <div class="bg-success">
+        <h5>
+            @Model.SuccesDecline
+        </h5>
+    </div>
+}
+
 <table class="table table-bordered table-striped">
     <thead class="table-primary">
     <th>Request ID</th>
@@ -19,12 +36,12 @@
                 <td>@requests.RequestId</td>
                 <td>@requests.Message</td>
                 <td>
-                        <form method="post">
-                            <button type="submit" asp-page-handler="Accept" asp-route-UserID="@requests.UserId" asp-route-RouteID="@requests.RouteId" asp-route-RequestID="@requests.RequestId"
-                                    class="btn btn-success btn-group-lg pull-right">
-                                Accept
-                            </button>
-                        </form>
+                    <form method="post">
+                        <button type="submit" asp-page-handler="Accept" asp-route-UserID="@requests.UserId" asp-route-RouteID="@requests.RouteId" asp-route-RequestID="@requests.RequestId"
+                                class="btn btn-success btn-group-lg pull-right">
+                            Accept
+                        </button>
+                    </form>
                 </td>
                 <td>
                     <form method="post">

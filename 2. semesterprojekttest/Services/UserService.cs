@@ -14,7 +14,7 @@ namespace _2._semesterprojekttest.Services
         private const string ConnectionString =
             "Data Source=alex-gryden-db.database.windows.net;Initial Catalog=\"Gryden DB\";Persist Security Info=True;User ID=adminlogin;Password=secret1!";
 
-        private const string AddDriverSQL = "insert into Driver(UserID) values (@UID)";
+        private const string AddDriverSQL = "insert into Driver(UserID, CarType, Carcolor, CouponCount) values (@UID, 'Car type not chosen', 'Car color not chosen', 0)";
         private const string AddUserSQL = "insert into CruizeUser(FirstName, LastName, Email, Password, Address, Zipcode) values (@FN, @LN, @E, @P, @AD, @ZC)";
         private const string DeleteUserSQL = "delete from CruizeUser where UserID = @ID";
         private const string GetAllUsersSQL = "select * from CruizeUser";
@@ -289,15 +289,38 @@ namespace _2._semesterprojekttest.Services
 
         private Driver MakeDriver(SqlDataReader reader)
         {
-            Driver driver = new Driver
-            {
-                UserId = Convert.ToInt32(reader["UserID"]),
-                CarType = Convert.ToString(reader["CarType"]),
-                Carcolor = Convert.ToString(reader["CarColor"]),
-                CouponCount = Convert.ToInt32(reader["CouponCount"])
-            };
+            Driver d = new Driver();
 
-            return driver;
+            if (reader["CarType"] == DBNull.Value)
+            {
+                d.CarType = "Car type not chosen";
+            }
+            else
+            {
+                d.CarType = Convert.ToString(reader["CarType"]);
+            }
+
+            if (reader["Carcolor"] == DBNull.Value)
+            {
+                d.Carcolor = "Car color not chosen";
+            }
+            else
+            {
+                d.Carcolor = Convert.ToString(reader["Carcolor"]);
+            }
+
+            if (reader["CouponCount"] == DBNull.Value)
+            {
+                d.CouponCount = 0;
+            }
+            else
+            {
+                d.CouponCount = Convert.ToInt32(reader["CouponCount"]);
+            }
+
+            d.UserId = Convert.ToInt32(reader["UserID"]);
+
+            return d;
         }
     }
 }
