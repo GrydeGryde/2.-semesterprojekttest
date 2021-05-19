@@ -21,5 +21,6 @@ namespace _2._semesterprojekttest.Interfaces
         bool ReduceSpace(int RouteID);
         List<Route> GetAllPassengerRoutes(int id);
         List<Route> GetAllDriverRoutes(int id);
+        bool CheckRequest(int UserID, int RouteID);
     }
 }

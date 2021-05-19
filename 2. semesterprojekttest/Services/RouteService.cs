@@ -263,6 +263,7 @@ namespace _2._semesterprojekttest.Services
             return false;
         }
 
+
         public List<Route> GetAllPassengerRoutes(int id)
         {
             List<Passenger> pliste = new List<Passenger>();
@@ -319,6 +320,27 @@ namespace _2._semesterprojekttest.Services
                 }
             }
             return liste;
+
+        public bool CheckRequest(int UserID, int RouteID)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand sql = new SqlCommand("select * from Request where (UserID = @UID) AND (RouteID = @RID)", connection))
+                {
+                    sql.Parameters.AddWithValue("UID", UserID);
+                    sql.Parameters.AddWithValue("RID", RouteID);
+
+                    SqlDataReader reader = sql.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 }
