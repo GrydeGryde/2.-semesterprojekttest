@@ -46,7 +46,7 @@
             <td>@routes.Start</td>
             <td>@routes.Goal</td>
             <td>@routes.Arrival.ToString("t")</td>
-            <td>@routes.Space</td>
+            <td>@(routes.Space-Model.OccupiedSpace(routes.RouteId))</td>
             <td>@routes.Day</td>
             <td><a asp-page="Route" asp-route-id="@routes.RouteId" class="btn btn-dark btn-group-lg">See Route</a></td>
         </tr>

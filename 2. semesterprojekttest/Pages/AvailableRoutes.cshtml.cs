@@ -42,7 +42,10 @@ namespace _2._semesterprojekttest.Pages
             _routeService = routeService;
             _iPicture = pictureservice;
         }
-
+        public int OccupiedSpace(int routeid)
+        {
+            return _routeService.GetAllPassengerUsers(routeid).Count;
+        }
 
         public void OnGet()
         {

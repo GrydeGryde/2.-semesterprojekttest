@@ -46,7 +46,7 @@
         <td>Day: @Model.RouteProperty.Day</td>
     </tr>
     <tr class="ProfilePageTR">
-        <td>Seats left: @Model.RouteProperty.Space</td>
+        <td>Seats left: @(Model.RouteProperty.Space-Model.OccupiedSpace(Model.RouteProperty.RouteId))</td>
     </tr>
 </table>
 <br />

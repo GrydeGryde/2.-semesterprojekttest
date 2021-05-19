@@ -50,6 +50,10 @@ namespace _2._semesterprojekttest.Pages
             _iPicture = pictureservice;
             _userService = userService;
         }
+        public int OccupiedSpace(int routeid)
+        {
+            return _routeService.GetAllPassengerUsers(routeid).Count;
+        }
         public Picture GetPicture(int id)
         {
             return _iPicture.GetProfilePicture(id);
@@ -83,7 +87,7 @@ namespace _2._semesterprojekttest.Pages
         public void OnPostRemovePassenger(int id, int routeid)
         {
             _routeService.RemovePassengerUser(id, routeid);
-            _routeService.IncreaseSpace(routeid);
+            //_routeService.IncreaseSpace(routeid);
             ProfilePicture = _iPicture.GetProfilePicture(userID);
             RouteProperty = _routeService.GetOneRoute(routeid);
             Passengers = _routeService.GetAllPassengerUsers(routeid);
