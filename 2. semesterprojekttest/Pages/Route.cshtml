@@ -1,4 +1,5 @@
 ﻿@page
+@using _2._semesterprojekttest.Models
 @model _2._semesterprojekttest.Pages.RouteModel
 @{
 }
@@ -53,10 +54,31 @@
 else if (Model.userID == Model.RouteProperty.UserId)
 {
     <h2>OPDATER RUTE MÅSKE??</h2>
+    <br/>
+    <table class="table table-bordered table-striped">
+        <thead class="table-primary">
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Adress and Zipcode</th>
+        <th></th>
+        </thead>
 
-    <h2> PASSENGER LISTE DER ER PÅ RUTEN </h2>
+        <tbody>
+            @foreach (CruizeUser passenger in Model.Passengers)
+            {
+                <tr>
+                    <td>@passenger.FirstName</td>
+                    <td>@passenger.LastName</td>
+                    <td>@passenger.Email</td>
+                    <td>@passenger.Address @passenger.Zipcode</td>
+                <td><form method="post"><button asp-page-handler="RemovePassenger" asp-route-id="@passenger.UserId" asp-route-routeid="@Model.RouteProperty.RouteId" class="btn btn-dark btn-group-lg">Remove Passenger</button></form></td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 else if (Model.RequestCheck)
             {
-                <h3>Request applicatin pending...</h3>
+                <h3>Request application pending...</h3>
             }

@@ -36,6 +36,7 @@ namespace _2._semesterprojekttest.Pages
         
 
         public List<Route> liste { get; set; }
+        
 
         public AvailableRoutesModel(IRouteService routeService, IProfilePicture pictureservice)
         {

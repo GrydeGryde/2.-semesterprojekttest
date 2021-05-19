@@ -52,12 +52,14 @@ namespace _2._semesterprojekttest.Pages
             _routeService.DeleteRequest(RequestID);
             _routeService.ReduceSpace(RouteID);
             liste = _routeService.GetAllRequests(userID);
+            ProfilePicture = _iPicture.GetProfilePicture(userID);
             return Page();
         }
         public IActionResult OnPostDecline(int RequestID)
         {
             _routeService.DeleteRequest(RequestID);
             liste = _routeService.GetAllRequests(userID);
+            ProfilePicture = _iPicture.GetProfilePicture(userID);
             return Page();
         }
     }
