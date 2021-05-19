@@ -19,5 +19,6 @@ namespace _2._semesterprojekttest.Interfaces
         List<Request> GetAllRequests(int id);
         bool AcceptRequest(int UserID, int RouteID);
         bool ReduceSpace(int RouteID);
+        bool CheckRequest(int UserID, int RouteID);
     }
 }

@@ -38,28 +38,36 @@ namespace _2._semesterprojekttest.Pages
 
         public Picture ProfilePicture { get; set; }
 
-        private IRouteService routeService;
+        private IRouteService _routeService;
         public Route RouteProperty { get; set; }
+        public string SuccesApply { get; set; }
+
+        public bool RequestCheck { get; set; }
         public RouteModel(IRouteService service, IProfilePicture pictureservice, IUserService userService)
         {
-            routeService = service;
+            _routeService = service;
             _iPicture = pictureservice;
             _userService = userService;
         }
         public void OnGet(int id)
         {
             ProfilePicture = _iPicture.GetProfilePicture(userID);
-            RouteProperty = routeService.GetOneRoute(id);
+            RouteProperty = _routeService.GetOneRoute(id);
+            RequestCheck = _routeService.CheckRequest(userID, id);
         }
 
         public IActionResult OnPost(int UserID, int RouteID)
         {
+            SuccesApply = "You have succesfully applied to this route";
             Request request = new Request();
             request.UserId = userID;
             request.RouteId = RouteID;
             request.Message = Request.Form["RequestMessage"];
-            routeService.AddRequest(request);
-            return RedirectToPage("Index");
+            _routeService.AddRequest(request);
+            RequestCheck = _routeService.CheckRequest(userID, RouteID);
+            RouteProperty = _routeService.GetOneRoute(RouteID);
+            ProfilePicture = _iPicture.GetProfilePicture(userID);
+            return Page();
         }
     }
 }
