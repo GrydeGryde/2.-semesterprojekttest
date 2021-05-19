@@ -84,23 +84,60 @@ namespace _2._semesterprojekttest.Services
 
         public Picture GetProfilePicture(int userID)
         {
-            var checkforpic = db.Pictures.Where(i => i.UserId == userID && i.TypeId == 1).ToList();
-            foreach (Picture pic in checkforpic)
+            //enity ser ud til at gemme dens egen cache eller noget og gjorde at hvis vi redirectede til en anden side efter at have uploadet
+            //et nyt billede blev det først opdateret efter vi startede nyt op projekt.
+            //var checkforpic = db.Pictures.Where(i => i.UserId == userID && i.TypeId == 1).ToList();
+            //foreach (Picture pic in checkforpic)
+            //{
+            //    return pic;
+            //}
+
+            //return null;
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
-                return pic;
+                conn.Open();
+                using (SqlCommand sql = new SqlCommand("SELECT * FROM Pictures WHERE (UserID = @UID AND TypeID = 1)", conn))
+                {
+                    sql.Parameters.AddWithValue("@UID", userID);
+                    SqlDataReader reader=sql.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        Picture p = new Picture();
+                        p.Picture1 = (byte[])reader["Picture"];
+                        return p;
+                    }
+                }
+
+                return null;
             }
 
-            return null;
         }
         public Picture GetCarPicture(int userID)
         {
-            var checkforpic = db.Pictures.Where(i => i.UserId == userID && i.TypeId == 0).ToList();
-            foreach (Picture pic in checkforpic)
-            {
-                return pic;
-            }
+            //var checkforpic = db.Pictures.Where(i => i.UserId == userID && i.TypeId == 0).ToList();
+            //foreach (Picture pic in checkforpic)
+            //{
+            //    return pic;
+            //}
 
-            return null;
+            //return null;
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand sql = new SqlCommand("SELECT * FROM Pictures WHERE (UserID = @UID AND TypeID = 2)", conn))
+                {
+                    sql.Parameters.AddWithValue("@UID", userID);
+                    SqlDataReader reader = sql.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        Picture p = new Picture();
+                        p.Picture1 = (byte[])reader["Picture"];
+                        return p;
+                    }
+                }
+
+                return null;
+            }
         }
 
     }
