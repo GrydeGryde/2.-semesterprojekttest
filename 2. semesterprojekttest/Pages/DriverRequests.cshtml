@@ -23,6 +23,7 @@ else if (Model.SuccesDecline != null)
 
 <table class="table table-bordered table-striped">
     <thead class="table-primary">
+    <th></th>
     <th>Request ID</th>
     <th>Request message</th>
     <th></th>
@@ -33,6 +34,17 @@ else if (Model.SuccesDecline != null)
         @foreach (Request requests in Model.liste)
         {
             <tr>
+                <td>
+                @if (Model.GetPicture(requests.UserId) == null)
+                {
+                    <img src="/Images/emptyprofile.png" alt="profilepic" height="80" width="80" class="rounded-circle">
+                }
+                else
+                {
+                    String file = "data:image/jpeg;base64," + Convert.ToBase64String(Model.GetPicture(requests.UserId).Picture1);
+                    <img src="@file" alt="profilepic" height="80" width="80" class="rounded-circle">
+                }
+                </td>
                 <td>@requests.RequestId</td>
                 <td>@requests.Message</td>
                 <td>

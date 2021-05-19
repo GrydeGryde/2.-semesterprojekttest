@@ -20,7 +20,18 @@
         </tr>
     </thead>
     <tr class="ProfilePageTR">
-        <td>User ID(skal ændres til driver name): @Model.RouteProperty.UserId</td>
+        <td>@if (Model.GetPicture(Model.RouteProperty.UserId) == null)
+            {
+                <img src="/Images/emptyprofile.png" alt="profilepic" height="80" width="80" class="rounded-circle">
+            }
+            else
+            {
+                String file = "data:image/jpeg;base64," + Convert.ToBase64String(Model.GetPicture(@Model.RouteProperty.UserId).Picture1);
+                <img src="@file" alt="profilepic" height="80" width="80" class="rounded-circle">
+            }</td>
+    </tr>
+    <tr class="ProfilePageTR">
+        <td>Drivers Name: @Model.GetDriverName(Model.RouteProperty.UserId).FirstName @Model.GetDriverName(Model.RouteProperty.UserId).LastName</td>
     </tr>
     <tr class="ProfilePageTR">
         <td>Start Point: @Model.RouteProperty.Start</td>
@@ -29,7 +40,7 @@
         <td>End Point: @Model.RouteProperty.Goal</td>
     </tr>
     <tr class="ProfilePageTR">
-        <td>Arrival Time: @Model.RouteProperty.Arrival</td>
+        <td>Arrival Time: @Model.RouteProperty.Arrival.ToString("t")</td>
     </tr>
     <tr class="ProfilePageTR">
         <td>Day: @Model.RouteProperty.Day</td>

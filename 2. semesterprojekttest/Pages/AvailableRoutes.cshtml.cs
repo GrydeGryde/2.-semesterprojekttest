@@ -33,7 +33,6 @@ namespace _2._semesterprojekttest.Pages
             get { return Convert.ToInt32(HttpContext.Session.GetInt32("Admin")); }
         }
 
-        
 
         public List<Route> liste { get; set; }
         
@@ -43,6 +42,8 @@ namespace _2._semesterprojekttest.Pages
             _routeService = routeService;
             _iPicture = pictureservice;
         }
+
+
         public void OnGet()
         {
             ProfilePicture = _iPicture.GetProfilePicture(userID);

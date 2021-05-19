@@ -14,6 +14,7 @@ namespace _2._semesterprojekttest.Pages
     {
         private IProfilePicture _iPicture;
         private IUserService _userService;
+        private ICouponService _couponService;
         public Picture ProfilePicture { get; set; }
         public Picture CarPicture { get; set; }
         public CruizeUser User { get; set; }
@@ -36,10 +37,15 @@ namespace _2._semesterprojekttest.Pages
         }
 
         
-        public ProfilePageModel(IProfilePicture pictureservice, IUserService userservice)
+        public ProfilePageModel(IProfilePicture pictureservice, IUserService userservice, ICouponService couponservice)
         {
             _iPicture = pictureservice;
             _userService = userservice;
+            _couponService = couponservice;
+        }
+        public int GetCouponCount()
+        {
+            return _couponService.GetUserCoupons(userID).Count;
         }
         public void OnGet()
         {

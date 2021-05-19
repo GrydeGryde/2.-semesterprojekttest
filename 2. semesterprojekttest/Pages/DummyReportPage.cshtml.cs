@@ -34,6 +34,10 @@ namespace _2._semesterprojekttest.Pages
         {
             get { return Convert.ToInt32(HttpContext.Session.GetInt32("Admin")); }
         }
+        public Picture GetPicture(int id)
+        {
+            return _iPicture.GetProfilePicture(id);
+        }
 
         public DummyReportPageModel(IUserService service, IProfilePicture pictureservice)
         {

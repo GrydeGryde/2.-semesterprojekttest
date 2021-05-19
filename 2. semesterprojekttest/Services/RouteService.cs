@@ -400,7 +400,7 @@ namespace _2._semesterprojekttest.Services
 
                 return false;
         }
-        public List<CruizeUser> GetAllPassengerUsers(int id)
+        public List<CruizeUser> GetAllPassengerUsers(int routeid)
         {
             List<CruizeUser> pliste = new List<CruizeUser>();
             
@@ -412,7 +412,7 @@ namespace _2._semesterprojekttest.Services
                 using (SqlCommand sql = new SqlCommand("SELECT * FROM Passenger WHERE RouteID = @RID", conn))
                 {
 
-                    sql.Parameters.AddWithValue("@RID", id);
+                    sql.Parameters.AddWithValue("@RID", routeid);
                     SqlDataReader reader = sql.ExecuteReader();
                     while (reader.Read())
                     {

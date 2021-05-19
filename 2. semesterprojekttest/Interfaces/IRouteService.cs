@@ -22,7 +22,7 @@ namespace _2._semesterprojekttest.Interfaces
         List<Route> GetAllPassengerRoutes(int id);
         List<Route> GetAllDriverRoutes(int id);
         bool CheckRequest(int UserID, int RouteID);
-        public List<CruizeUser> GetAllPassengerUsers(int id);
+        public List<CruizeUser> GetAllPassengerUsers(int routeid);
         bool RemovePassengerUser(int userid, int routeid);
         bool IncreaseSpace(int RouteID);
     }

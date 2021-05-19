@@ -43,6 +43,11 @@ namespace _2._semesterprojekttest.Pages
             _routeService = routeService;
             _iPicture = pictureservice;
         }
+
+        public Picture GetPicture(int id)
+        {
+            return _iPicture.GetProfilePicture(id);
+        }
         public void OnGet()
         {
             ProfilePicture = _iPicture.GetProfilePicture(userID);

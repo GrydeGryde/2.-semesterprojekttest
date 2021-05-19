@@ -4,7 +4,6 @@
 }
 
 
-<a class="text-dark" asp-area="" asp-page="/AvailableRoutes">Available routes</a>
 <div class="ProfilePagerow">
     <div class="ProfilePagecolumn">
         @if (Model.ProfilePicture == null)
@@ -81,7 +80,10 @@
                     <td>Car Color: @Model.CruizeDriver.Carcolor</td>
                 </tr>
                 <tr class="ProfilePageTR">
-                    <td>Coupons Available: @Model.CruizeDriver.CouponCount</td>
+                    <td>Fares Until Next Coupon: @(10 - Model.CruizeDriver.CouponCount)</td>
+                </tr>
+                <tr class="ProfilePageTR">
+                    <td>Coupons Available: @Model.GetCouponCount()</td>
                 </tr>
             </table>
             <form method="post">
