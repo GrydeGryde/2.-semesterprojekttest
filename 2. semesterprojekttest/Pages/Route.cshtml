@@ -3,33 +3,43 @@
 @{
 }
 
-<table class="table table-bordered table-striped">
+@if (Model.SuccesApply != null)
+{
+    <div class="bg-success">
+        <h5>
+            @Model.SuccesApply
+        </h5>
+    </div>
+}
+
+<table class="ProfilePageTR">
     <thead class="table-primary">
         <tr>
             <th>Route Information</th>
         </tr>
-        <tr>
-           <td>User ID(skal ændres til driver name): @Model.RouteProperty.UserId</td>
-        </tr>
-        <tr>
-            <td>Start Point: @Model.RouteProperty.Start</td>
-        </tr>
-        <tr>
-            <td>End Point: @Model.RouteProperty.Goal</td>
-        </tr>
-        <tr>
-            <td>Arrival Time: @Model.RouteProperty.Arrival</td>
-        </tr>
-        <tr>
-            <td>Day: @Model.RouteProperty.Day</td>
-        </tr>
-        <tr>
-            <td>Seats left: @Model.RouteProperty.Space</td>
-        </tr>
+    </thead>
+    <tr class="ProfilePageTR">
+        <td>User ID(skal ændres til driver name): @Model.RouteProperty.UserId</td>
+    </tr>
+    <tr class="ProfilePageTR">
+        <td>Start Point: @Model.RouteProperty.Start</td>
+    </tr>
+    <tr class="ProfilePageTR">
+        <td>End Point: @Model.RouteProperty.Goal</td>
+    </tr>
+    <tr class="ProfilePageTR">
+        <td>Arrival Time: @Model.RouteProperty.Arrival</td>
+    </tr>
+    <tr class="ProfilePageTR">
+        <td>Day: @Model.RouteProperty.Day</td>
+    </tr>
+    <tr class="ProfilePageTR">
+        <td>Seats left: @Model.RouteProperty.Space</td>
+    </tr>
 </table>
-<br/>
+<br />
 
-@if (Model.userID != Model.RouteProperty.UserId)
+@if (Model.userID != Model.RouteProperty.UserId && !Model.RequestCheck)
 {
     <h5>Write a message to the driver:</h5>
     <form method="post">
@@ -46,3 +56,7 @@ else if (Model.userID == Model.RouteProperty.UserId)
 
     <h2> PASSENGER LISTE DER ER PÅ RUTEN </h2>
 }
+else if (Model.RequestCheck)
+            {
+                <h3>Request applicatin pending...</h3>
+            }
