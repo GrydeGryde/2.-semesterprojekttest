@@ -56,6 +56,9 @@ namespace _2._semesterprojekttest.Pages
         }
         public IActionResult OnPostRemoveDriver()
         {
+            ProfilePicture = _iPicture.GetProfilePicture(userID);
+            CarPicture = _iPicture.GetCarPicture(userID);
+            User = _userService.GetOneUser(userID);
             _userService.DeleteDriver(userID);
             HttpContext.Session.SetInt32("Driver", 0);
             return Page();
@@ -63,7 +66,11 @@ namespace _2._semesterprojekttest.Pages
 
         public IActionResult OnPostAddDriver()
         {
+            ProfilePicture = _iPicture.GetProfilePicture(userID);
+            CarPicture = _iPicture.GetCarPicture(userID);
+            User = _userService.GetOneUser(userID);
             _userService.AddDriver(LoggedInUser);
+            CruizeDriver = _userService.GetOneDriver(userID);
             HttpContext.Session.SetInt32("Driver", 1);
             return Page();
         }
