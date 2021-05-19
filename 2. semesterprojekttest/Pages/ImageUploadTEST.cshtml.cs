@@ -83,7 +83,7 @@ namespace _2._semesterprojekttest.Pages
             return RedirectToPage("ProfilePage");
         }
 
-        public void OnPostUpload(Picture pic, int id)
+        public IActionResult OnPostUpload(Picture pic, int id)
         {
             GrydenDBContext db = new GrydenDBContext();
             {
@@ -103,6 +103,8 @@ namespace _2._semesterprojekttest.Pages
                 {
                      ProfilePicture = pic;
                 }
+
+                return RedirectToPage("ProfilePage");
             }
             
         }

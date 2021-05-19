@@ -5,79 +5,6 @@
 
 
 <a class="text-dark" asp-area="" asp-page="/AvailableRoutes">Available routes</a>
-@*<div>
-        <div style="float:left">
-            @if (Model.ProfilePicture == null)
-            {
-                <a class="rounded-circle" asp-area="" asp-page="/ImageUploadTEST" asp-route-picID="1"><img src="/Images/emptyprofile.png" alt="profilepic" height="80" width="80" class="rounded-circle"></a>
-            }
-            else
-            {
-                String file = "data:image/jpeg;base64," + Convert.ToBase64String(Model.ProfilePicture.Picture1);
-                <a class="rounded-circle" asp-area="" asp-page="/ImageUploadTEST" asp-route-picID="1"><img src="@file" alt="profilepic" height="80" width="80" class="rounded-circle"></a>
-
-            }
-            <table>
-                <thead>
-                <tr>
-                    <th>BrugerInfo</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>First Name: @Model.User.FirstName</td>
-                </tr>
-                <tr>
-                    <td>Last Name: @Model.User.LastName</td>
-                </tr>
-                <tr>
-                    <td>Email: @Model.User.Email</td>
-                </tr>
-                <tr>
-                    <td> Your Address: @Model.User.Address</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div style="float:right">
-            @if (Model.CarPicture == null)
-            {
-                <a class="rounded-circle" asp-area="" asp-page="/ImageUploadTEST" asp-route-picID="0"><img src="/Images/emptyprofile.png" alt="carpic" height="80" width="80" class="rounded-circle"></a>
-            }
-            else
-            {
-                String file = "data:image/jpeg;base64," + Convert.ToBase64String(Model.CarPicture.Picture1);
-                <a class="rounded-circle" asp-area="" asp-page="/ImageUploadTEST" asp-route-picID="0"><img src="@file" alt="carpic" height="80" width="80" class="rounded-circle"></a>
-
-            }
-            <table>
-                <thead>
-                <tr>
-                    <th>Driver</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>Car: @Model.CruizeDriver.CarType</td>
-                </tr>
-                <tr>
-                    <td>Car Color: @Model.CruizeDriver.Carcolor</td>
-                </tr>
-                <tr>
-                    <td>Coupons Available: @Model.CruizeDriver.CouponCount</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>*@
-
-@*<style>
-        * {
-            box-sizing: border-box;
-        }
-    </style>
-*@
-
 <div class="ProfilePagerow">
     <div class="ProfilePagecolumn">
         @if (Model.ProfilePicture == null)
@@ -106,61 +33,63 @@
             <tr class="ProfilePageTR">
                 <td> Your Address: @Model.User.Address</td>
             </tr>
-            <tr class="ProfilePageTR">
-                <form method="post">
-                    <button asp-page-handler="LogOut"
-                            class="btn btn-dark btn-group-lg pull-right">
-                        Log ud
-                    </button>
-                </form>
-            </tr>
         </table>
+        <a asp-page="/MyRoutes" class="btn btn-dark btn-group-lg pull-right">
+            My Routes
+        </a>
+        <form method="post">
+            <button asp-page-handler="LogOut"
+                    class="btn btn-dark btn-group-lg pull-right">
+                Log ud
+            </button>
+        </form>
     </div>
     <div class="ProfilePagecolumn">
-        @if (Model.CarPicture == null)
+        @if (Model.validDriver == 0)
         {
-            <a class="rounded-circle" asp-area="" asp-page="/ImageUploadTEST" asp-route-picID="0"><img src="/Images/emptyprofile.png" alt="carpic" height="80" width="80" class="rounded-circle"></a>
+            <br />
+            <br />
+            <br />
+            <h3>Recently got a car? Become a driver today!</h3>
+            <form method="post">
+                <button asp-page-handler="AddDriver"
+                        class="btn btn-dark btn-group-lg pull-right">
+                    Add Driver Status
+                </button>
+            </form>
         }
-        else
+        else if (Model.validDriver == 1)
         {
-            String file = "data:image/jpeg;base64," + Convert.ToBase64String(Model.CarPicture.Picture1);
-            <a class="rounded-circle" asp-area="" asp-page="/ImageUploadTEST" asp-route-picID="0"><img src="@file" alt="carpic" height="80" width="80" class="rounded-circle"></a>
+            @if (Model.CarPicture == null)
+            {
+                <a class="rounded-circle" asp-area="" asp-page="/ImageUploadTEST" asp-route-picID="0"><img src="/Images/emptyprofile.png" alt="carpic" height="80" width="80" class="rounded-circle"></a>
+            }
+            else
+            {
+                String file = "data:image/jpeg;base64," + Convert.ToBase64String(Model.CarPicture.Picture1);
+                <a class="rounded-circle" asp-area="" asp-page="/ImageUploadTEST" asp-route-picID="0"><img src="@file" alt="carpic" height="80" width="80" class="rounded-circle"></a>
 
+            }
+            <table class="ProfilePageTable">
+                <tr class="ProfilePageTR">
+                    <th class="ProfilePageth">Driver</th>
+                </tr>
+                <tr class="ProfilePageTR">
+                    <td>Car: @Model.CruizeDriver.CarType</td>
+                </tr>
+                <tr class="ProfilePageTR">
+                    <td>Car Color: @Model.CruizeDriver.Carcolor</td>
+                </tr>
+                <tr class="ProfilePageTR">
+                    <td>Coupons Available: @Model.CruizeDriver.CouponCount</td>
+                </tr>
+            </table>
+            <form method="post">
+                <button asp-page-handler="RemoveDriver"
+                        class="btn btn-dark btn-group-lg pull-right">
+                    Remove Driver Status
+                </button>
+            </form>
         }
-        <table class="ProfilePageTable">
-            <tr class="ProfilePageTR">
-                <th class="ProfilePageth">Driver</th>
-            </tr>
-            <tr class="ProfilePageTR">
-                <td>Car: @Model.CruizeDriver.CarType</td>
-            </tr>
-            <tr class="ProfilePageTR">
-                <td>Car Color: @Model.CruizeDriver.Carcolor</td>
-            </tr>
-            <tr class="ProfilePageTR">
-                <td>Coupons Available: @Model.CruizeDriver.CouponCount</td>
-            </tr>
-        </table>
     </div>
 </div>
-@if (Model.validDriver == 0)
-{
-<h3>Recently got a car? Become a driver today!</h3>
-<form method="post">
-    <button asp-page-handler="AddDriver"
-            class="btn btn-dark btn-group-lg pull-right">
-        Add Driver Status
-    </button>
-</form>
-}
-else if (Model.validDriver == 1)
-{
-<h1>You are a driver</h1>
-<h3>No longer a driver?</h3>
-<form method="post">
-    <button asp-page-handler="RemoveDriver"
-            class="btn btn-dark btn-group-lg pull-right">
-        Remove Driver Status
-    </button>
-</form>
-}

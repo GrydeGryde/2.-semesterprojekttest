@@ -1,0 +1,56 @@
+﻿@page
+@using _2._semesterprojekttest.Models
+@model _2._semesterprojekttest.Pages.MyRoutesModel
+@{
+}
+<h3>My Routes as a Passenger</h3>
+<table class="table table-bordered table-striped">
+    <thead class="table-primary">
+    <th>Start point</th>
+    <th>End point</th>
+    <th>Arrival time</th>
+    <th>Day</th>
+    <th></th>
+    </thead>
+
+    <tbody>
+        @foreach (Route routes in Model.Passengerliste)
+        {
+            <tr>
+                <td>@routes.Start</td>
+                <td>@routes.Goal</td>
+                <td>@routes.Arrival</td>
+                <td>@routes.Day</td>
+                <td><a asp-page="Route" asp-route-id="@routes.RouteId" class="btn btn-dark btn-group-lg">See Route</a></td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+<br/>
+<h3>My Routes as a Driver</h3>
+<table class="table table-bordered table-striped">
+    <thead class="table-primary">
+    <th>Start point</th>
+    <th>End point</th>
+    <th>Arrival time</th>
+    <th>Available Space</th>
+    <th>Day</th>
+    <th></th>
+    </thead>
+
+    <tbody>
+    @foreach (Route routes in Model.liste)
+    {
+        <tr>
+            <td>@routes.Start</td>
+            <td>@routes.Goal</td>
+            <td>@routes.Arrival</td>
+            <td>@routes.Space</td>
+            <td>@routes.Day</td>
+            <td><a asp-page="Route" asp-route-id="@routes.RouteId" class="btn btn-dark btn-group-lg">See Route</a></td>
+        </tr>
+
+    }
+    </tbody>
+</table>

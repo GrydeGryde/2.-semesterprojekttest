@@ -67,6 +67,7 @@ namespace _2._semesterprojekttest.Pages
             HttpContext.Session.SetInt32("Driver", 1);
             return Page();
         }
+
         public CruizeUser LoggedInUser
         {
             get

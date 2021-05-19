@@ -263,6 +263,64 @@ namespace _2._semesterprojekttest.Services
             return false;
         }
 
+
+        public List<Route> GetAllPassengerRoutes(int id)
+        {
+            List<Passenger> pliste = new List<Passenger>();
+            List<Route> liste = new List<Route>();
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand sql = new SqlCommand("SELECT * FROM Passenger WHERE UserID = @ID", conn))
+                {
+
+                    sql.Parameters.AddWithValue("@ID", id);
+                    SqlDataReader reader = sql.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Passenger p = new Passenger();
+                        p.RouteId = reader.GetInt32(1);
+                        pliste.Add(p);
+                    }
+
+                    foreach (Passenger passenger in pliste)
+                    {
+                        liste.Add(GetOneRoute(passenger.RouteId));
+                    }
+                }
+            }
+            return liste;
+        }
+
+        public List<Route> GetAllDriverRoutes(int id)
+        {
+            List<Route> liste = new List<Route>();
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand sql = new SqlCommand("SELECT * FROM Route WHERE UserID = @ID", conn))
+                {
+
+                    sql.Parameters.AddWithValue("@ID", id);
+                    SqlDataReader reader = sql.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Route r = new Route();
+                        r.Day = Convert.ToInt32(reader["Day"]);
+                        r.Arrival = Convert.ToDateTime(reader["Arrival"]);
+                        r.Goal = Convert.ToString(reader["Goal"]);
+                        r.Start = Convert.ToString(reader["Start"]);
+                        r.Space = Convert.ToInt32(reader["Space"]);
+                        liste.Add(r);
+                    }
+                }
+            }
+            return liste;
+
         public bool CheckRequest(int UserID, int RouteID)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
