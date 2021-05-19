@@ -40,6 +40,7 @@ namespace _2._semesterprojekttest.Services
                     }
                 }
             }
+
             return liste;
         }
 
@@ -49,7 +50,10 @@ namespace _2._semesterprojekttest.Services
             {
                 connection.Open();
 
-                using (SqlCommand sql = new SqlCommand("Insert into Route(UserID, Start, Goal, Day, Arrival, Space) values (@UID, @S, @G, @D, @Arr, @Spa)", connection))
+                using (SqlCommand sql =
+                    new SqlCommand(
+                        "Insert into Route(UserID, Start, Goal, Day, Arrival, Space) values (@UID, @S, @G, @D, @Arr, @Spa)",
+                        connection))
                 {
                     sql.Parameters.AddWithValue("@UID", route.UserId);
                     sql.Parameters.AddWithValue("@S", route.Start);
@@ -123,7 +127,8 @@ namespace _2._semesterprojekttest.Services
             {
                 connection.Open();
 
-                using (SqlCommand sql = new SqlCommand("Insert into Request(UserID, RouteID, Message) values (@UID, @RID, @M)", connection))
+                using (SqlCommand sql =
+                    new SqlCommand("Insert into Request(UserID, RouteID, Message) values (@UID, @RID, @M)", connection))
                 {
                     sql.Parameters.AddWithValue("@UID", request.UserId);
                     sql.Parameters.AddWithValue("@RID", request.RouteId);
@@ -136,6 +141,7 @@ namespace _2._semesterprojekttest.Services
                     }
                 }
             }
+
             return false;
         }
 
@@ -159,41 +165,44 @@ namespace _2._semesterprojekttest.Services
                     }
                 }
             }
+
             return null;
         }
+
         public Request GetOneRequest(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
-                using (SqlConnection connection = new SqlConnection(ConnectionString))
+                connection.Open();
+
+                using (SqlCommand sql = new SqlCommand("select * from Request where RequestID = @ID", connection))
                 {
-                    connection.Open();
+                    sql.Parameters.AddWithValue("@ID", id);
 
-                    using (SqlCommand sql = new SqlCommand("select * from Request where RequestID = @ID", connection))
+                    SqlDataReader reader = sql.ExecuteReader();
+
+                    if (reader.Read())
                     {
-                        sql.Parameters.AddWithValue("@ID", id);
-
-                        SqlDataReader reader = sql.ExecuteReader();
-
-                        if (reader.Read())
-                        {
-                            return MakeRequest(reader);
-                        }
+                        return MakeRequest(reader);
                     }
                 }
-
-                return null;
-        }
-            private Request MakeRequest(SqlDataReader reader)
-            {
-                Request request = new Request
-                {
-                    RequestId = Convert.ToInt32(reader["RequestID"]),
-                    UserId = Convert.ToInt32(reader["UserID"]),
-                    RouteId = Convert.ToInt32(reader["RouteID"]),
-                    Message = Convert.ToString(reader["Message"]),
-                };
-
-                return request;
             }
+
+            return null;
+        }
+
+        private Request MakeRequest(SqlDataReader reader)
+        {
+            Request request = new Request
+            {
+                RequestId = Convert.ToInt32(reader["RequestID"]),
+                UserId = Convert.ToInt32(reader["UserID"]),
+                RouteId = Convert.ToInt32(reader["RouteID"]),
+                Message = Convert.ToString(reader["Message"]),
+            };
+
+            return request;
+        }
 
         public List<Request> GetAllRequests(int id)
         {
@@ -219,37 +228,41 @@ namespace _2._semesterprojekttest.Services
                     }
                 }
             }
+
             return liste;
         }
 
         public bool AcceptRequest(int UserID, int RouteID)
         {
-                using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand sql = new SqlCommand("Insert into Passenger(UserID, RouteID) values (@UID, @RID)",
+                    connection))
                 {
-                    connection.Open();
+                    sql.Parameters.AddWithValue("@UID", UserID);
+                    sql.Parameters.AddWithValue("@RID", RouteID);
+                    int rows = sql.ExecuteNonQuery();
 
-                    using (SqlCommand sql = new SqlCommand("Insert into Passenger(UserID, RouteID) values (@UID, @RID)", connection))
+                    if (rows == 1)
                     {
-                        sql.Parameters.AddWithValue("@UID", UserID);
-                        sql.Parameters.AddWithValue("@RID", RouteID);
-                        int rows = sql.ExecuteNonQuery();
-
-                        if (rows == 1)
-                        {
-                            return true;
-                        }
+                        return true;
                     }
                 }
+            }
+
             return false;
         }
-        
+
         public bool ReduceSpace(int RouteID)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
 
-                using (SqlCommand sql = new SqlCommand("UPDATE Route SET Space = Space - 1 where RouteID = @RID", connection))
+                using (SqlCommand sql = new SqlCommand("UPDATE Route SET Space = Space - 1 where RouteID = @RID",
+                    connection))
                 {
                     sql.Parameters.AddWithValue("@RID", RouteID);
                     int rows = sql.ExecuteNonQuery();
@@ -260,6 +273,7 @@ namespace _2._semesterprojekttest.Services
                     }
                 }
             }
+
             return false;
         }
 
@@ -291,6 +305,7 @@ namespace _2._semesterprojekttest.Services
                     }
                 }
             }
+
             return liste;
         }
 
@@ -319,28 +334,33 @@ namespace _2._semesterprojekttest.Services
                     }
                 }
             }
+
             return liste;
+        }
 
         public bool CheckRequest(int UserID, int RouteID)
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-
-                using (SqlCommand sql = new SqlCommand("select * from Request where (UserID = @UID) AND (RouteID = @RID)", connection))
+                using (SqlConnection connection = new SqlConnection(ConnectionString))
                 {
-                    sql.Parameters.AddWithValue("UID", UserID);
-                    sql.Parameters.AddWithValue("RID", RouteID);
+                    connection.Open();
 
-                    SqlDataReader reader = sql.ExecuteReader();
-
-                    if (reader.Read())
+                    using (SqlCommand sql =
+                        new SqlCommand("select * from Request where (UserID = @UID) AND (RouteID = @RID)", connection))
                     {
-                        return true;
+                        sql.Parameters.AddWithValue("UID", UserID);
+                        sql.Parameters.AddWithValue("RID", RouteID);
+
+                        SqlDataReader reader = sql.ExecuteReader();
+
+                        if (reader.Read())
+                        {
+                            return true;
+                        }
                     }
                 }
-            }
-            return false;
+
+                return false;
         }
     }
 }
+
