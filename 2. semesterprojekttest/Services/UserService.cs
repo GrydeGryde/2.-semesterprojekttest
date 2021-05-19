@@ -215,7 +215,8 @@ namespace _2._semesterprojekttest.Services
                 LastName = Convert.ToString(reader["LastName"]),
                 Email = Convert.ToString(reader["Email"]),
                 Password = Convert.ToString(reader["Password"]),
-                Address = Convert.ToString(reader["Address"])
+                Address = Convert.ToString(reader["Address"]),
+                Zipcode = Convert.ToInt32(reader["ZipCode"]),
             };
 
             return user;

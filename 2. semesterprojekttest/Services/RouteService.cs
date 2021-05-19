@@ -5,11 +5,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using _2._semesterprojekttest.Interfaces;
 using _2._semesterprojekttest.Models;
+using Microsoft.AspNetCore.SignalR;
 
 namespace _2._semesterprojekttest.Services
 {
     public class RouteService : IRouteService
     {
+        private IUserService _userService = new UserService();
         private const string ConnectionString =
             "Data Source=alex-gryden-db.database.windows.net;Initial Catalog=\"Gryden DB\";Persist Security Info=True;User ID=adminlogin;Password=secret1!";
 
@@ -111,9 +113,24 @@ namespace _2._semesterprojekttest.Services
             return null;
         }
 
-        public bool RemoveRoute(int id)
+        public bool RemoveRoute(int routeid)
         {
-            throw new NotImplementedException();
+            using SqlConnection conn = new SqlConnection(ConnectionString);
+            conn.Open();
+
+            using (SqlCommand sql =
+                new SqlCommand("DELETE * FROM Route WHERE RouteID=@RID ", conn))
+            {
+                sql.Parameters.AddWithValue("@RID", routeid);
+                int rows = sql.ExecuteNonQuery();
+
+                if (rows == 1)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public bool UpdateRoute(int id, Route route)
@@ -277,6 +294,27 @@ namespace _2._semesterprojekttest.Services
             return false;
         }
 
+        public bool IncreaseSpace(int RouteID)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand sql = new SqlCommand("UPDATE Route SET Space = Space + 1 where RouteID = @RID",
+                    connection))
+                {
+                    sql.Parameters.AddWithValue("@RID", RouteID);
+                    int rows = sql.ExecuteNonQuery();
+
+                    if (rows == 1)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
 
         public List<Route> GetAllPassengerRoutes(int id)
         {
@@ -325,6 +363,7 @@ namespace _2._semesterprojekttest.Services
                     while (reader.Read())
                     {
                         Route r = new Route();
+                        r.RouteId = Convert.ToInt32(reader["RouteID"]);
                         r.Day = Convert.ToInt32(reader["Day"]);
                         r.Arrival = Convert.ToDateTime(reader["Arrival"]);
                         r.Goal = Convert.ToString(reader["Goal"]);
@@ -360,6 +399,52 @@ namespace _2._semesterprojekttest.Services
                 }
 
                 return false;
+        }
+        public List<CruizeUser> GetAllPassengerUsers(int id)
+        {
+            List<CruizeUser> pliste = new List<CruizeUser>();
+            
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+
+                using (SqlCommand sql = new SqlCommand("SELECT * FROM Passenger WHERE RouteID = @RID", conn))
+                {
+
+                    sql.Parameters.AddWithValue("@RID", id);
+                    SqlDataReader reader = sql.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        int userid = Convert.ToInt32(reader["UserID"]);
+                        CruizeUser p = _userService.GetOneUser(userid);
+                        pliste.Add(p);
+                    }
+                    
+                }
+            }
+            return pliste;
+        }
+
+        public bool RemovePassengerUser(int userid, int routeid)
+        {
+            using SqlConnection conn = new SqlConnection(ConnectionString);
+            conn.Open();
+
+            using (SqlCommand sql =
+                new SqlCommand("Delete FROM Passenger WHERE (UserID = @UID) AND (RouteID=@RID)", conn))
+            {
+                sql.Parameters.AddWithValue("@RID", routeid);
+                sql.Parameters.AddWithValue("@UID", userid);
+                int rows = sql.ExecuteNonQuery();
+
+                if (rows == 1)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

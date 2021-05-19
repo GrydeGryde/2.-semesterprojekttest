@@ -9,7 +9,7 @@ namespace _2._semesterprojekttest.Interfaces
     public interface IRouteService
     {
         bool AddRoute(Route route);
-        bool RemoveRoute(int id);
+        bool RemoveRoute(int routeid);
         bool UpdateRoute(int id, Route route);
         List<Route> GetAllRoutes();
         Route GetOneRoute(int id);
@@ -22,5 +22,8 @@ namespace _2._semesterprojekttest.Interfaces
         List<Route> GetAllPassengerRoutes(int id);
         List<Route> GetAllDriverRoutes(int id);
         bool CheckRequest(int UserID, int RouteID);
+        public List<CruizeUser> GetAllPassengerUsers(int id);
+        bool RemovePassengerUser(int userid, int routeid);
+        bool IncreaseSpace(int RouteID);
     }
 }
