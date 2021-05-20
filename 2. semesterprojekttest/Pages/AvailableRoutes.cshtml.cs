@@ -15,6 +15,7 @@ namespace _2._semesterprojekttest.Pages
     {
         private IProfilePicture _iPicture;
         private IRouteService _routeService;
+        private IUserService _userService;
         public Picture ProfilePicture { get; set; }
         public int validUser
         {
@@ -33,21 +34,31 @@ namespace _2._semesterprojekttest.Pages
             get { return Convert.ToInt32(HttpContext.Session.GetInt32("Admin")); }
         }
 
+        [BindProperty(SupportsGet = true)]
+        public string Filter { get; set; }
+        public List<Route> liste { get; set; }        
 
-        public List<Route> liste { get; set; }
-        
-
-        public AvailableRoutesModel(IRouteService routeService, IProfilePicture pictureservice)
+        public AvailableRoutesModel(IRouteService routeService, IProfilePicture pictureservice, IUserService userService)
         {
             _routeService = routeService;
             _iPicture = pictureservice;
+            _userService = userService;
+        }
+        public CruizeUser GetDriverAddress(int id)
+        {
+            return _userService.GetOneUser(id);
         }
 
-
-        public void OnGet()
+        public IActionResult OnGet()
         {
             ProfilePicture = _iPicture.GetProfilePicture(userID);
             liste = _routeService.GetAllRoutes();
+
+            if (!string.IsNullOrEmpty(Filter))
+            {
+                liste = _routeService.FilterRoutes(Filter);
+            }
+            return Page();
         }
 
 

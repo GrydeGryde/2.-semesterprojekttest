@@ -58,6 +58,10 @@ namespace _2._semesterprojekttest.Pages
         {
             return _userService.GetOneUser(id);
         }
+        public CruizeUser GetDriverAddress(int id)
+        {
+            return _userService.GetOneUser(id);
+        }
         public void OnGet(int id)
         {
             ProfilePicture = _iPicture.GetProfilePicture(userID);

@@ -20,7 +20,8 @@
         </tr>
     </thead>
     <tr class="ProfilePageTR">
-        <td>@if (Model.GetPicture(Model.RouteProperty.UserId) == null)
+        <td>
+            @if (Model.GetPicture(Model.RouteProperty.UserId) == null)
             {
                 <img src="/Images/emptyprofile.png" alt="profilepic" height="80" width="80" class="rounded-circle">
             }
@@ -28,26 +29,30 @@
             {
                 String file = "data:image/jpeg;base64," + Convert.ToBase64String(Model.GetPicture(@Model.RouteProperty.UserId).Picture1);
                 <img src="@file" alt="profilepic" height="80" width="80" class="rounded-circle">
-            }</td>
-    </tr>
-    <tr class="ProfilePageTR">
-        <td>Drivers Name: @Model.GetDriverName(Model.RouteProperty.UserId).FirstName @Model.GetDriverName(Model.RouteProperty.UserId).LastName</td>
-    </tr>
-    <tr class="ProfilePageTR">
-        <td>Start Point: @Model.RouteProperty.Start</td>
-    </tr>
-    <tr class="ProfilePageTR">
-        <td>End Point: @Model.RouteProperty.Goal</td>
-    </tr>
-    <tr class="ProfilePageTR">
-        <td>Arrival Time: @Model.RouteProperty.Arrival.ToString("t")</td>
-    </tr>
-    <tr class="ProfilePageTR">
-        <td>Day: @Model.RouteProperty.Day</td>
-    </tr>
-    <tr class="ProfilePageTR">
-        <td>Seats left: @Model.RouteProperty.Space</td>
-    </tr>
+            }
+    </td>
+</tr>
+<tr class="ProfilePageTR">
+    <td>Drivers Name: @Model.GetDriverName(Model.RouteProperty.UserId).FirstName @Model.GetDriverName(Model.RouteProperty.UserId).LastName</td>
+</tr>
+<tr class="ProfilePageTR">
+    <td>Drivers Address: @Model.GetDriverAddress(Model.RouteProperty.UserId).Address, @Model.GetDriverAddress(Model.RouteProperty.UserId).Zipcode</td>
+</tr>
+<tr class="ProfilePageTR">
+    <td>Start Point: @Model.RouteProperty.Start</td>
+</tr>
+<tr class="ProfilePageTR">
+    <td>End Point: @Model.RouteProperty.Goal</td>
+</tr>
+<tr class="ProfilePageTR">
+    <td>Arrival Time: @Model.RouteProperty.Arrival.ToString("t")</td>
+</tr>
+<tr class="ProfilePageTR">
+    <td>Day: @Model.RouteProperty.Day</td>
+</tr>
+<tr class="ProfilePageTR">
+    <td>Seats left: @Model.RouteProperty.Space</td>
+</tr>
 </table>
 <br />
 

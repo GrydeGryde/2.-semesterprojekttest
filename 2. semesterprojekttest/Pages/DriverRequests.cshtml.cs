@@ -15,6 +15,7 @@ namespace _2._semesterprojekttest.Pages
     {
         private IProfilePicture _iPicture;
         private IRouteService _routeService;
+        private IUserService _userService;
         public Picture ProfilePicture { get; set; }
         public int validUser
         {
@@ -37,39 +38,49 @@ namespace _2._semesterprojekttest.Pages
         public string SuccesDecline { get; set; }
 
         public List<Request> liste { get; set; }
-        
-        public DriverRequestsModel(IRouteService routeService, IProfilePicture pictureservice)
+
+        public Request RequestProperty { get; set; }
+
+        public DriverRequestsModel(IRouteService routeService, IProfilePicture pictureservice, IUserService userService)
         {
             _routeService = routeService;
             _iPicture = pictureservice;
+            _userService = userService;
         }
 
         public Picture GetPicture(int id)
         {
             return _iPicture.GetProfilePicture(id);
         }
-        public void OnGet()
+        public CruizeUser GetUserName(int id)
+        {
+            return _userService.GetOneUser(id);
+        }
+        public void OnGet(int id)
         {
             ProfilePicture = _iPicture.GetProfilePicture(userID);
             liste = _routeService.GetAllRequests(userID);
+            RequestProperty = _routeService.GetOneRequest(id);
         }
 
         public IActionResult OnPostAccept(int UserID, int RouteID, int RequestID)
         {
-            SuccesAccept = "The request has been accepted.";
+            SuccesAccept = _userService.GetOneUser(UserID).FirstName + " " + _userService.GetOneUser(UserID).LastName + " has been accepted to your route.";
             _routeService.AcceptRequest(UserID, RouteID);
             _routeService.DeleteRequest(RequestID);
             _routeService.ReduceSpace(RouteID);
             liste = _routeService.GetAllRequests(userID);
             ProfilePicture = _iPicture.GetProfilePicture(userID);
+            RequestProperty = _routeService.GetOneRequest(RequestID);
             return Page();
         }
-        public IActionResult OnPostDecline(int RequestID)
+        public IActionResult OnPostDecline(int RequestID, int UserID)
         {
-            SuccesDecline = "The request has been declined.";
+            SuccesDecline = _userService.GetOneUser(UserID).FirstName + " " + _userService.GetOneUser(UserID).LastName + " has been declined from your route.";
             _routeService.DeleteRequest(RequestID);
             liste = _routeService.GetAllRequests(userID);
             ProfilePicture = _iPicture.GetProfilePicture(userID);
+            RequestProperty = _routeService.GetOneRequest(RequestID);
             return Page();
         }
     }
