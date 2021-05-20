@@ -39,8 +39,6 @@ namespace _2._semesterprojekttest.Pages
 
         public List<Request> liste { get; set; }
 
-        public Request RequestProperty { get; set; }
-
         public DriverRequestsModel(IRouteService routeService, IProfilePicture pictureservice, IUserService userService)
         {
             _routeService = routeService;
@@ -60,7 +58,6 @@ namespace _2._semesterprojekttest.Pages
         {
             ProfilePicture = _iPicture.GetProfilePicture(userID);
             liste = _routeService.GetAllRequests(userID);
-            RequestProperty = _routeService.GetOneRequest(id);
         }
 
         public IActionResult OnPostAccept(int UserID, int RouteID, int RequestID)
@@ -71,7 +68,6 @@ namespace _2._semesterprojekttest.Pages
             //_routeService.ReduceSpace(RouteID);
             liste = _routeService.GetAllRequests(userID);
             ProfilePicture = _iPicture.GetProfilePicture(userID);
-            RequestProperty = _routeService.GetOneRequest(RequestID);
             return Page();
         }
         public IActionResult OnPostDecline(int RequestID, int UserID)
@@ -80,7 +76,6 @@ namespace _2._semesterprojekttest.Pages
             _routeService.DeleteRequest(RequestID);
             liste = _routeService.GetAllRequests(userID);
             ProfilePicture = _iPicture.GetProfilePicture(userID);
-            RequestProperty = _routeService.GetOneRequest(RequestID);
             return Page();
         }
     }

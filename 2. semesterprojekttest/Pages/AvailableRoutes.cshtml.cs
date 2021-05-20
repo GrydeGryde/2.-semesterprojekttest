@@ -52,12 +52,12 @@ namespace _2._semesterprojekttest.Pages
         {
             return _routeService.GetAllPassengerUsers(routeid).Count;
         }
-
-        public IActionResult OnGet()
         public string GetDay(int day)
         {
             return _routeService.GetDay(day);
         }
+        public IActionResult OnGet()
+        
         {
             ProfilePicture = _iPicture.GetProfilePicture(userID);
             liste = _routeService.GetAllRoutes();
