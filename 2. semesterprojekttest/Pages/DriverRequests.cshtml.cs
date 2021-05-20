@@ -68,7 +68,7 @@ namespace _2._semesterprojekttest.Pages
             SuccesAccept = _userService.GetOneUser(UserID).FirstName + " " + _userService.GetOneUser(UserID).LastName + " has been accepted to your route.";
             _routeService.AcceptRequest(UserID, RouteID);
             _routeService.DeleteRequest(RequestID);
-            _routeService.ReduceSpace(RouteID);
+            //_routeService.ReduceSpace(RouteID);
             liste = _routeService.GetAllRequests(userID);
             ProfilePicture = _iPicture.GetProfilePicture(userID);
             RequestProperty = _routeService.GetOneRequest(RequestID);

@@ -34,6 +34,7 @@ namespace _2._semesterprojekttest.Pages
         {
             get { return Convert.ToInt32(HttpContext.Session.GetInt32("Admin")); }
         }
+        public string Reportstatus { get; set; }
         public Picture GetPicture(int id)
         {
             return _iPicture.GetProfilePicture(id);
@@ -44,8 +45,9 @@ namespace _2._semesterprojekttest.Pages
             _userService = service;
             _iPicture = pictureservice;
         }
-        public void OnGet()
+        public void OnGet(string ReportStatus)
         {
+            Reportstatus = ReportStatus;
             ProfilePicture = _iPicture.GetProfilePicture(userID);
             _listeUsers = _userService.GetAllUsers();
         }

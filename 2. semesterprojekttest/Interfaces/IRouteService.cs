@@ -26,5 +26,6 @@ namespace _2._semesterprojekttest.Interfaces
         bool RemovePassengerUser(int userid, int routeid);
         bool IncreaseSpace(int RouteID);
         List<Route> FilterRoutes(string e);
+        string GetDay(int day);
     }
 }

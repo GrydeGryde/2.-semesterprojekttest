@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace _2._semesterprojekttest.Services
 {
+    /// <inheritdoc />
     public class CouponService : ICouponService
     {
 
@@ -20,7 +21,7 @@ namespace _2._semesterprojekttest.Services
         private const string CouponCounterSQL = "Update Driver Set CouponCount = @CC where UserID = @UID";
         private const string ReadCouponCountSQL = "Select CouponCount From Driver where UserID = @UID";
 
-        // This method fetches the current users available coupons //
+        /// <inheritdoc />
         public List<Coupon> GetUserCoupons(int id)
         {
             List<Coupon> coupons = new List<Coupon>();
@@ -46,7 +47,7 @@ namespace _2._semesterprojekttest.Services
             }
             return coupons;
         }
-
+        /// <inheritdoc />
         public int GetCouponCount(int id)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
@@ -66,7 +67,7 @@ namespace _2._semesterprojekttest.Services
             }
             return 0;
         }
-
+        /// <inheritdoc />
         public bool AddCouponCount(int id, int counter)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
@@ -88,7 +89,7 @@ namespace _2._semesterprojekttest.Services
             return false;
         }
 
-        // This method creates a coupon //
+        /// <inheritdoc />
         public bool CreateCoupon(Coupon aCoupon)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))

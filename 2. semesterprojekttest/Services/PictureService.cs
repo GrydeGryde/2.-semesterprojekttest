@@ -66,17 +66,6 @@ namespace _2._semesterprojekttest.Services
             
         }
 
-        public void UpdatePicture(Picture pic)
-        {
-            foreach (Picture picture in db.Pictures.ToList())
-            {
-                if ((picture.TypeId == pic.TypeId) && (picture.UserId == pic.UserId))
-                {
-                    pic.PictureId = picture.PictureId;
-                    db.Update(pic);
-                }
-            }
-        }
 
         public void DeletePicture(int userID, int typeID)
         {
@@ -84,15 +73,6 @@ namespace _2._semesterprojekttest.Services
 
         public Picture GetProfilePicture(int userID)
         {
-            //enity ser ud til at gemme dens egen cache eller noget og gjorde at hvis vi redirectede til en anden side efter at have uploadet
-            //et nyt billede blev det først opdateret efter vi startede nyt op projekt.
-            //var checkforpic = db.Pictures.Where(i => i.UserId == userID && i.TypeId == 1).ToList();
-            //foreach (Picture pic in checkforpic)
-            //{
-            //    return pic;
-            //}
-
-            //return null;
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
                 conn.Open();
@@ -114,13 +94,6 @@ namespace _2._semesterprojekttest.Services
         }
         public Picture GetCarPicture(int userID)
         {
-            //var checkforpic = db.Pictures.Where(i => i.UserId == userID && i.TypeId == 0).ToList();
-            //foreach (Picture pic in checkforpic)
-            //{
-            //    return pic;
-            //}
-
-            //return null;
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
                 conn.Open();
@@ -135,7 +108,6 @@ namespace _2._semesterprojekttest.Services
                         return p;
                     }
                 }
-
                 return null;
             }
         }

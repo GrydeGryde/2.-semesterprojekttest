@@ -48,8 +48,16 @@ namespace _2._semesterprojekttest.Pages
         {
             return _userService.GetOneUser(id);
         }
+        public int OccupiedSpace(int routeid)
+        {
+            return _routeService.GetAllPassengerUsers(routeid).Count;
+        }
 
         public IActionResult OnGet()
+        public string GetDay(int day)
+        {
+            return _routeService.GetDay(day);
+        }
         {
             ProfilePicture = _iPicture.GetProfilePicture(userID);
             liste = _routeService.GetAllRoutes();
@@ -60,7 +68,6 @@ namespace _2._semesterprojekttest.Pages
             }
             return Page();
         }
-
 
     }
 }

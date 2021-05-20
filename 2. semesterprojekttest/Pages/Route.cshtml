@@ -47,12 +47,13 @@
 <tr class="ProfilePageTR">
     <td>Arrival Time: @Model.RouteProperty.Arrival.ToString("t")</td>
 </tr>
+    <tr class="ProfilePageTR">
+        <td>Day: @Model.GetDay(Model.RouteProperty.Day)</td>
+    </tr>
 <tr class="ProfilePageTR">
-    <td>Day: @Model.RouteProperty.Day</td>
-</tr>
-<tr class="ProfilePageTR">
-    <td>Seats left: @Model.RouteProperty.Space</td>
-</tr>
+        <td>Seats left: @(Model.RouteProperty.Space-Model.OccupiedSpace(Model.RouteProperty.RouteId))</td>
+    </tr>
+
 </table>
 <br />
 
