@@ -98,3 +98,57 @@ border-color: #000;
 .ProfilePageTR:nth-child(even) {
     background-color: #f2f2f2;
 }
+
+.btn-primary {
+    background-color: #fff387;
+    border-color: #000;
+    color: #000;
+}
+
+.btn-primary:hover {
+    background-color: #000;
+    border-color: #fff387;
+    color: #fff387;
+}
+
+.btn-primary:active {
+    background-color: #000;
+    border-color: #fff387;
+    color: #fff387;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle {
+    color: #fff387;
+    background-color: #000;
+    border-color: #000;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 243, 135, 0.5);
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    overflow-x: hidden;
+}
+
+.flex-container img {
+    max-width: 50%;
+    height: auto;
+}
+
+.flex-item{
+    width: 50%;
+    margin: 0;
+    padding: 0;
+}
+
+.flex-item img {
+    max-width: 100%;
+    height: auto;
+}
