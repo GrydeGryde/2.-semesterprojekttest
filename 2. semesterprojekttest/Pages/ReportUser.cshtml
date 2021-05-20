@@ -1,6 +1,7 @@
 ﻿@page
 @model _2._semesterprojekttest.Pages.ReportUserModel
 @{
+    
     <h1>Report @Model.ReportedUser.FirstName @Model.ReportedUser.LastName</h1>
     <div>
         @if (Model.GetPicture(Model.ReportedUser.UserId) == null)
@@ -13,12 +14,11 @@
             <img src="@file" alt="profilepic" height="80" width="80" class="rounded-circle">
         }
         <br/>
-        Skriv din Rapport her
+        Write your report here.
         <form method="post">
             <br/>
             <input name="Message" type="text"/>
             <br/>
-
             <button asp-route-id="@Model.ReportedUser.UserId" class="btn btn-danger">
                 Report
             </button>

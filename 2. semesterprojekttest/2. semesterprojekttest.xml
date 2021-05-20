@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>2. semesterprojekttest</name>
+    </assembly>
+    <members>
+        <member name="T:_2._semesterprojekttest.Interfaces.ICouponService">
+            <summary>
+            This interface used to access the Coupon service methods.
+            </summary>
+        </member>
+        <member name="M:_2._semesterprojekttest.Interfaces.ICouponService.GetUserCoupons(System.Int32)">
+            <summary>
+            This method fetches the current users available coupons from the database.
+            </summary>
+            <param name="id">The Drivers user Id.</param>
+            <returns>A List of all the Coupons that driver has earned.</returns>
+        </member>
+        <member name="M:_2._semesterprojekttest.Interfaces.ICouponService.CreateCoupon(_2._semesterprojekttest.Models.Coupon)">
+            <summary>
+            This method creates a coupon
+            </summary>
+            <param name="aCoupon"></param>
+            <returns></returns>
+        </member>
+        <member name="M:_2._semesterprojekttest.Interfaces.ICouponService.GetCouponCount(System.Int32)">
+            <summary>
+            This class is used to count how many coupons a specific driver has earned.
+            </summary>
+            <param name="id">The Drivers userid</param>
+            <returns>A number of how many coupons</returns>
+        </member>
+        <member name="M:_2._semesterprojekttest.Interfaces.ICouponService.AddCouponCount(System.Int32,System.Int32)">
+            <summary>
+            Updates the Couponcount for by a certain amount for a driver in Driver table
+            </summary>
+            <param name="id">A drivers userid</param>
+            <param name="counter">The amount you want to add to the counter</param>
+            <returns>True if it succeed or false if it fails</returns>
+        </member>
+        <member name="T:_2._semesterprojekttest.Services.CouponService">
+            <inheritdoc />
+        </member>
+        <member name="M:_2._semesterprojekttest.Services.CouponService.GetUserCoupons(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:_2._semesterprojekttest.Services.CouponService.GetCouponCount(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:_2._semesterprojekttest.Services.CouponService.AddCouponCount(System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:_2._semesterprojekttest.Services.CouponService.CreateCoupon(_2._semesterprojekttest.Models.Coupon)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

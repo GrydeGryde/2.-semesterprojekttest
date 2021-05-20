@@ -4,18 +4,22 @@
     ViewData["Title"] = "UploadTest";
 
 }
-<h1>UploadTest</h1>
+<h1>Upload a 
+    @if (Model.TypeID == 0){<h1>Car Picture</h1>}
+    @if (Model.TypeID == 1){<h1>Profile Picture</h1>}
+    </h1>
+@if (Model.ErrorPicture != null)
+{
+    <div class="bg-danger">
+        <h5>
+            @Model.ErrorPicture
+        </h5>
+    </div>
+}
 <form method="post">
     Upload file:<input id="Picture1" type="file" name="Picture1" /><br />
-    
-    @*Er billedet til bil eller bruger?
-    <br />
-    <input type="radio" id="Bil" name="Bil/profil" value="0">*@
-    @*<label for="Bil">Bil</label><br>
-    <input type="radio" id="Profil" name="Bil/profil" value="1">
-    <label for="Profil">Profil</label><br>*@
     <button asp-page-handler="Upload" asp-route-id="@Model.TypeID" class="btn btn-danger" onclick="return confirm('Do you want to upload this picture?')">
-        Upload 
+        Upload
     </button>
     <br />
 </form>

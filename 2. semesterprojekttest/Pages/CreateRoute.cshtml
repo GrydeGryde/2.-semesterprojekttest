@@ -2,17 +2,13 @@
 @model _2._semesterprojekttest.Pages.CreateRouteModel
 @{
     <div>
-        <h5 class="pageTitle">Fill this form to create user</h5>
+        <h5 class="pageTitle">Fill this form to create a route</h5>
         <form method="post">
-            Visuel visning af Bruger Id til testning (SLET EFTERFØLGENDE)
-            <br />
-            Brugerens ID er: @Model.userID
-            <br />
-            Start Address
+            Address of the start of the route
             <br />
             <input name="AddStart" type="text" class="form-control input-lg" required autofocus />
             <br />
-            End Route
+            Address of the Destination
             <br />
             <input name="AddEnd" type="text" class="form-control input-lg" required autofocus />
             <br />

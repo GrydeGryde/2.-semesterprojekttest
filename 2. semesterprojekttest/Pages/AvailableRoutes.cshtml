@@ -8,6 +8,7 @@
     <thead class="table-primary">
     <th>Start point</th>
     <th>End point</th>
+    <th>Day</th>
     <th>Arrival time</th>
     <th>Seats left</th>
     <th></th>
@@ -21,8 +22,9 @@
         <tr>
             <td>@routes.Start</td>
             <td>@routes.Goal</td>
+            <td>@Model.GetDay(routes.Day)</td>
             <td>@routes.Arrival.ToString("t")</td>
-            <td>@routes.Space</td>
+            <td>@(routes.Space-Model.OccupiedSpace(routes.RouteId))</td>
             <td><a asp-page="Route" asp-route-id="@routes.RouteId">Apply</a></td>
         </tr>
             }

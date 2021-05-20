@@ -44,6 +44,8 @@ namespace _2._semesterprojekttest.Pages
             _userService = userService;
             _iPicture = pictureservice;
         }
+
+        public string ReportStatus { get; set; }
         public void OnGet(int id)
         {
             ProfilePicture = _iPicture.GetProfilePicture(userID);
@@ -57,12 +59,12 @@ namespace _2._semesterprojekttest.Pages
                 report.Reporter = Convert.ToInt32(HttpContext.Session.GetInt32("UserID"));
                 report.Reported = id;
                 report.Message = Request.Form["Message"];
-                
+                ReportStatus = "Your Report was sent";
                 _reportService.AddReport(report);
-                return RedirectToPage("Index");
+                return RedirectToPage("DummyReportPage", new { ReportStatus });
             }
             //Tilføj Respons besked hvis til knappen
-            return RedirectToPage("Index");
+            return RedirectToPage("DummyReportPage", ReportStatus);
         }
     }
 }

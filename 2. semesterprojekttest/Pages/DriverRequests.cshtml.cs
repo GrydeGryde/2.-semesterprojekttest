@@ -59,7 +59,7 @@ namespace _2._semesterprojekttest.Pages
             SuccesAccept = "The request has been accepted.";
             _routeService.AcceptRequest(UserID, RouteID);
             _routeService.DeleteRequest(RequestID);
-            _routeService.ReduceSpace(RouteID);
+            //_routeService.ReduceSpace(RouteID);
             liste = _routeService.GetAllRequests(userID);
             ProfilePicture = _iPicture.GetProfilePicture(userID);
             return Page();

@@ -2,7 +2,23 @@
 @using _2._semesterprojekttest.Models
 @model _2._semesterprojekttest.Pages.DummyReportPageModel
 @{
-
+    <head>
+        <style>
+            .center {
+                text-align: center;
+                background-color: green;
+                color: #ffffff;
+            }
+        </style>
+    </head>
+    if (Model.Reportstatus != null)
+    {
+        <div class="center">
+            <h5>
+                @Model.Reportstatus
+            </h5>
+        </div>
+    }
     <div class="text-center">
         <h1 class="display-4">Users</h1>
         <table class="table table-bordered table-striped">

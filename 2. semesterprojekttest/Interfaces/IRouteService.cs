@@ -25,5 +25,6 @@ namespace _2._semesterprojekttest.Interfaces
         public List<CruizeUser> GetAllPassengerUsers(int routeid);
         bool RemovePassengerUser(int userid, int routeid);
         bool IncreaseSpace(int RouteID);
+        string GetDay(int day);
     }
 }

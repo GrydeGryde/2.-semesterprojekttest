@@ -67,11 +67,9 @@ namespace _2._semesterprojekttest.Pages
             set => _pictures = value;
         }
 
-        public int TypeID
-        {
-            get;
-            set;
-        }
+        public int TypeID { get; set; }
+        public string ErrorPicture { get; set; }
+        
         public void OnGet(int picID)
         {
             TypeID = picID;
@@ -83,29 +81,41 @@ namespace _2._semesterprojekttest.Pages
             return RedirectToPage("ProfilePage");
         }
 
+
         public IActionResult OnPostUpload(Picture pic, int id)
         {
-            GrydenDBContext db = new GrydenDBContext();
+            try
             {
-                string path = @"C:\Users\grydg\OneDrive\Billeder\";
-                FileStream b1 = System.IO.File.OpenRead(path + Request.Form["Picture1"]);
-                long b1size = b1.Length;
-                byte[] billedBytes = new byte[b1size];
-                int noOfBytes = b1.Read(billedBytes, 0, (int) b1size);
-
-
-                pic.UserId = Convert.ToInt32(HttpContext.Session.GetInt32("UserID"));
-                pic.FileType = "jpg";
-                pic.Picture1 = billedBytes;
-                pic.TypeId = id;
-                _iPicture.AddPicture(pic);
-                if (pic.TypeId == 1)
+                GrydenDBContext db = new GrydenDBContext();
                 {
-                     ProfilePicture = pic;
-                }
+                    string path = @"C:\Users\grydg\OneDrive\Billeder\";
+                    FileStream b1 = System.IO.File.OpenRead(path + Request.Form["Picture1"]);
+                    long b1size = b1.Length;
+                    byte[] billedBytes = new byte[b1size];
+                    int noOfBytes = b1.Read(billedBytes, 0, (int)b1size);
 
-                return RedirectToPage("ProfilePage");
+
+                    pic.UserId = Convert.ToInt32(HttpContext.Session.GetInt32("UserID"));
+                    pic.FileType = "jpg";
+                    pic.Picture1 = billedBytes;
+                    pic.TypeId = id;
+                    _iPicture.AddPicture(pic);
+                    if (pic.TypeId == 1)
+                    {
+                        ProfilePicture = pic;
+                    }
+
+                    return RedirectToPage("ProfilePage");
+                }
             }
+            catch (Exception)
+            {
+                ErrorPicture = "An error occoured. Did you forget to add a picture?";
+                TypeID = id;
+                ProfilePicture = _iPicture.GetProfilePicture(userID);
+                return Page();
+            }
+            
             
         }
     }

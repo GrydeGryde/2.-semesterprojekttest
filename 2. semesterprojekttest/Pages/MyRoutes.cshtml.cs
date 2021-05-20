@@ -42,6 +42,15 @@ namespace _2._semesterprojekttest.Pages
             _routeService = routeService;
             _iPicture = pictureservice;
         }
+        public int OccupiedSpace(int routeid)
+        {
+            return _routeService.GetAllPassengerUsers(routeid).Count;
+        }
+
+        public string GetDay(int day)
+        {
+            return _routeService.GetDay(day);
+        }
         public void OnGet()
         {
             ProfilePicture = _iPicture.GetProfilePicture(userID);
