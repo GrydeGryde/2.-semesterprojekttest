@@ -4,8 +4,16 @@
 @{
 }
 
+<form>
+    <p>
+        Filter routes by drivers zipcode: <input type="text" asp-for="Filter" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
 <table class="table table-bordered table-striped">
     <thead class="table-primary">
+    <th>Drivers address</th>
     <th>Start point</th>
     <th>End point</th>
     <th>Day</th>
@@ -20,12 +28,12 @@
             if (routes.Space > 0 && routes.UserId != Model.userID)
             {
         <tr>
-            <td>@routes.Start</td>
-            <td>@routes.Goal</td>
-            <td>@Model.GetDay(routes.Day)</td>
-            <td>@routes.Arrival.ToString("t")</td>
-            <td>@(routes.Space-Model.OccupiedSpace(routes.RouteId))</td>
-            <td><a asp-page="Route" asp-route-id="@routes.RouteId">Apply</a></td>
+        <td>@Model.GetDriverAddress(routes.UserId).Address, @Model.GetDriverAddress(routes.UserId).Zipcode</td>
+        <td>@routes.Start</td>
+        <td>@routes.Goal</td>
+        <td>@routes.Arrival.ToString("t")</td>
+        <td>@(routes.Space-Model.OccupiedSpace(routes.RouteId))</td>
+        <td><a asp-page="Route" asp-route-id="@routes.RouteId">Apply</a></td>
         </tr>
             }
         }

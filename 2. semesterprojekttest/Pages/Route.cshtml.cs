@@ -62,7 +62,10 @@ namespace _2._semesterprojekttest.Pages
         {
             return _userService.GetOneUser(id);
         }
-
+        public CruizeUser GetDriverAddress(int id)
+        {
+            return _userService.GetOneUser(id);
+        }
         public string GetDay(int day)
         {
             return _routeService.GetDay(day);

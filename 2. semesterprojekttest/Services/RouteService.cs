@@ -447,6 +447,21 @@ namespace _2._semesterprojekttest.Services
             return false;
         }
 
+        public List<Route> FilterRoutes(string e)
+        {
+            List<Route> filterRoutes = new List<Route>();
+            if (e != null)
+            {
+                foreach (Route route in GetAllRoutes())
+                {
+                    if (_userService.GetOneUser(route.UserId).Zipcode.ToString().StartsWith(e))
+                    {
+                        filterRoutes.Add(route);
+                    }
+                }
+            }
+            return filterRoutes;
+        }
         public string GetDay(int day)
         {
             switch (day)

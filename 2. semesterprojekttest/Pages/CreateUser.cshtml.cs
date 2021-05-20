@@ -35,6 +35,7 @@ namespace _2._semesterprojekttest.Pages
         }
 
 
+        public string SuccesCreate { get; set; }
         public CreateUserModel(IUserService service, IReportService reportService, IProfilePicture pictureservice)
 
         {
@@ -52,6 +53,8 @@ namespace _2._semesterprojekttest.Pages
 
         public void OnPost()
         {
+
+            SuccesCreate = "You have been created as a user";
             List<CruizeUser> users = _userService.GetAllUsers();
             string userEmail = Request.Form["Email".ToLower()];
             bool userStatus = false;
