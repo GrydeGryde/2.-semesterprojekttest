@@ -110,7 +110,7 @@ namespace _2._semesterprojekttest.Pages
             }
             catch (Exception)
             {
-                ErrorPicture = "You forgot to add a picture";
+                ErrorPicture = "An error occoured. Did you forget to add a picture?";
                 TypeID = id;
                 ProfilePicture = _iPicture.GetProfilePicture(userID);
                 return Page();
