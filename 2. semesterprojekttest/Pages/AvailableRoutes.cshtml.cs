@@ -63,7 +63,7 @@ namespace _2._semesterprojekttest.Pages
             List<Route> filterList = new List<Route>();
             foreach (Route routes in liste)
             {
-                if (routes.Space == 0 && routes.UserId == userID)
+                if (routes.Space != 0 && routes.UserId != userID)
                 {
                     filterList.Add(routes);
                 }

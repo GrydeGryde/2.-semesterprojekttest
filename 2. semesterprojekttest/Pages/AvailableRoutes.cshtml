@@ -46,14 +46,12 @@ else
     <th>Day</th>
     <th>Arrival time</th>
     <th>Seats left</th>
-    <th></th>
     </thead>
   
         <tbody>
-        @foreach (Route routes in Model.liste)
+        @foreach (Route routes in Model.FilteredList)
         {
-            if (routes.Space > 0 && routes.UserId != Model.userID)
-            {
+            
                 <tr >
                     <td><a asp-page="Route" asp-route-id="@routes.RouteId">@Model.GetDriverAddress(routes.UserId).Address, @Model.GetDriverAddress(routes.UserId).Zipcode</a></td>
                     <td><a asp-page="Route" asp-route-id="@routes.RouteId">@routes.Start</a></td>
@@ -62,8 +60,6 @@ else
                     <td><a asp-page="Route" asp-route-id="@routes.RouteId">@routes.Arrival.ToString("t")</a></td>
                     <td><a asp-page="Route" asp-route-id="@routes.RouteId">@(routes.Space - Model.OccupiedSpace(routes.RouteId))</a></td>
                 </tr>
-
-            }
         }
         </tbody>
     </table>
