@@ -9,8 +9,12 @@
             background: red; 
         }
         td a { 
-            display: block; 
-            border: 1px solid black;
+            display: block;
+            /*border: 1px solid black;*/
+        }
+        .table td, th {
+            margin: 0 !important;
+            text-align: center !important;
         }
         body { background-image: url('/Images/emptyprofile.png'); 
             background-repeat: no-repeat; 
@@ -54,7 +58,6 @@ else
                     <td><a asp-page="Route" asp-route-id="@routes.RouteId">@Model.GetDay(routes.Day)</a></td>
                     <td><a asp-page="Route" asp-route-id="@routes.RouteId">@routes.Arrival.ToString("t")</a></td>
                     <td><a asp-page="Route" asp-route-id="@routes.RouteId">@(routes.Space - Model.OccupiedSpace(routes.RouteId))</a></td>
-                    <td><a asp-page="Route" asp-route-id="@routes.RouteId">Apply</a></td>
                 </tr>
             }
         }
