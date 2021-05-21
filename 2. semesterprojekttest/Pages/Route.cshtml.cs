@@ -80,16 +80,16 @@ namespace _2._semesterprojekttest.Pages
 
         public IActionResult OnPost(int UserID, int RouteID)
         {
-            SuccesApply = "You have succesfully applied to this route";
-            Request request = new Request();
-            request.UserId = userID;
-            request.RouteId = RouteID;
-            request.Message = Request.Form["RequestMessage"];
-            _routeService.AddRequest(request);
-            RequestCheck = _routeService.CheckRequest(userID, RouteID);
-            RouteProperty = _routeService.GetOneRoute(RouteID);
-            ProfilePicture = _iPicture.GetProfilePicture(userID);
-            return Page();
+                SuccesApply = "You have succesfully applied to this route";
+                Request request = new Request();
+                request.UserId = userID;
+                request.RouteId = RouteID;
+                request.Message = Request.Form["RequestMessage"];
+                _routeService.AddRequest(request);
+                RequestCheck = _routeService.CheckRequest(userID, RouteID);
+                RouteProperty = _routeService.GetOneRoute(RouteID);
+                ProfilePicture = _iPicture.GetProfilePicture(userID);
+                return Page();
         }
 
         public void OnPostRemovePassenger(int id, int routeid)
