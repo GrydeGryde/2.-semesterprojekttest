@@ -3,6 +3,13 @@
 @{
 }
 
+<style>
+body { background-image: url('/Images/emptyprofile.png'); 
+    background-repeat: no-repeat; 
+    background-attachment: fixed;
+    background-size: cover; }
+</style>
+
 @if (Model.validUser == 1)
 {
     <p>Du er logget ind, @Model.LoggedInUser.FirstName</p>
@@ -14,7 +21,6 @@
         </button>
     </form>
 
-    
 }
 else
 {
