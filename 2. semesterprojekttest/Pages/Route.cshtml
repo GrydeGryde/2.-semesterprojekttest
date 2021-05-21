@@ -12,6 +12,14 @@
         </h5>
     </div>
 }
+@if (Model.ErrorMessage != null)
+{
+    <div class="alert-danger">
+        <h5>
+            @Model.ErrorMessage
+        </h5>
+    </div>
+}
 
 <table class="ProfilePageTR">
     <thead class="table-primary">
@@ -70,7 +78,6 @@
 }
 else if (Model.userID == Model.RouteProperty.UserId)
 {
-    <h2>OPDATER RUTE MÅSKE??</h2>
     <br/>
     <table class="table table-bordered table-striped">
         <thead class="table-primary">
