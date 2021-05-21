@@ -272,50 +272,6 @@ namespace _2._semesterprojekttest.Services
             return false;
         }
 
-        public bool ReduceSpace(int RouteID)
-        {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-
-                using (SqlCommand sql = new SqlCommand("UPDATE Route SET Space = Space - 1 where RouteID = @RID",
-                    connection))
-                {
-                    sql.Parameters.AddWithValue("@RID", RouteID);
-                    int rows = sql.ExecuteNonQuery();
-
-                    if (rows == 1)
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        }
-
-        public bool IncreaseSpace(int RouteID)
-        {
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-
-                using (SqlCommand sql = new SqlCommand("UPDATE Route SET Space = Space + 1 where RouteID = @RID",
-                    connection))
-                {
-                    sql.Parameters.AddWithValue("@RID", RouteID);
-                    int rows = sql.ExecuteNonQuery();
-
-                    if (rows == 1)
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        }
-
         public List<Route> GetAllPassengerRoutes(int id)
         {
             List<Passenger> pliste = new List<Passenger>();

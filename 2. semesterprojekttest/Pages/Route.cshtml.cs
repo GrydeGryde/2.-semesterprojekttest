@@ -43,6 +43,23 @@ namespace _2._semesterprojekttest.Pages
         public string SuccesApply { get; set; }
 
         public bool RequestCheck { get; set; }
+
+        public bool PassengerCheck
+        {
+            get
+            {
+                foreach (CruizeUser passenger in Passengers)
+                {
+                    if (passenger.UserId == userID)
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+        }
+
         public List<CruizeUser> Passengers { get; set; }
         public RouteModel(IRouteService service, IProfilePicture pictureservice, IUserService userService)
         {
@@ -95,11 +112,16 @@ namespace _2._semesterprojekttest.Pages
         public void OnPostRemovePassenger(int id, int routeid)
         {
             _routeService.RemovePassengerUser(id, routeid);
-            //_routeService.IncreaseSpace(routeid);
             ProfilePicture = _iPicture.GetProfilePicture(userID);
             RouteProperty = _routeService.GetOneRoute(routeid);
             Passengers = _routeService.GetAllPassengerUsers(routeid);
             RequestCheck = _routeService.CheckRequest(userID, routeid);
+        }
+
+        public IActionResult OnPostRemoveSelf(int id, int routeid)
+        {
+            _routeService.RemovePassengerUser(id, routeid);
+            return RedirectToPage("MyRoutes");
         }
     }
 }
