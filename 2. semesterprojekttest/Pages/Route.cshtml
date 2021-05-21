@@ -67,7 +67,9 @@
 
 @if (Model.userID != Model.RouteProperty.UserId && !Model.RequestCheck && !Model.PassengerCheck)
 {
-    <h5>Write a message to the driver:</h5>
+
+
+<h5>Write a message to the driver:</h5>                
     <form method="post">
         <input name="RequestMessage" type="text" class="form-control input-lg" required autofocus />
         <button type="submit" asp-page-handler="Request" asp-route-UserID="@Model.RouteProperty.UserId" asp-route-RouteID="@Model.RouteProperty.RouteId"
@@ -110,4 +112,5 @@ else if (Model.PassengerCheck)
 {
     <h3>You are a passenger on this route.</h3>
     <form method="post"><button asp-page-handler="RemoveSelf" asp-route-id="@Model.userID" asp-route-routeid="@Model.RouteProperty.RouteId" class="btn btn-dark btn-group-lg" onclick="return confirm('Are you sure you want to leave this route? You will have the option to request again.')">Leave Route</button></form>
+
 }
