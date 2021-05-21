@@ -5,21 +5,25 @@
 }
 <head>
     <style>
+        tr:nth-child(top) {
+            background-color: #fff387;
+        }
         tr:hover { 
             background: red; 
         }
+        .table td, th {
+            padding: 0 !important;
+            text-align: center;
+            vertical-align: middle !important;
+        }
         td a { 
             display: block;
-            /*border: 1px solid black;*/
+            width: 100%;
         }
         .table td, th {
             margin: 0 !important;
             text-align: center !important;
         }
-        body { background-image: url('/Images/emptyprofile.png'); 
-            background-repeat: no-repeat; 
-            background-attachment: fixed;
-            background-size: cover; }
     </style>
 </head>
 @if (Model.FilteredList.Count == 0 )
@@ -34,18 +38,17 @@ else
         <input type="submit" value="Filter" />
     </p>
 </form>
-
-<table class="table table-bordered table-striped">
-        <thead class="table-primary">
-        <th>Drivers address</th>
-        <th>Start point</th>
-        <th>End point</th>
-        <th>Day</th>
-        <th>Arrival time</th>
-        <th>Seats left</th>
-        <th></th>
-        </thead>
-
+<table class="table table-bordered">
+    <thead class="table-primary">
+    <th>Drivers address</th>
+    <th>Start point</th>
+    <th>End point</th>
+    <th>Day</th>
+    <th>Arrival time</th>
+    <th>Seats left</th>
+    <th></th>
+    </thead>
+  
         <tbody>
         @foreach (Route routes in Model.liste)
         {
@@ -59,6 +62,7 @@ else
                     <td><a asp-page="Route" asp-route-id="@routes.RouteId">@routes.Arrival.ToString("t")</a></td>
                     <td><a asp-page="Route" asp-route-id="@routes.RouteId">@(routes.Space - Model.OccupiedSpace(routes.RouteId))</a></td>
                 </tr>
+
             }
         }
         </tbody>
