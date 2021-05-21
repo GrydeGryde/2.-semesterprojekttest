@@ -19,18 +19,25 @@
         td a { 
             display: block;
             width: 100%;
-            /*border: 1px solid black;*/
+        }
+        .table td, th {
+            margin: 0 !important;
+            text-align: center !important;
         }
     </style>
 </head>
-<form>
+@if (Model.FilteredList.Count == 0 )
+{
+    <h3>There are currently no routes available</h3>
+}
+else
+{
+    <form>
     <p>
         Filter routes by drivers zipcode: <input type="text" asp-for="Filter" />
         <input type="submit" value="Filter" />
     </p>
 </form>
-
-
 <table class="table table-bordered">
     <thead class="table-primary">
     <th>Drivers address</th>
@@ -41,22 +48,23 @@
     <th>Seats left</th>
     <th></th>
     </thead>
-
-    <tbody>
+  
+        <tbody>
         @foreach (Route routes in Model.liste)
         {
             if (routes.Space > 0 && routes.UserId != Model.userID)
             {
-            <tr >
-            <td><a asp-page="Route" asp-route-id="@routes.RouteId">@Model.GetDriverAddress(routes.UserId).Address, @Model.GetDriverAddress(routes.UserId).Zipcode</a></td>
-            <td><a asp-page="Route" asp-route-id="@routes.RouteId">@routes.Start</a></td>
-            <td><a asp-page="Route" asp-route-id="@routes.RouteId">@routes.Goal</a></td>
-            <td><a asp-page="Route" asp-route-id="@routes.RouteId">@Model.GetDay(routes.Day)</a></td>
-            <td><a asp-page="Route" asp-route-id="@routes.RouteId">@routes.Arrival.ToString("t")</a></td>
-            <td><a asp-page="Route" asp-route-id="@routes.RouteId">@(routes.Space-Model.OccupiedSpace(routes.RouteId))</a></td>
-            <td><a asp-page="Route" asp-route-id="@routes.RouteId">Apply</a></td>
-            </tr>
+                <tr >
+                    <td><a asp-page="Route" asp-route-id="@routes.RouteId">@Model.GetDriverAddress(routes.UserId).Address, @Model.GetDriverAddress(routes.UserId).Zipcode</a></td>
+                    <td><a asp-page="Route" asp-route-id="@routes.RouteId">@routes.Start</a></td>
+                    <td><a asp-page="Route" asp-route-id="@routes.RouteId">@routes.Goal</a></td>
+                    <td><a asp-page="Route" asp-route-id="@routes.RouteId">@Model.GetDay(routes.Day)</a></td>
+                    <td><a asp-page="Route" asp-route-id="@routes.RouteId">@routes.Arrival.ToString("t")</a></td>
+                    <td><a asp-page="Route" asp-route-id="@routes.RouteId">@(routes.Space - Model.OccupiedSpace(routes.RouteId))</a></td>
+                </tr>
+
             }
         }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+}
