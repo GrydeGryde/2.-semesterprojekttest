@@ -35,5 +35,11 @@ namespace _2._semesterprojekttest.Services
             List<BannedUser> bannedUsers = db.BannedUsers.ToList();
             return bannedUsers;
         }
+
+        public void DeleteBan(BannedUser bannedUser)
+        {
+            db.BannedUsers.Remove(bannedUser);
+            db.SaveChanges();
+        }
     }
 }

@@ -1,0 +1,28 @@
+﻿@page
+@using _2._semesterprojekttest.Models
+@model _2._semesterprojekttest.Pages.AdminBannedUsersModel
+@{
+}
+<table class="table table-bordered table-striped">
+    <thead class="table-primary">
+    <th>Banned Email</th>
+    <th></th>
+    </thead>
+
+    <tbody>
+    @foreach (BannedUser bannedUser in Model.AllBannedUsers)
+    {
+        <tr>
+            <td>@bannedUser.BannedEmail</td>
+            <td>
+                <form method="post">
+                    <button asp-page-handler="Unban" asp-route-email="@bannedUser.BannedEmail" class="btn btn-danger" onclick="return confirm('Are you sure you want to unban this user from the application? The user will be allowed to make a new account and use the application again.')">
+                        Unban from application
+                    </button>
+
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
