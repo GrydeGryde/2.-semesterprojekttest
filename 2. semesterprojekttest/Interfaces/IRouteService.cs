@@ -18,13 +18,11 @@ namespace _2._semesterprojekttest.Interfaces
         Request GetOneRequest(int id);
         List<Request> GetAllRequests(int id);
         bool AcceptRequest(int UserID, int RouteID);
-        bool ReduceSpace(int RouteID);
         List<Route> GetAllPassengerRoutes(int id);
         List<Route> GetAllDriverRoutes(int id);
         bool CheckRequest(int UserID, int RouteID);
         public List<CruizeUser> GetAllPassengerUsers(int routeid);
         bool RemovePassengerUser(int userid, int routeid);
-        bool IncreaseSpace(int RouteID);
         List<Route> FilterRoutes(string e);
         string GetDay(int day);
     }

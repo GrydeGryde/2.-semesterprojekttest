@@ -38,34 +38,34 @@
                 String file = "data:image/jpeg;base64," + Convert.ToBase64String(Model.GetPicture(@Model.RouteProperty.UserId).Picture1);
                 <img src="@file" alt="profilepic" height="80" width="80" class="rounded-circle">
             }
-    </td>
-</tr>
-<tr class="ProfilePageTR">
-    <td>Drivers Name: @Model.GetDriverName(Model.RouteProperty.UserId).FirstName @Model.GetDriverName(Model.RouteProperty.UserId).LastName</td>
-</tr>
-<tr class="ProfilePageTR">
-    <td>Drivers Address: @Model.GetDriverAddress(Model.RouteProperty.UserId).Address, @Model.GetDriverAddress(Model.RouteProperty.UserId).Zipcode</td>
-</tr>
-<tr class="ProfilePageTR">
-    <td>Start Point: @Model.RouteProperty.Start</td>
-</tr>
-<tr class="ProfilePageTR">
-    <td>End Point: @Model.RouteProperty.Goal</td>
-</tr>
-<tr class="ProfilePageTR">
-    <td>Arrival Time: @Model.RouteProperty.Arrival.ToString("t")</td>
-</tr>
+        </td>
+    </tr>
+    <tr class="ProfilePageTR">
+        <td>Drivers Name: @Model.GetDriverName(Model.RouteProperty.UserId).FirstName @Model.GetDriverName(Model.RouteProperty.UserId).LastName</td>
+    </tr>
+    <tr class="ProfilePageTR">
+        <td>Drivers Address: @Model.GetDriverAddress(Model.RouteProperty.UserId).Address, @Model.GetDriverAddress(Model.RouteProperty.UserId).Zipcode</td>
+    </tr>
+    <tr class="ProfilePageTR">
+        <td>Start Point: @Model.RouteProperty.Start</td>
+    </tr>
+    <tr class="ProfilePageTR">
+        <td>End Point: @Model.RouteProperty.Goal</td>
+    </tr>
+    <tr class="ProfilePageTR">
+        <td>Arrival Time: @Model.RouteProperty.Arrival.ToString("t")</td>
+    </tr>
     <tr class="ProfilePageTR">
         <td>Day: @Model.GetDay(Model.RouteProperty.Day)</td>
     </tr>
-<tr class="ProfilePageTR">
+    <tr class="ProfilePageTR">
         <td>Seats left: @(Model.RouteProperty.Space-Model.OccupiedSpace(Model.RouteProperty.RouteId))</td>
     </tr>
 
 </table>
 <br />
 
-@if (Model.userID != Model.RouteProperty.UserId && !Model.RequestCheck)
+@if (Model.userID != Model.RouteProperty.UserId && !Model.RequestCheck && !Model.PassengerCheck)
 {
     <h5>Write a message to the driver:</h5>
     <form method="post">
@@ -96,13 +96,18 @@ else if (Model.userID == Model.RouteProperty.UserId)
                     <td>@passenger.LastName</td>
                     <td>@passenger.Email</td>
                     <td>@passenger.Address @passenger.Zipcode</td>
-                <td><form method="post"><button asp-page-handler="RemovePassenger" asp-route-id="@passenger.UserId" asp-route-routeid="@Model.RouteProperty.RouteId" class="btn btn-dark btn-group-lg">Remove Passenger</button></form></td>
+                    <td><form method="post"><button asp-page-handler="RemovePassenger" asp-route-id="@passenger.UserId" asp-route-routeid="@Model.RouteProperty.RouteId" class="btn btn-dark btn-group-lg" onclick="return confirm('Are you sure you want to remove this passenger from your route?')">Remove Passenger</button></form></td>
                 </tr>
             }
         </tbody>
     </table>
 }
 else if (Model.RequestCheck)
-            {
-                <h3>Request application pending...</h3>
-            }
+{
+    <h3>Request application pending...</h3>
+}
+else if (Model.PassengerCheck)
+{
+    <h3>You are a passenger on this route.</h3>
+    <form method="post"><button asp-page-handler="RemoveSelf" asp-route-id="@Model.userID" asp-route-routeid="@Model.RouteProperty.RouteId" class="btn btn-dark btn-group-lg" onclick="return confirm('Are you sure you want to leave this route? You will have the option to request again.')">Leave Route</button></form>
+}

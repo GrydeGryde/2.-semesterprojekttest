@@ -7,7 +7,7 @@
 @if (Model.liste != null && Model.liste.Count > 0)
 {<h5>Number of users : @Model.liste.Count</h5>}
 else
-{ <h5>Number of users : 0</h5>}
+{ <h5>Number of users : 0</h5> }
 
 <form>
     <p>
@@ -30,13 +30,16 @@ else
     <tbody>
         @foreach (CruizeUser users in Model.liste)
         {
-        <tr>
-            <td>@users.UserId</td>
-            <td>@users.FirstName @users.LastName</td>
-            <td>@users.Email</td>
-            <td>@users.Address</td>
-            <td>@users.Zipcode</td>
-        </tr>
+            if (users.Email != "admin@easj.dk")
+            {
+                <tr>
+                    <td>@users.UserId</td>
+                    <td>@users.FirstName @users.LastName</td>
+                    <td>@users.Email</td>
+                    <td>@users.Address</td>
+                    <td>@users.Zipcode</td>
+                </tr>
+            }
         }
     </tbody>
 </table>
