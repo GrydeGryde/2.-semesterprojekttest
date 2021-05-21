@@ -41,8 +41,25 @@ namespace _2._semesterprojekttest.Pages
         private IRouteService _routeService;
         public Route RouteProperty { get; set; }
         public string SuccesApply { get; set; }
-
+        public string ErrorMessage { get; set; }
         public bool RequestCheck { get; set; }
+
+        public bool PassengerCheck
+        {
+            get
+            {
+                foreach (CruizeUser passenger in Passengers)
+                {
+                    if (passenger.UserId == userID)
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+        }
+
         public List<CruizeUser> Passengers { get; set; }
         public RouteModel(IRouteService service, IProfilePicture pictureservice, IUserService userService)
         {
@@ -80,7 +97,8 @@ namespace _2._semesterprojekttest.Pages
 
         public IActionResult OnPost(int UserID, int RouteID)
         {
-                SuccesApply = "You have succesfully applied to this route";
+            try
+            {
                 Request request = new Request();
                 request.UserId = userID;
                 request.RouteId = RouteID;
@@ -89,17 +107,33 @@ namespace _2._semesterprojekttest.Pages
                 RequestCheck = _routeService.CheckRequest(userID, RouteID);
                 RouteProperty = _routeService.GetOneRoute(RouteID);
                 ProfilePicture = _iPicture.GetProfilePicture(userID);
+                SuccesApply = "You have succesfully applied to this route";
                 return Page();
+            }
+            catch (Exception e)
+            {
+                ErrorMessage = "An error occoured, you probably wrote over the 500 character limit";
+                ProfilePicture = _iPicture.GetProfilePicture(userID);
+                RouteProperty = _routeService.GetOneRoute(RouteID);
+                RequestCheck = _routeService.CheckRequest(userID, RouteID);
+                Passengers = _routeService.GetAllPassengerUsers(RouteID);
+                return Page();
+            }
         }
 
         public void OnPostRemovePassenger(int id, int routeid)
         {
             _routeService.RemovePassengerUser(id, routeid);
-            //_routeService.IncreaseSpace(routeid);
             ProfilePicture = _iPicture.GetProfilePicture(userID);
             RouteProperty = _routeService.GetOneRoute(routeid);
             Passengers = _routeService.GetAllPassengerUsers(routeid);
             RequestCheck = _routeService.CheckRequest(userID, routeid);
+        }
+
+        public IActionResult OnPostRemoveSelf(int id, int routeid)
+        {
+            _routeService.RemovePassengerUser(id, routeid);
+            return RedirectToPage("MyRoutes");
         }
     }
 }

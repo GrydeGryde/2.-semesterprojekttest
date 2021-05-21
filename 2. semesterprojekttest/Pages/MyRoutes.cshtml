@@ -3,54 +3,79 @@
 @model _2._semesterprojekttest.Pages.MyRoutesModel
 @{
 }
-<h3>My Routes as a Passenger</h3>
-<table class="table table-bordered table-striped">
-    <thead class="table-primary">
-    <th>Start point</th>
-    <th>End point</th>
-    <th>Arrival time</th>
-    <th>Day</th>
-    <th></th>
-    </thead>
 
-    <tbody>
-        @foreach (Route routes in Model.Passengerliste)
-        {
-            <tr>
-                <td>@routes.Start</td>
-                <td>@routes.Goal</td>
-                <td>@routes.Arrival.ToString("t")</td>
-                <td>@Model.GetDay(routes.Day)</td>
-                <td><a asp-page="Route" asp-route-id="@routes.RouteId" class="btn btn-dark btn-group-lg">See Route</a></td>
-            </tr>
 
-        }
-    </tbody>
-</table>
-<br/>
-<h3>My Routes as a Driver</h3>
-<table class="table table-bordered table-striped">
-    <thead class="table-primary">
-    <th>Start point</th>
-    <th>End point</th>
-    <th>Arrival time</th>
-    <th>Spaces</th>
-    <th>Day</th>
-    <th></th>
-    </thead>
+@if (Model.Passengerliste != null && Model.Passengerliste.Count != 0)
+{
+    <h3>My Routes as a Passenger</h3>
+    <table class="table table-bordered table-striped">
 
-    <tbody>
-    @foreach (Route routes in Model.liste)
+        <thead class="table-primary">
+        <th>Start point</th>
+        <th>End point</th>
+        <th>Arrival time</th>
+        <th>Day</th>
+        <th></th>
+        </thead>
+
+        <tbody>
+            @foreach (Route routes in Model.Passengerliste)
+            {
+                <tr>
+                    <td>@routes.Start</td>
+                    <td>@routes.Goal</td>
+                    <td>@routes.Arrival.ToString("t")</td>
+                    <td>@Model.GetDay(routes.Day)</td>
+                    <td><a asp-page="Route" asp-route-id="@routes.RouteId" class="btn btn-dark btn-group-lg">See Route</a></td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+    <br />
+}
+else
+{
+    <h3>You are not currently signed up to any routes. Click the button to see available routes.</h3>
+    <a asp-page="AvailableRoutes" class="btn btn-dark btn-group-lg">Available Routes</a>
+}
+
+@if (Model.validDriver == 1)
+{
+
+    @if (Model.liste != null && Model.liste.Count != 0)
     {
-        <tr>
-            <td>@routes.Start</td>
-            <td>@routes.Goal</td>
-            <td>@routes.Arrival.ToString("t")</td>
-            <td>@(routes.Space-Model.OccupiedSpace(routes.RouteId))</td>
-            <td>@Model.GetDay(routes.Day)</td>
-            <td><a asp-page="Route" asp-route-id="@routes.RouteId" class="btn btn-dark btn-group-lg">See Route</a></td>
-        </tr>
+        <h3>My Routes as a Driver</h3>
+        <table class="table table-bordered table-striped">
+            <thead class="table-primary">
+            <th>Start point</th>
+            <th>End point</th>
+            <th>Arrival time</th>
+            <th>Spaces</th>
+            <th>Day</th>
+            <th></th>
+            </thead>
+
+            <tbody>
+                @foreach (Route routes in Model.liste)
+                {
+                    <tr>
+                        <td>@routes.Start</td>
+                        <td>@routes.Goal</td>
+                        <td>@routes.Arrival.ToString("t")</td>
+                        <td>@(routes.Space-Model.OccupiedSpace(routes.RouteId))</td>
+                        <td>@Model.GetDay(routes.Day)</td>
+                        <td><a asp-page="Route" asp-route-id="@routes.RouteId" class="btn btn-dark btn-group-lg">See Route</a></td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
 
     }
-    </tbody>
-</table>
+    else
+    {
+        <h3>You have no routes as a Driver. Click the button to create a new route.</h3>
+        <a asp-page="CreateRoute" class="btn btn-dark btn-group-lg">Create Route</a>
+    }
+}

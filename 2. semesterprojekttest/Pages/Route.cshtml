@@ -12,6 +12,14 @@
         </h5>
     </div>
 }
+@if (Model.ErrorMessage != null)
+{
+    <div class="alert-danger">
+        <h5>
+            @Model.ErrorMessage
+        </h5>
+    </div>
+}
 
 <table class="ProfilePageTR">
     <thead class="table-primary">
@@ -57,7 +65,7 @@
 </table>
 <br />
 
-@if (Model.userID != Model.RouteProperty.UserId && !Model.RequestCheck)
+@if (Model.userID != Model.RouteProperty.UserId && !Model.RequestCheck && !Model.PassengerCheck)
 {
 
 
@@ -72,8 +80,7 @@
 }
 else if (Model.userID == Model.RouteProperty.UserId)
 {
-    <h2>OPDATER RUTE MÅSKE??</h2>
-    <br />
+    <br/>
     <table class="table table-bordered table-striped">
         <thead class="table-primary">
         <th>First Name</th>
@@ -91,7 +98,7 @@ else if (Model.userID == Model.RouteProperty.UserId)
                     <td>@passenger.LastName</td>
                     <td>@passenger.Email</td>
                     <td>@passenger.Address @passenger.Zipcode</td>
-                    <td><form method="post"><button asp-page-handler="RemovePassenger" asp-route-id="@passenger.UserId" asp-route-routeid="@Model.RouteProperty.RouteId" class="btn btn-dark btn-group-lg">Remove Passenger</button></form></td>
+                    <td><form method="post"><button asp-page-handler="RemovePassenger" asp-route-id="@passenger.UserId" asp-route-routeid="@Model.RouteProperty.RouteId" class="btn btn-dark btn-group-lg" onclick="return confirm('Are you sure you want to remove this passenger from your route?')">Remove Passenger</button></form></td>
                 </tr>
             }
         </tbody>
@@ -100,4 +107,10 @@ else if (Model.userID == Model.RouteProperty.UserId)
 else if (Model.RequestCheck)
 {
     <h3>Request application pending...</h3>
+}
+else if (Model.PassengerCheck)
+{
+    <h3>You are a passenger on this route.</h3>
+    <form method="post"><button asp-page-handler="RemoveSelf" asp-route-id="@Model.userID" asp-route-routeid="@Model.RouteProperty.RouteId" class="btn btn-dark btn-group-lg" onclick="return confirm('Are you sure you want to leave this route? You will have the option to request again.')">Leave Route</button></form>
+
 }

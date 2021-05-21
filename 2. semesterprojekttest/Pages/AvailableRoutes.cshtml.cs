@@ -36,7 +36,8 @@ namespace _2._semesterprojekttest.Pages
 
         [BindProperty(SupportsGet = true)]
         public string Filter { get; set; }
-        public List<Route> liste { get; set; }        
+        public List<Route> liste { get; set; }
+        public List<Route> FilteredList { get; set; }
 
         public AvailableRoutesModel(IRouteService routeService, IProfilePicture pictureservice, IUserService userService)
         {
@@ -56,16 +57,28 @@ namespace _2._semesterprojekttest.Pages
         {
             return _routeService.GetDay(day);
         }
+
+        public List<Route> FilterList()
+        {
+            List<Route> filterList = new List<Route>();
+            foreach (Route routes in liste)
+            {
+                if (routes.Space-OccupiedSpace(routes.RouteId) != 0 && routes.UserId != userID)
+                {
+                    filterList.Add(routes);
+                }
+            }
+            return filterList;
+        }
         public IActionResult OnGet()
-        
         {
             ProfilePicture = _iPicture.GetProfilePicture(userID);
             liste = _routeService.GetAllRoutes();
-
             if (!string.IsNullOrEmpty(Filter))
             {
                 liste = _routeService.FilterRoutes(Filter);
             }
+            FilteredList = FilterList();
             return Page();
         }
 
