@@ -23,6 +23,9 @@ namespace _2._semesterprojekttest.Models
         [StringLength(500)]
         public string Message { get; set; }
 
+        [ForeignKey(nameof(RouteId))]
+        [InverseProperty("Requests")]
+        public virtual Route Route { get; set; }
         [ForeignKey(nameof(UserId))]
         [InverseProperty(nameof(CruizeUser.Requests))]
         public virtual CruizeUser User { get; set; }

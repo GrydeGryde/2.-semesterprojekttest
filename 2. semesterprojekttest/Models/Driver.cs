@@ -12,6 +12,12 @@ namespace _2._semesterprojekttest.Models
     [Table("Driver")]
     public partial class Driver
     {
+        public Driver()
+        {
+            Coupons = new HashSet<Coupon>();
+            Routes = new HashSet<Route>();
+        }
+
         [Key]
         [Column("UserID")]
         public int UserId { get; set; }
@@ -24,5 +30,9 @@ namespace _2._semesterprojekttest.Models
         [ForeignKey(nameof(UserId))]
         [InverseProperty(nameof(CruizeUser.Driver))]
         public virtual CruizeUser User { get; set; }
+        [InverseProperty(nameof(Coupon.User))]
+        public virtual ICollection<Coupon> Coupons { get; set; }
+        [InverseProperty(nameof(Route.User))]
+        public virtual ICollection<Route> Routes { get; set; }
     }
 }

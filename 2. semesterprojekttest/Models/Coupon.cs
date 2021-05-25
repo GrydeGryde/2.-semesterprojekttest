@@ -26,7 +26,7 @@ namespace _2._semesterprojekttest.Models
         public string Barcode { get; set; }
 
         [ForeignKey(nameof(UserId))]
-        [InverseProperty(nameof(CruizeUser.Coupons))]
-        public virtual CruizeUser User { get; set; }
+        [InverseProperty(nameof(Driver.Coupons))]
+        public virtual Driver User { get; set; }
     }
 }
