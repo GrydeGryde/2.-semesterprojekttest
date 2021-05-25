@@ -60,6 +60,14 @@ namespace _2._semesterprojekttest.Pages
             return Page();
         }
 
+        public IActionResult OnPostDismiss(int id)
+        {
+            _reportService.DeleteReport(id);
+            AllReports = _reportService.ReportedUsers();
+            ProfilePicture = _iPicture.GetProfilePicture(userID);
+            return Page();
+        }
+
         public CruizeUser GetReportedUser(int id)
         {
             CruizeUser reportedUser = _userService.GetOneUser(id);

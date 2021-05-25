@@ -13,5 +13,6 @@ namespace _2._semesterprojekttest.Interfaces
         void AddBan(BannedUser bannedUser);
         List<BannedUser> BannedUsers();
         void DeleteBan(BannedUser bannedUser);
+        void DeleteReport(int id);
     }
 }

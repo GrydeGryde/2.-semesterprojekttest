@@ -56,14 +56,13 @@ namespace _2._semesterprojekttest.Pages
             if (ModelState.IsValid)
             {
                 Report report = new Report();
-                report.Reporter = Convert.ToInt32(HttpContext.Session.GetInt32("UserID"));
+                report.Reporter = userID;
                 report.Reported = id;
                 report.Message = Request.Form["Message"];
                 ReportStatus = "Your Report was sent";
                 _reportService.AddReport(report);
                 return RedirectToPage("DummyReportPage", new { ReportStatus });
             }
-            //Tilføj Respons besked hvis til knappen
             return RedirectToPage("DummyReportPage", ReportStatus);
         }
     }

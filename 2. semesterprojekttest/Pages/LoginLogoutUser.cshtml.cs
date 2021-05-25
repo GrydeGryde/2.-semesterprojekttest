@@ -59,7 +59,7 @@ namespace _2._semesterprojekttest.Pages
         }
         public void OnGet()
         {
-
+            ProfilePicture = _iPicture.GetProfilePicture(userID);
         }
         public IActionResult OnPost()
         {

@@ -31,7 +31,7 @@
             <tbody>
                 @foreach (CruizeUser user in Model._listeUsers)
                 {
-                    if (user.UserId != Model.userID)
+                    if (user.UserId != Model.userID && user.Email != "admin@easj.dk")
                     {
                         <tr>
                             <td>@if (Model.GetPicture(user.UserId) == null)
@@ -47,10 +47,9 @@
                             <td>@user.LastName</td>
 
                             <td>
-                                <a asp-page="ReportUser" asp-route-id="@user.UserId">Report</a>
+                                <a asp-page="ReportUser" asp-route-id="@user.UserId" class="btn btn-danger">Report</a>
                             </td>
                         </tr>
-
                     }
                 }
             </tbody>

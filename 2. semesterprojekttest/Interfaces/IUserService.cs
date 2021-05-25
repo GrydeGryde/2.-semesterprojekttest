@@ -19,7 +19,7 @@ namespace _2._semesterprojekttest.Interfaces
 
         bool CheckDriver(int id);
 
-        CruizeUser DeleteUser(int id);
+        bool DeleteUser(int id);
 
         bool UpdateUser(int id, CruizeUser user);
 

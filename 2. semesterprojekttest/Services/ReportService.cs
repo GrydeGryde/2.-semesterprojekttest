@@ -18,6 +18,13 @@ namespace _2._semesterprojekttest.Services
             db.SaveChanges();
         }
 
+        public void DeleteReport(int id)
+        {
+            Report report = db.Reports.Find(id);
+            db.Reports.Remove(report);
+            db.SaveChanges();
+        }
+
         public List<Report> ReportedUsers()
         {
             List<Report> reportedUsers = db.Reports.ToList();
