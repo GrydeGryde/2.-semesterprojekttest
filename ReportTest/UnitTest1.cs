@@ -33,7 +33,7 @@ namespace ReportTest
             //Arrange
 
             //Act
-            user.Zipcode = 999;
+            user.Zipcode = 4000;
 
             //Assert
             Assert.ThrowsException<ArgumentException>(() => user.Zipcode = 999);
@@ -68,10 +68,21 @@ namespace ReportTest
             //Arrange
 
             //Act
-            user.Zipcode = 10000;
+            user.Zipcode = 4000;
 
             //Assert
             Assert.ThrowsException<ArgumentException>(() => user.Zipcode = 10000);
+        }
+        [TestMethod]
+        public void TestMethodNegative()
+        {
+            //Arrange
+
+            //Act
+            user.Zipcode = 4000;
+
+            //Assert
+            Assert.ThrowsException<ArgumentException>(() => user.Zipcode = -5);
         }
     }
 }
