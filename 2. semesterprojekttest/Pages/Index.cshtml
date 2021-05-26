@@ -4,22 +4,54 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
+<div class="text-center" id="headerimageindex">
+    <div id="imageoverlayindexheader">
     <h1>Welcome to Cruize!</h1>
-    <p>Begin your journey by picking an available route or create one yourself.</p>
-</div>
-
-<div class="flex-container">
-    <div class="flex-item">
-        <a asp-page="LoginLogoutUser"><img src="~/Images/phone1.jpg"></a>
-    </div>
-
-    <div class="flex-item">
-        <a asp-page="CreateUser"><img src="~/Images/phone2.jpg"></a>
+        <h4>Cruizing to school!</h4>
     </div>
 </div>
 
-@*<div class="flex-container">
-    <img src="~/Images/phone1.jpg">
-    <img src="~/Images/phone2.jpg">
-</div>*@
+@if(Model.validUser == 0) {
+    <div class="row" id="cardcontainer">
+        <div class="card bg-dark text-white">
+            <a asp-page="LoginLogoutUser">
+                <img class="card-img" src="~/Images/rideshare1.jpg" alt="Card image">
+                <div class="card-img-overlay">
+                    <h3 class="card-title">Login</h3>
+                </div>
+            </a>
+        </div>
+
+        <div class="card bg-dark text-white">
+            <a asp-page="CreateUser">
+                <img class="card-img" src="~/Images/rideshare2.jpg" alt="Card image">
+                <div class="card-img-overlay">
+                    <h3 class="card-title">Create User</h3>
+                </div>
+            </a>
+        </div>
+    
+    </div>
+}
+else
+{
+    <div class="row" id="cardcontainer">
+        <div class="card bg-dark text-white">
+            <a asp-page="AvailableRoutes">
+                <img class="card-img" src="~/Images/rideshare3.jpg" alt="Card image">
+                <div class="card-img-overlay">
+                    <h3 class="card-title">Available Routes</h3>
+                </div>
+            </a>
+        </div>
+
+        <div class="card bg-dark text-white">
+            <a asp-page="MyRoutes">
+                <img class="card-img" src="~/Images/rideshare4.jpg" alt="Card image">
+                <div class="card-img-overlay">
+                    <h3 class="card-title">My Routes</h3>
+                </div>
+            </a>
+        </div>
+    </div>
+}

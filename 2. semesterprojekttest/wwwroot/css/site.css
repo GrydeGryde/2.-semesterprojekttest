@@ -1,5 +1,10 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
+@font-face {
+    font-family: "Zealand";
+    src: url("../fonts/ZealandDisplay-Regular.woff") format('woff');
+}
+
 
 a.navbar-brand {
   white-space: normal;
@@ -60,7 +65,6 @@ html {
 
 body {
   /* Margin bottom by footer height */
-  margin-bottom: 60px;
 }
 .footer {
   position: absolute;
@@ -68,6 +72,8 @@ body {
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+    background-color: white;
+
 }
 .table-primary {
   background-color: #fff387;
@@ -142,13 +148,169 @@ border-color: #000;
     height: auto;
 }
 
-.flex-item{
-    width: 50%;
-    margin: 0;
-    padding: 0;
+a:hover {
+    color: black;
+    text-decoration: none;
 }
 
-.flex-item img {
-    max-width: 100%;
-    height: auto;
+a {
+    color: black;
+}
+
+
+    .flex-item {
+        width: 50%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .flex-item img {
+        max-width: 100%;
+        height: auto;
+    }
+
+#indexbody {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+#navbarcontainer {
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.navbar-togggler {
+    width: 15%;
+}
+
+.text-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.navbar-brand {
+    width: 50%;
+    margin-right: 0;
+}
+
+#profileimage {
+    width: 15%;
+}
+
+#profilepic {
+    width: 65px;
+    height: 65px;
+}
+
+#headerimageindex {
+    font-family: Zealand;
+    color: white;
+}
+
+#imageoverlayindexheader {
+    background-image: url("../Images/headerpanorama2.jpg");
+    margin: -15px;
+    padding: 4%;
+    background-size: 100% 165%;
+    background-position: bottom;
+    background-repeat: no-repeat;
+}
+
+#logo {
+    width: 193px;
+    height: 65px;
+}
+
+.card {
+    width: 50%;
+    border: none;
+    border-style: none;
+    height: 100%;
+}
+
+.card a {
+    height: 100%;
+    color: white;
+}
+
+    .card a:hover {
+        color: black;
+        background-color: #fff387;
+    }
+
+.card-img {
+    border: none;
+    border-style: none;
+    border-radius: 0;
+    height: 100%;
+}
+
+.card-img:hover {
+    opacity: 0;
+}
+
+.card:hover .card-img {
+    opacity: 0;
+}
+
+#cardcontainer {
+    height: 60vh;
+    font-family: Zealand;
+}
+
+.card-img-overlay {
+    top: 5%;
+    left: 5%;
+}
+
+
+    .container {
+        max-width: 100% !important;
+    }
+
+.navbar-expand-sm .navbar-toggler {
+    display: inherit !important;
+}
+
+.navbar-expand-sm .navbar-collapse {
+    align-items: flex-start;
+    flex-basis: 100%;
+}
+
+.table {
+    table-layout: fixed;
+    width: 95%;
+    word-break: break-word;
+}
+
+.navbar-nav {
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.collapse:not(.show) {
+    display: none !important;
+}
+
+#loginimagetext {
+    font-size: clamp(2rem, 10vw, 5rem);
+}
+
+@media (max-width: 992px) {
+    .card {
+        width: 100% !important;
+    }
+}
+
+@media (min-width: 992px) {
+    #profileimage {
+        width: 3%;
+    }
+}
+
+@media (max-width: 992px) {
+    #cardcontainer {
+        height: 36vh;
+    }
 }

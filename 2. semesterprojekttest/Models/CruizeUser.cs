@@ -12,6 +12,9 @@ namespace _2._semesterprojekttest.Models
     [Table("CruizeUser")]
     public partial class CruizeUser
     {
+
+        private int _zipCode;
+
         public CruizeUser()
         {
             Passengers = new HashSet<Passenger>();
@@ -39,8 +42,18 @@ namespace _2._semesterprojekttest.Models
         [Required]
         [StringLength(50)]
         public string Address { get; set; }
-        public int Zipcode { get; set; }
-
+        public int Zipcode
+        {
+            get { return _zipCode;}
+            set
+            {
+                if (value < 1000 || value > 9999)
+                {
+                    throw new ArgumentException("ZipCode needs to be between 1000 and 9999");
+                }
+                _zipCode = value;
+            }
+        }
         [InverseProperty("User")]
         public virtual Driver Driver { get; set; }
         [InverseProperty(nameof(Passenger.User))]

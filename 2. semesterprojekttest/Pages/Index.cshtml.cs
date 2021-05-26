@@ -13,7 +13,6 @@ namespace _2._semesterprojekttest.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
         private IProfilePicture _iPicture;
 
         public Picture ProfilePicture
@@ -37,9 +36,8 @@ namespace _2._semesterprojekttest.Pages
             get { return Convert.ToInt32(HttpContext.Session.GetInt32("Admin")); }
         }
 
-        public IndexModel(ILogger<IndexModel> logger, IProfilePicture billed)
+        public IndexModel(IProfilePicture billed)
         {
-            _logger = logger;
             _iPicture = billed;
         }
 

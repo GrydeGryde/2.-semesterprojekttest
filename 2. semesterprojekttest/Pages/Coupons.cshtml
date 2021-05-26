@@ -25,27 +25,36 @@ else if (Model.validDriver == 1)
         <br>
     </div>
 
-
+    if (Model.Coupons != null && Model.Coupons.Count != 0)
+    {
         <table class="table table-bordered table-striped">
             <thead class="table-primary">
-                <th>Coupon ID</th>
-                <th>Info</th>
-                <th>Barcode</th>
+            <th>Coupon ID</th>
+            <th>Info</th>
+            <th>Barcode</th>
             </thead>
 
             <tbody>
-                @foreach (Models.Coupon c in Model.Coupons)
-                {
-                    <tr>
-                        <td>@c.CouponId</td>
-                        <td>@c.Info</td>
-                        <td>@c.Barcode</td>
-                    </tr>
-                }
+            @foreach (Models.Coupon c in Model.Coupons)
+            {
+                <tr>
+                    <td>@c.CouponId</td>
+                    <td>@c.Info</td>
+                    <td>@c.Barcode</td>
+                </tr>
+            }
             </tbody>
         </table>
     }
     else
     {
+        <div class="text-center">
+            <h3>You currently have no available coupons.</h3>
+        </div>
+    }
+
+}
+else
+{
         <p class="text-danger">You must <a asp-page="LoginLogoutUser">Log In</a> to view your coupons.</p>
     }

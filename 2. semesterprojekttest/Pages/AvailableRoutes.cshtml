@@ -8,8 +8,8 @@
         tr:nth-child(top) {
             background-color: #fff387;
         }
-        tr:hover { 
-            background: red; 
+        .hoverrow:hover {
+            background: #fff387;
         }
         .table td, th {
             padding: 0 !important;
@@ -26,6 +26,7 @@
         }
     </style>
 </head>
+
 @if (Model.FilteredList.Count == 0 )
 {
     <h3>There are currently no routes available</h3>
@@ -52,7 +53,7 @@ else
         @foreach (Route routes in Model.FilteredList)
         {
             
-                <tr >
+                <tr class="hoverrow">
                     <td><a asp-page="Route" asp-route-id="@routes.RouteId">@Model.GetDriverAddress(routes.UserId).Address, @Model.GetDriverAddress(routes.UserId).Zipcode</a></td>
                     <td><a asp-page="Route" asp-route-id="@routes.RouteId">@routes.Start</a></td>
                     <td><a asp-page="Route" asp-route-id="@routes.RouteId">@routes.Goal</a></td>

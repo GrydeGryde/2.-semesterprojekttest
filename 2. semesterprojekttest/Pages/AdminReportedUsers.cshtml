@@ -3,28 +3,50 @@
 @model _2._semesterprojekttest.Pages.AdminReportedUsersModel
 @{
 }
-<table class="table table-bordered table-striped">
-    <thead class="table-primary">
-    <th>Report ID</th>
-    <th>Report Message</th>
-    <th></th>
-    </thead>
 
-    <tbody>
-        @foreach (Report report in Model.AllReports)
-        {
-            <tr>
-                <td>@report.ReportId</td>
-                <td>@report.Message</td>
-                <td>
-                    <form method="post">
-                        <button asp-page-handler="Ban" asp-route-email="@Model.GetReportedUser(report.Reported).Email" asp-route-id="@report.Reported" class="btn btn-danger" onclick="return confirm('Are you sure you want to ban this user from the application? The user and all their data will be deleted upon confirmation.')">
-                            Ban from application
-                        </button>
+@if (Model.adminLogin == 1)
+{
+    @if (Model.AllReports != null && Model.AllReports.Count != 0)
+    {
+        <table class="table table-bordered table-striped">
+            <thead class="table-primary">
+            <th>Report ID</th>
+            <th>Reported User</th>
+            <th>Report Message</th>
+            <th></th>
+            </thead>
 
-                    </form>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+            <tbody>
+                @foreach (Report report in Model.AllReports)
+                {
+                    <tr>
+                        <td>@report.ReportId</td>
+                        <td>@Model.GetReportedUser(report.Reported).FirstName @Model.GetReportedUser(report.Reported).LastName</td>
+                        <td>@report.Message</td>
+                        <td>
+                            <form method="post">
+                                <button asp-page-handler="Ban" asp-route-email="@Model.GetReportedUser(report.Reported).Email" asp-route-id="@report.Reported" class="btn btn-danger" onclick="return confirm('Are you sure you want to ban this user from the application? The user and all their data will be deleted upon confirmation.')">
+                                    Ban from application
+                                </button>
+                            </form>
+                            <form method="post">
+                                <button asp-page-handler="Dismiss" asp-route-id="@report.ReportId" class="btn btn-danger" onclick="return confirm('Are you sure you want to dismiss this report?')">
+                                    Dismiss
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h3>There are currently no reported users.</h3>
+    }
+}
+else
+{
+    <h3>You need to be an admin to view the contents of this page.</h3>
+}
+

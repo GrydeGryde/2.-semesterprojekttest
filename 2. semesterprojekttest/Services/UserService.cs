@@ -27,24 +27,28 @@ namespace _2._semesterprojekttest.Services
         {
             user.Password = PasswordHash(user.Email, user.Password);
 
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            if (user.Email.Contains("@easj.dk") || user.Email.Contains("@edu.easj.dk") ||
+                user.Email.Contains("@zealand.dk"))
             {
-                connection.Open();
-
-                using (SqlCommand sql = new SqlCommand(AddUserSQL, connection))
+                using (SqlConnection connection = new SqlConnection(ConnectionString))
                 {
-                    sql.Parameters.AddWithValue("@FN", user.FirstName);
-                    sql.Parameters.AddWithValue("@LN", user.LastName);
-                    sql.Parameters.AddWithValue("@E", user.Email);
-                    sql.Parameters.AddWithValue("@P", user.Password);
-                    sql.Parameters.AddWithValue("@AD", user.Address);
-                    sql.Parameters.AddWithValue("@ZC", user.Zipcode);
+                    connection.Open();
 
-                    int rows = sql.ExecuteNonQuery();
-
-                    if (rows == 1)
+                    using (SqlCommand sql = new SqlCommand(AddUserSQL, connection))
                     {
-                        return true;
+                        sql.Parameters.AddWithValue("@FN", user.FirstName);
+                        sql.Parameters.AddWithValue("@LN", user.LastName);
+                        sql.Parameters.AddWithValue("@E", user.Email);
+                        sql.Parameters.AddWithValue("@P", user.Password);
+                        sql.Parameters.AddWithValue("@AD", user.Address);
+                        sql.Parameters.AddWithValue("@ZC", user.Zipcode);
+
+                        int rows = sql.ExecuteNonQuery();
+
+                        if (rows == 1)
+                        {
+                            return true;
+                        }
                     }
                 }
             }
@@ -116,10 +120,8 @@ namespace _2._semesterprojekttest.Services
             return false;
         }
 
-        public CruizeUser DeleteUser(int id)
+        public bool DeleteUser(int id)
         {
-            CruizeUser user = GetOneUser(id);
-
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
@@ -132,12 +134,11 @@ namespace _2._semesterprojekttest.Services
 
                     if (affectedRows == 1)
                     {
-                        return user;
+                        return true;
                     }
                 }
             }
-
-            return null;
+            return false;
         }
 
         public List<CruizeUser> GetAllUsers()
@@ -189,6 +190,7 @@ namespace _2._semesterprojekttest.Services
 
             return null;
         }
+
         public int GetUserId(string email)
         {
             foreach (CruizeUser user in GetAllUsers())

@@ -21,7 +21,10 @@ else if (Model.SuccesDecline != null)
     </div>
 }
 
-<table class="table table-bordered table-striped">
+
+@if (Model.liste != null && Model.liste.Count != 0)
+{
+    <table class="table table-bordered table-striped">
     <thead class="table-primary">
     <th>User name</th>
     <th>Request message</th>
@@ -29,38 +32,43 @@ else if (Model.SuccesDecline != null)
     </thead>
 
     <tbody style="overflow-y: auto; overflow-x:hidden;">
-        @foreach (Request requests in Model.liste)
-        {
-            <tr>
-                <td>
-                    @if (Model.GetPicture(requests.UserId) == null)
-                    {
-                        <img src="/Images/emptyprofile.png" alt="profilepic" height="80" width="80" class="rounded-circle">
-                    }
-                    else
-                    {
-                        String file = "data:image/jpeg;base64," + Convert.ToBase64String(Model.GetPicture(requests.UserId).Picture1);
-                        <img src="@file" alt="profilepic" height="80" width="80" class="rounded-circle">
-                    }
-                    <br />
-                    @Model.GetUserName(requests.UserId).FirstName @Model.GetUserName(requests.UserId).LastName
-                </td>
-                <td>@requests.Message</td>
-                <td>
-                    <form method="post">
-                        <button type="submit" asp-page-handler="Accept" asp-route-UserID="@requests.UserId" asp-route-RouteID="@requests.RouteId" asp-route-RequestID="@requests.RequestId"
-                                class="btn btn-success btn-group-lg pull-right">
-                            Accept
-                        </button>
-                    </form>
-                    <form method="post">
-                        <button type="submit" asp-page-handler="Decline" asp-route-UserID="@requests.UserId" asp-route-RequestID="@requests.RequestId"
-                                class="btn btn-danger btn-group-lg pull-right">
-                            Decline
-                        </button>
-                    </form>
-                </td>
-            </tr>
-        }
+    @foreach (Request requests in Model.liste)
+    {
+        <tr>
+            <td>
+                @if (Model.GetPicture(requests.UserId) == null)
+                {
+                    <img src="/Images/emptyprofile.png" alt="profilepic" height="80" width="80" class="rounded-circle">
+                }
+                else
+                {
+                    String file = "data:image/jpeg;base64," + Convert.ToBase64String(Model.GetPicture(requests.UserId).Picture1);
+                    <img src="@file" alt="profilepic" height="80" width="80" class="rounded-circle">
+                }
+                <br />
+                @Model.GetUserName(requests.UserId).FirstName @Model.GetUserName(requests.UserId).LastName
+            </td>
+            <td>@requests.Message</td>
+            <td>
+                <form method="post">
+                    <button type="submit" asp-page-handler="Accept" asp-route-UserID="@requests.UserId" asp-route-RouteID="@requests.RouteId" asp-route-RequestID="@requests.RequestId"
+                            class="btn btn-success btn-group-lg pull-right">
+                        Accept
+                    </button>
+                </form>
+                <form method="post">
+                    <button type="submit" asp-page-handler="Decline" asp-route-UserID="@requests.UserId" asp-route-RequestID="@requests.RequestId"
+                            class="btn btn-danger btn-group-lg pull-right">
+                        Decline
+                    </button>
+                </form>
+            </td>
+        </tr>
+    }
     </tbody>
-</table>
+    </table>
+}
+else
+{
+    <h2>You currently have no requests for your routes.</h2>
+}

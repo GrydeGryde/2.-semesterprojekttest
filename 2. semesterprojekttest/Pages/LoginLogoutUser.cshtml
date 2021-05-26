@@ -3,12 +3,6 @@
 @{
 }
 
-<style>
-body { background-image: url('/Images/emptyprofile.png'); 
-    background-repeat: no-repeat; 
-    background-attachment: fixed;
-    background-size: cover; }
-</style>
 
 @if (Model.validUser == 1)
 {
@@ -34,9 +28,6 @@ else
         <br />
         <input name="Password" type="password" class="form-control input-lg" required />
         <br />
-        <input id="LoginButton" type="submit" value="Login" class="btn-primary">
+        <input id="LoginButton" type="submit" value="Login" class="btn btn-primary">
     </form>
 }
-
-
-
