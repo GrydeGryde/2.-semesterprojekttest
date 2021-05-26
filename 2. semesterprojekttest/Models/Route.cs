@@ -15,6 +15,7 @@ namespace _2._semesterprojekttest.Models
         public Route()
         {
             Passengers = new HashSet<Passenger>();
+            Requests = new HashSet<Request>();
         }
 
         [Key]
@@ -34,9 +35,11 @@ namespace _2._semesterprojekttest.Models
         public int Space { get; set; }
 
         [ForeignKey(nameof(UserId))]
-        [InverseProperty(nameof(CruizeUser.Routes))]
-        public virtual CruizeUser User { get; set; }
+        [InverseProperty(nameof(Driver.Routes))]
+        public virtual Driver User { get; set; }
         [InverseProperty(nameof(Passenger.Route))]
         public virtual ICollection<Passenger> Passengers { get; set; }
+        [InverseProperty(nameof(Request.Route))]
+        public virtual ICollection<Request> Requests { get; set; }
     }
 }

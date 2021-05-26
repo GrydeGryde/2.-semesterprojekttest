@@ -22,8 +22,6 @@ namespace _2._semesterprojekttest.Pages
         private readonly ILogger<ImageUploadTESTModel> _logger;
         private Picture _picture;
         private List<Picture> _pictures;
-        private ImageTest _image;
-        private List<ImageTest> _images;
         private GrydenDBContext db = new GrydenDBContext();
         private IProfilePicture _iPicture;
         public Picture ProfilePicture { get; set; }

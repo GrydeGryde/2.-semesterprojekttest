@@ -22,7 +22,6 @@ namespace _2._semesterprojekttest.Models
         public virtual DbSet<Coupon> Coupons { get; set; }
         public virtual DbSet<CruizeUser> CruizeUsers { get; set; }
         public virtual DbSet<Driver> Drivers { get; set; }
-        public virtual DbSet<ImageTest> ImageTests { get; set; }
         public virtual DbSet<Passenger> Passengers { get; set; }
         public virtual DbSet<Picture> Pictures { get; set; }
         public virtual DbSet<Report> Reports { get; set; }
@@ -59,7 +58,7 @@ namespace _2._semesterprojekttest.Models
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Coupons)
                     .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK__Coupon__UserID__76969D2E");
+                    .HasConstraintName("FK__Coupon__UserID__1EA48E88");
             });
 
             modelBuilder.Entity<CruizeUser>(entity =>
@@ -95,18 +94,6 @@ namespace _2._semesterprojekttest.Models
                     .HasConstraintName("FK__Driver__UserID__797309D9");
             });
 
-            modelBuilder.Entity<ImageTest>(entity =>
-            {
-                entity.HasKey(e => e.PictureId)
-                    .HasName("PK__ImageTes__8C2866F8AE9FFB8E");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.ImageTests)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK__ImageTest__UserI__1AD3FDA4");
-            });
-
             modelBuilder.Entity<Passenger>(entity =>
             {
                 entity.HasKey(e => new { e.UserId, e.RouteId })
@@ -115,8 +102,7 @@ namespace _2._semesterprojekttest.Models
                 entity.HasOne(d => d.Route)
                     .WithMany(p => p.Passengers)
                     .HasForeignKey(d => d.RouteId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Passenger__Route__7F2BE32F");
+                    .HasConstraintName("FK__Passenger__Route__208CD6FA");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Passengers)
@@ -131,7 +117,7 @@ namespace _2._semesterprojekttest.Models
                     .WithMany(p => p.Pictures)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK__Pictures__UserID__17F790F9");
+                    .HasConstraintName("FK__Pictures__UserID__1DB06A4F");
             });
 
             modelBuilder.Entity<Report>(entity =>
@@ -141,8 +127,7 @@ namespace _2._semesterprojekttest.Models
                 entity.HasOne(d => d.ReportedNavigation)
                     .WithMany(p => p.ReportReportedNavigations)
                     .HasForeignKey(d => d.Reported)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Report__Reported__787EE5A0");
+                    .HasConstraintName("FK__Report__Reported__1BC821DD");
 
                 entity.HasOne(d => d.ReporterNavigation)
                     .WithMany(p => p.ReportReporterNavigations)
@@ -155,10 +140,16 @@ namespace _2._semesterprojekttest.Models
             {
                 entity.Property(e => e.Message).IsUnicode(false);
 
+                entity.HasOne(d => d.Route)
+                    .WithMany(p => p.Requests)
+                    .HasForeignKey(d => d.RouteId)
+                    .HasConstraintName("FK__Request__RouteID__2BFE89A6");
+
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Requests)
                     .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK__Request__UserID__7B5B524B");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Request__UserID__2CF2ADDF");
             });
 
             modelBuilder.Entity<Route>(entity =>
@@ -170,7 +161,7 @@ namespace _2._semesterprojekttest.Models
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Routes)
                     .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK__Route__UserID__7A672E12");
+                    .HasConstraintName("FK__Route__UserID__1F98B2C1");
             });
 
             OnModelCreatingPartial(modelBuilder);
