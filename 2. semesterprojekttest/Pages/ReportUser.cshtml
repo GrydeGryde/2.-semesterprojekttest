@@ -2,13 +2,8 @@
 @model _2._semesterprojekttest.Pages.ReportUserModel
 @{
 }
-<style>
-    body {
-        margin-bottom: 60px;
-    }
-</style>
-    
-    <h1>Report @Model.ReportedUser.FirstName @Model.ReportedUser.LastName</h1>
+
+<h1>Report @Model.ReportedUser.FirstName @Model.ReportedUser.LastName</h1>
     <div>
         @if (Model.GetPicture(Model.ReportedUser.UserId) == null)
         {
