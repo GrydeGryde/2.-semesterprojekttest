@@ -58,7 +58,7 @@ namespace _2._semesterprojekttest.Pages
         {
             Coupon aCoupon = new Coupon();
             aCoupon.UserId = userID; // Connects the created coupon to the current users ID //
-            aCoupon.Info = "Dette er en madkupon, indløs den i cafeteriet";
+            aCoupon.Info = "This coupon can be redeemed in the cafeteria for a free sandwich";
             aCoupon.Barcode = "570020010042069";
 
             int counter = _couponService.GetCouponCount(userID);

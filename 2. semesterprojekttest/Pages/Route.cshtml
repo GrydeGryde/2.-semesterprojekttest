@@ -87,7 +87,7 @@ else if (Model.userID == Model.RouteProperty.UserId && Model.Passengers != null 
         <th>First Name</th>
         <th>Last Name</th>
         <th>Email</th>
-        <th>Adress and Zipcode</th>
+        <th>Adress</th>
         <th></th>
         </thead>
 
@@ -98,8 +98,8 @@ else if (Model.userID == Model.RouteProperty.UserId && Model.Passengers != null 
                     <td>@passenger.FirstName</td>
                     <td>@passenger.LastName</td>
                     <td>@passenger.Email</td>
-                    <td>@passenger.Address @passenger.Zipcode</td>
-                    <td><form method="post"><button asp-page-handler="RemovePassenger" asp-route-id="@passenger.UserId" asp-route-routeid="@Model.RouteProperty.RouteId" class="btn btn-dark btn-group-lg" onclick="return confirm('Are you sure you want to remove this passenger from your route?')">Remove Passenger</button></form></td>
+                    <td>@passenger.Address, @passenger.Zipcode</td>
+                    <td><form method="post"><button asp-page-handler="RemovePassenger" asp-route-id="@passenger.UserId" asp-route-routeid="@Model.RouteProperty.RouteId" class="btn btn-danger btn-group-lg" onclick="return confirm('Are you sure you want to remove this passenger from your route?')">Kick</button></form></td>
                 </tr>
             }
         </tbody>
