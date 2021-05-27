@@ -5,12 +5,12 @@
 
 @if (Model.validUser == 1)
 {
-    <p>Du er logget ind, @Model.LoggedInUser.FirstName</p>
+    <p>You are logged in, @Model.LoggedInUser.FirstName</p>
 
     <form method="post">
         <button asp-page-handler="LogOut"
                 class="btn btn-primary btn-group-lg pull-right">
-            Log ud
+            Log out
         </button>
     </form>
 
