@@ -97,7 +97,7 @@ namespace _2._semesterprojekttest.Services
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
                 conn.Open();
-                using (SqlCommand sql = new SqlCommand("SELECT * FROM Pictures WHERE (UserID = @UID AND TypeID = 2)", conn))
+                using (SqlCommand sql = new SqlCommand("SELECT * FROM Pictures WHERE (UserID = @UID AND TypeID = 0)", conn))
                 {
                     sql.Parameters.AddWithValue("@UID", userID);
                     SqlDataReader reader = sql.ExecuteReader();
