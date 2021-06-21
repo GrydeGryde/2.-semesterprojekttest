@@ -54,7 +54,6 @@ namespace _2._semesterprojekttest.Pages
         public void OnPost()
         {
 
-            SuccesCreate = "You have been created as a user";
             List<CruizeUser> users = _userService.GetAllUsers();
             string userEmail = Request.Form["Email".ToLower()];
             bool userStatus = false;
@@ -98,7 +97,8 @@ namespace _2._semesterprojekttest.Pages
             cruizer.Zipcode = Convert.ToInt32(Request.Form["Zipcode"]);
 
             _userService.AddUser(cruizer);
-            
+            SuccesCreate = "You have been created as a user";
+
             if (userStatus == true)
             {
                 _userService.AddDriver(cruizer);
